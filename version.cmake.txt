@@ -1,0 +1,32 @@
+function(CreateVersionHeader HEADER_FILE_PATH VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
+   set(CMD_BASH bash -c)
+   if(WIN32)
+      set(CMD_BASH cmd /C)
+   endif()
+
+   execute_process(COMMAND ${CMD_BASH} "git rev-parse --short HEAD"
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      OUTPUT_VARIABLE GIT_SHA OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+   execute_process(COMMAND ${CMD_BASH} "git status --porcelain"
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      OUTPUT_VARIABLE GIT_UNCOMMITTED_STATUS OUTPUT_STRIP_TRAILING_WHITESPACE)
+   if(GIT_UNCOMMITTED_STATUS STREQUAL "")
+      set(GIT_UNCOMMITED FALSE)
+   else()
+         set(GIT_UNCOMMITED TRUE)
+   endif()
+
+   execute_process(COMMAND ${CMD_BASH} "git rev-list --count HEAD"
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      OUTPUT_VARIABLE VERSION_BUILD OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+   FILE(WRITE ${HEADER_FILE_PATH}
+      "#define GIT_SHA \"${GIT_SHA}\"\n"
+      "#define GIT_UNCOMMITED ${GIT_UNCOMMITED}\n"
+      "#define VERSION_MAJOR ${VERSION_MAJOR}\n"
+      "#define VERSION_MINOR ${VERSION_MINOR}\n"
+      "#define VERSION_PATCH ${VERSION_PATCH}\n"
+      "#define VERSION_BUILD ${VERSION_BUILD}\n"
+   )
+endfunction()

@@ -1,0 +1,10 @@
+{
+  "name": "packages",
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "name": "imgui"
+    }
+  ],
+  "builtin-baseline": "4a1035927d26de8601513a0591ba99213d3bcfbc"
+}

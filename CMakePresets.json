@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "configurePresets": [
+    {
+      "name": "Default",
+      "hidden": true,
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "Default-MSC",
+      "inherits": "Default",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      }
+    },
+    {
+      "name": "Default-Clang",
+      "inherits": "Default",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++.exe"
+      }
+    },
+    {
+      "name": "Debug-MSVC",
+      "inherits": "Default-MSC",
+      "displayName": "Debug",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "/W4 /permissive- /w14061 /w14062 /w14191 /w14242 /w14254 /w14263 /w14264 /w14265 /w14287 /w14289 /w14296 /w14311 /w14342 /w14350 /w14355 /w14370 /w14371 /w14388 /w14545 /w14546 /w14547 /w14549 /w14555 /w14577 /w14596 /w14598 /w14619 /w14640 /w14668 /w14692 /w14822 /w14826 /w14905 /w14906 /w14928 /w14946 /w15032 /w15038 /w15041 /w15042 /w15204 /w15233 /w15240 /w15246 /w15256 /w15258 /w15259 /w15262 /w15263 /w15264 /WX /sdl /MP /EHsc"
+      }
+    },
+    {
+      "name": "Release-MSVC",
+      "inherits": "Default-MSC",
+      "displayName": "Release",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_FLAGS": "/Zi /W4 /permissive- /w14061 /w14062 /w14191 /w14242 /w14254 /w14263 /w14264 /w14265 /w14287 /w14289 /w14296 /w14311 /w14342 /w14350 /w14355 /w14370 /w14371 /w14388 /w14545 /w14546 /w14547 /w14549 /w14555 /w14577 /w14596 /w14598 /w14619 /w14640 /w14668 /w14692 /w14822 /w14826 /w14905 /w14906 /w14928 /w14946 /w15032 /w15038 /w15041 /w15042 /w15204 /w15233 /w15240 /w15246 /w15256 /w15258 /w15259 /w15262 /w15263 /w15264 /WX /sdl /MP /O2 /Ob2 /Oi /Ot /GL /EHsc",
+        "CMAKE_EXE_LINKER_FLAGS": "/LTCG",
+        "CMAKE_SHARED_LINKER_FLAGS": "/LTCG"
+      }
+    },
+    {
+      "name": "Release-Clang",
+      "inherits": "Default-Clang",
+      "displayName": "Release Clang",
+      "binaryDir": "${sourceDir}/build/release-clang",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_FLAGS": "-pedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wdouble-promotion -Wformat=2 -Wimplicit-fallthrough -Werror -g -O3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+---
+BasedOnStyle: LLVM
+
+AccessModifierOffset: -2
+
+AlignAfterOpenBracket: Align
+# AlignArrayOfStructures: Left # Clang 13
+AlignConsecutiveAssignments: false
+AlignConsecutiveMacros: true
+AlignConsecutiveBitFields: true
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: DontAlign
+AlignOperands: false
+AlignTrailingComments: true
+
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: MultiLine
+
+BinPackArguments: true
+BinPackParameters: true
+
+#BitFieldColonSpacing: Both
+
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: true
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+
+# BreakAfterAttributes: Never # Clang 16
+BreakAfterJavaFieldAnnotations: false
+# BreakArrays: false # Clang 16
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Custom 
+#BreakBeforeConceptDeclarations: false #Never
+# BreakBeforeInlineASMColon: Never # Clang 16
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+BreakStringLiterals: false
+
+ColumnLimit: 0
+
+# CommentPragmas
+
+CompactNamespaces: false
+
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
+
+ContinuationIndentWidth: 4
+
+Cpp11BracedListStyle: true
+
+# DeriveLineEnding
+DerivePointerAlignment: false
+
+DisableFormat: false
+
+# EmptyLineAfterAccessModifier: Never # Clang 13
+# EmptyLineBeforeAccessModifier: Always
+
+ExperimentalAutoDetectBinPacking: false
+
+FixNamespaceComments: false
+
+# ForEachMacros
+
+# IfMacros
+
+IncludeBlocks: Regroup
+# IncludeCategories TODO
+# IncludeIsMainRegex TODO
+# IncludeIsMainSourceRegex TODO
+
+# IndentAccessModifiers: false # Clang 13
+IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentExternBlock: AfterExternBlock
+IndentGotoLabels: false
+IndentPPDirectives: BeforeHash
+# IndentRequiresClause: true # Clang 15
+IndentWidth: 3
+IndentWrappedFunctionNames: false
+
+# InsertBraces: true # Clang 15
+# InsertNewlineAtEOF: true # Clang 16
+InsertTrailingCommas: None
+
+# IntegerLiteralSeparator
+
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# LambdaBodyIndentation: Signature # Clang 13
+
+Language: Cpp
+
+# MacroBlockBegin
+# MacroBlockEnd
+
+MaxEmptyLinesToKeep: 2
+
+NamespaceIndentation: All
+# NamespaceMacros
+
+# PPIndentWidth 1 # Clang 13
+
+# PackConstructorInitializers: Never # Clang 14
+
+# PenaltyBreakAssignment
+# PenaltyBreakBeforeFirstCallParameter
+# PenaltyBreakComment
+# PenaltyBreakFirstLessLess
+# PenaltyBreakOpenParenthesis
+# PenaltyBreakString
+# PenaltyBreakTemplateDeclaration
+# PenaltyExcessCharacter
+# PenaltyIndentedWhitespace
+# PenaltyReturnTypeOnItsOwnLine
+
+PointerAlignment: Left
+
+# QualifierAlignment: Left # Clang 14
+# QualifierOrder: ['constexpr', 'inline', 'static', 'volatile', 'restrict', 'friend', 'const', 'type' ] # Clang 14
+
+# RawStringFormats
+
+# ReferenceAlignment: Left # Clang 13
+
+ReflowComments: false
+
+# RemoveBracesLLVM: false # Clang 14
+# RemoveSemicolon: true # Clang 16
+
+# RequiresClausePosition
+# RequiresExpressionIndentation
+
+# SeparateDefinitionBlocks: Always # Clang 14
+
+# ShortNamespaceLines: 1 # Useless in this case # Clang 13
+
+SortIncludes: false # Never
+SortUsingDeclarations: false
+
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+#SpaceAroundPointerQualifiers: Default
+SpaceBeforeAssignmentOperators: true
+#SpaceBeforeCaseColon: false
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+SpaceBeforeParens: Never
+# SpaceBeforeParensOptions
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInConditionalStatement: false
+SpacesInContainerLiterals: false
+# SpacesInLineCommentPrefix: # Clang 13
+#   Minimum = 1
+#   Maximum = -1
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+Standard: c++17
+
+# StatementAttributeLikeMacros
+# StatementMacros
+
+TabWidth: 3
+
+# TypenameMacros
+
+# UseCRLF
+UseTab: Never
+
+# WhitespaceSensitiveMacros
+
+...
