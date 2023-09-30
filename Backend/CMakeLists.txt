@@ -7,12 +7,21 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 
 set(SOURCES 
     "Communication/Model.cpp"
-	"Communication/Signal.hpp")
+	"Communication/Signal.hpp"
+
+    "Geometry/Point.hpp"
+    "Geometry/Rect.hpp")
 
 add_library(Backend SHARED)
 target_sources(Backend PRIVATE ${SOURCES})
 target_include_directories(Backend PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_precompile_headers(Backend PUBLIC pch.h)
+
+# clang tidy setup
+if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+   set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+   set(CMAKE_CXX_CLANG_TIDY_EXPORT_FIXES_DIR clang-tidy)
+endif()
 
 # External dependencies:
 

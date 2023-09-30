@@ -1,7 +1,7 @@
 #include <limits>
 #include <iostream>
 
-#include "Frontend/ImGui/Application.h"
+#include "Frontend/App/Application.h"
 
 int main(int /*argc*/, char** /*argv*/) {
    Application::Init();
