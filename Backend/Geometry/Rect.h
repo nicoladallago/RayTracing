@@ -3,12 +3,12 @@
 #pragma once
 #include "Point2.h"
 
-template<class T> 
+template<class T>
 class Rect {
  private:
-   constexpr Point2<T> m_origin;
-   constexpr T m_width = 0;
-   constexpr T m_height = 0;
+   Point2<T> m_origin;
+   T m_width = 0;
+   T m_height = 0;
 
  public:
    API constexpr Rect() noexcept = default;

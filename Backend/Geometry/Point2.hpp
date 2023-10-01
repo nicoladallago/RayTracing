@@ -8,6 +8,18 @@ API constexpr Point2<T>::Point2(const T x, const T y) noexcept:
 
 
 template<class T>
+API constexpr bool Point2<T>::operator<(const Point2<T>& point) const noexcept {
+   if(m_x < point.GetX()) {
+      return true;
+   }
+   if(m_x == point.GetX()) {
+      return m_y < point.GetY();
+   }
+   return false;
+}
+
+
+template<class T>
 API constexpr void Point2<T>::SetX(const T x) noexcept {
    m_x = x;
 }

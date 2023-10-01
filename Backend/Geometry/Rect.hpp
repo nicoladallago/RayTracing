@@ -8,16 +8,17 @@ API constexpr Rect<T>::Rect(const T width, const T height) noexcept:
 
 
 template<class T>
-API constexpr Rect<T>::Rect(const Point2<T>& origin, const T width, const T height) noexcept :
+API constexpr Rect<T>::Rect(const Point2<T>& origin, const T width, const T height) noexcept:
     m_origin(origin),
-    Rect(width, height) {
+    Rect<T>(width, height) {
 }
 
 
 template<class T>
 API constexpr Rect<T>::Rect(const T x, const T y, const T width, const T height) noexcept:
-    m_origin(Point<T>(x, y)),
-    Rect(width, height) {
+    m_origin(Point2<T>(x, y)),
+    m_width(width),
+    m_height(height) {
 }
 
 

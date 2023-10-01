@@ -1,4 +1,5 @@
 #include "App/Application.h"
+#include "Color/DefaultColors.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
    if(uMsg == WM_DESTROY) {
@@ -10,7 +11,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
       const HDC hdc = BeginPaint(hwnd, &ps);
 
       // All painting occurs here, between BeginPaint and EndPaint.
-      FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+      const COLORREF color = RGB(COLOR_WINDOW_BKG.GetRed(), COLOR_WINDOW_BKG.GetGreen(), COLOR_WINDOW_BKG.GetBlue());
+      const HBRUSH brush = CreateSolidBrush(color);
+      FillRect(hdc, &ps.rcPaint, brush);
       EndPaint(hwnd, &ps);
       return 0;
    }

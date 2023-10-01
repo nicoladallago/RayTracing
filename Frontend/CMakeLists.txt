@@ -6,7 +6,19 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 
 set(SOURCES 
-    "App/Application.cpp")
+    "App/Application.cpp"
+
+    "Base/Layout.cpp"
+    "Base/Layout.hpp"
+    "Base/Widget.cpp"
+    "Base/Widget.hpp"
+
+    "Color/Color.hpp"
+
+    "Draw/Draw2.hpp"
+
+    "Widgets/Button.hpp"
+    "Widgets/Button.cpp")
 
 add_library(Frontend SHARED)
 target_sources(Frontend PRIVATE ${SOURCES})
