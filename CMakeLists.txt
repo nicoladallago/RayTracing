@@ -30,7 +30,7 @@ add_subdirectory(Frontend)
 
 # Create executable
 set(SOURCES "main.cpp")
-add_executable(RayTracing ${SOURCES})
+add_executable(RayTracing WIN32 ${SOURCES})
 target_include_directories(RayTracing PUBLIC ${CMAKE_SOURCE_DIR}/Frontend)
 target_link_libraries(RayTracing PUBLIC Frontend)
 

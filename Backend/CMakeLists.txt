@@ -9,7 +9,8 @@ set(SOURCES
     "Communication/Model.cpp"
 	"Communication/Signal.hpp"
 
-    "Geometry/Point.hpp"
+    "Geometry/Point2.hpp"
+    "Geometry/Point3.hpp"
     "Geometry/Rect.hpp")
 
 add_library(Backend SHARED)
