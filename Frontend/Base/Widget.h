@@ -2,19 +2,16 @@
 #define WIDGET_H
 #pragma once
 #include "Layout.h"
-#include "App/WindowHandler.h"
+
+class WindowHandler;
 
 class Widget {
- private:
-   const WindowHandler m_handler;
-
  protected:
    Layout m_layout;
    unsigned int m_width = 0;
    unsigned int m_height = 0;
 
  public:
-   explicit Widget(const Widget& parent) noexcept;
    virtual ~Widget() noexcept = default;
 
    constexpr void SetWidth(const unsigned int width) noexcept;
@@ -22,15 +19,12 @@ class Widget {
 
    [[nodiscard]] constexpr const Layout& GetLayout() const noexcept;
    [[nodiscard]] constexpr Layout& GetLayout() noexcept;
-   [[nodiscard]] constexpr const WindowHandler& GetHandler() const noexcept;
    [[nodiscard]] constexpr unsigned int GetWidth() const noexcept;
    [[nodiscard]] constexpr unsigned int GetHeight() const noexcept;
 
-   virtual void Draw(const unsigned int x,
+   virtual void Draw(const WindowHandler& handler,
+                     const unsigned int x,
                      const unsigned int y) const = 0;
-
- protected:
-   explicit Widget(const WindowHandler& handler) noexcept;
 };
 
 #include "Widget.hpp"

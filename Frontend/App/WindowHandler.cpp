@@ -1,10 +1,10 @@
 #include "WindowHandler.h"
 
-WindowHandler::WindowHandler(HWND handler) noexcept:
+API WindowHandler::WindowHandler(HDC handler) noexcept:
     m_handler(handler) {
 }
 
 
-HWND WindowHandler::GetBase() const noexcept {
+HDC WindowHandler::GetBase() const noexcept {
    return m_handler;
 }

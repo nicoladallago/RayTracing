@@ -1,4 +1,5 @@
 #include "App/Application.h"
+#include "App/WindowHandler.h"
 #include "Color/DefaultColors.h"
 #include "Widgets/MainWidget.h"
 #include "Widgets/Button.h"
@@ -19,7 +20,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
       const HBRUSH brush = CreateSolidBrush(color);
       FillRect(hdc, &ps.rcPaint, brush);
 
-      m_upMainWidget->Draw(ps.rcPaint.right - ps.rcPaint.left,
+      m_upMainWidget->Draw(WindowHandler(hdc),
+                           ps.rcPaint.right - ps.rcPaint.left,
                            ps.rcPaint.top - ps.rcPaint.bottom);
 
       EndPaint(hwnd, &ps);
@@ -30,11 +32,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 }
 
 
-void CreateMainLayout(const HWND hwnd) {
-   m_upMainWidget = std::make_unique<MainWidget>(hwnd);
+void CreateMainLayout() {
+   m_upMainWidget = std::make_unique<MainWidget>();
 
    Layout& layout = m_upMainWidget->GetLayout();
-   layout.AddWidget(0, 0, new Button("text", *m_upMainWidget));
+   layout.AddWidget(0, 0, new Button("text"));
 }
 
 
@@ -62,7 +64,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow) {
       return 0;
    }
 
-   CreateMainLayout(hwnd);
+   CreateMainLayout();
    ShowWindow(hwnd, nCmdShow);
 
    // Run the message loop

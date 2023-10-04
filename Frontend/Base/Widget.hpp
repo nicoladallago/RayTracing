@@ -20,11 +20,6 @@ constexpr Layout& Widget::GetLayout() noexcept {
 }
 
 
-constexpr const WindowHandler& Widget::GetHandler() const noexcept {
-   return m_handler;
-}
-
-
 constexpr unsigned int Widget::GetWidth() const noexcept {
    return m_width;
 }

@@ -13,15 +13,16 @@ class Button: public Widget {
    Layout::HAlignement m_hTxtAlignement = Layout::HAlignement::Center;
 
  public:
-   API Button(Widget& parent);
-   API Button(const std::string& text, Widget& parent);
+   API Button();
+   API explicit Button(const std::string& text);
 
    constexpr void SetText(const std::string& text);
    constexpr void SetVTextAlignement(const Layout::VAlignement& align) noexcept;
    constexpr void SetHTextAlignement(const Layout::HAlignement& align) noexcept;
 
  protected:
-   virtual void Draw(const unsigned int x,
+   virtual void Draw(const WindowHandler& handler,
+                     const unsigned int x,
                      const unsigned int y) const override final;
 };
 

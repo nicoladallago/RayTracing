@@ -11,7 +11,7 @@ inline void Draw2::Rectangle(const WindowHandler& handler,
    reg.bottom = rect.GetY();
    reg.top = rect.GetY() + rect.GetHeight();
 
-   FillRect(GetDC(handler.GetBase()), &reg, CreateSolidBrush(ref));
+   FillRect(handler.GetBase(), &reg, CreateSolidBrush(ref));
 }
 
 
@@ -24,7 +24,7 @@ void Draw2::Text(const WindowHandler& handler,
    reg.bottom = rect.GetY();
    reg.top = rect.GetY() + rect.GetHeight();
 
-   SetTextColor(GetDC(handler.GetBase()), 0x00000000);
-   SetBkMode(GetDC(handler.GetBase()), TRANSPARENT);
-   DrawText(GetDC(handler.GetBase()), text.c_str(), static_cast<int>(text.size()), &reg, DT_CENTER | DT_VCENTER);
+   SetTextColor(handler.GetBase(), 0x00000000);
+   SetBkMode(handler.GetBase(), TRANSPARENT);
+   DrawText(handler.GetBase(), text.c_str(), static_cast<int>(text.size()), &reg, DT_CENTER | DT_VCENTER);
 }

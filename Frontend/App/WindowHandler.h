@@ -4,12 +4,12 @@
 
 class WindowHandler {
  private:
-   HWND m_handler;
+   HDC m_handler;
 
  public:
-   explicit WindowHandler(HWND handler) noexcept;
+   API explicit WindowHandler(HDC handler) noexcept;
 
-   [[nodiscard]] HWND GetBase() const noexcept;
+   [[nodiscard]] HDC GetBase() const noexcept;
 };
 
 #endif

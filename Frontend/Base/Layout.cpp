@@ -28,7 +28,8 @@ Widget& Layout::GetWidget(const unsigned int row, const unsigned int col) {
 }
 
 
-void Layout::Draw(const unsigned int /*width*/,
+void Layout::Draw(const WindowHandler& handler,
+                  const unsigned int /*width*/,
                   const unsigned int /*height*/) const {
    // first compute column and row dimensions
    std::map<unsigned int, unsigned int> colsDim; // [col nr][width]
@@ -58,7 +59,6 @@ void Layout::Draw(const unsigned int /*width*/,
       }
    }
 
-
    // then plot
    for(const auto& [position, data] : m_widgets) {
       const Widget& widget = *data.m_upWidget;
@@ -68,6 +68,6 @@ void Layout::Draw(const unsigned int /*width*/,
       // TODO use aignement flags
       unsigned int x = startX.at(col);
       unsigned int y = startY.at(row);
-      widget.Draw(x, y);
+      widget.Draw(handler, x, y);
    }
 }

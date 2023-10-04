@@ -1,6 +1,5 @@
 #include "Layout.h"
 
-
 constexpr void Layout::SetBorderMargin(unsigned int margin) noexcept {
    m_borderMargin = margin;
 }

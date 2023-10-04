@@ -11,7 +11,6 @@ set(SOURCES
 
     "Base/Layout.cpp"
     "Base/Layout.hpp"
-    "Base/Widget.cpp"
     "Base/Widget.hpp"
 
     "Color/Color.hpp"

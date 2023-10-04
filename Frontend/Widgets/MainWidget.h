@@ -5,9 +5,8 @@
 
 class MainWidget: public Widget {
  public:
-   API explicit MainWidget(HWND handler) noexcept;
-
-   API virtual void Draw(const unsigned int width,
+   API virtual void Draw(const WindowHandler& handler,
+                         const unsigned int width,
                          const unsigned int height) const override final;
 };
 
