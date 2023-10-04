@@ -1,5 +1,9 @@
 #include "App/Application.h"
 #include "Color/DefaultColors.h"
+#include "Widgets/MainWidget.h"
+#include "Widgets/Button.h"
+
+std::unique_ptr<MainWidget> m_upMainWidget = nullptr;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
    if(uMsg == WM_DESTROY) {
@@ -14,11 +18,23 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
       const COLORREF color = RGB(COLOR_WINDOW_BKG.GetRed(), COLOR_WINDOW_BKG.GetGreen(), COLOR_WINDOW_BKG.GetBlue());
       const HBRUSH brush = CreateSolidBrush(color);
       FillRect(hdc, &ps.rcPaint, brush);
+
+      m_upMainWidget->Draw(ps.rcPaint.right - ps.rcPaint.left,
+                           ps.rcPaint.top - ps.rcPaint.bottom);
+
       EndPaint(hwnd, &ps);
       return 0;
    }
 
    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+
+void CreateMainLayout(const HWND hwnd) {
+   m_upMainWidget = std::make_unique<MainWidget>(hwnd);
+
+   Layout& layout = m_upMainWidget->GetLayout();
+   layout.AddWidget(0, 0, new Button("text", *m_upMainWidget));
 }
 
 
@@ -45,9 +61,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow) {
    if(hwnd == NULL) {
       return 0;
    }
-   ShowWindow(hwnd, nCmdShow);
 
-   Application::Init();
+   CreateMainLayout(hwnd);
+   ShowWindow(hwnd, nCmdShow);
 
    // Run the message loop
    MSG msg{};

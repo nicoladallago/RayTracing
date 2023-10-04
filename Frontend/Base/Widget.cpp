@@ -1,5 +1,10 @@
 #include "Widget.h"
 
-Widget::Widget(Widget& parent) noexcept:
-    m_hwnd(parent.GetBase()) {
+Widget::Widget(const Widget& parent) noexcept:
+    Widget(parent.GetHandler()) {
+}
+
+
+Widget::Widget(const WindowHandler& handler) noexcept:
+    m_handler(handler) {
 }

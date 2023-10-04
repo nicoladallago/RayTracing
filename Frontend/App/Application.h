@@ -3,9 +3,6 @@
 #pragma once
 
 class Application {
- public:
-   API static void Init();
-
  private:
    static Application& Instance() noexcept;
 };

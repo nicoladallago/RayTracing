@@ -7,6 +7,7 @@
 #include <string>
 #include <limits>
 #include <map>
+#include <vector>
 #include <memory>
 
 #include "Export.h"

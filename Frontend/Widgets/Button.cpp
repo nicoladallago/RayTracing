@@ -1,17 +1,22 @@
 #include "Button.h"
 #include "Draw/Draw2.h"
 
-Button::Button(Widget& parent):
-    Widget(parent) {
+API Button::Button(Widget& parent):
+    Button(std::string(), parent) {
 }
 
 
-Button::Button(const std::string& text, Widget& parent):
+API Button::Button(const std::string& text, Widget& parent):
     Widget(parent),
     m_text(text) {
+   m_width = 80;  // TODO adjust according to text width
+   m_height = 24; // TODO adjust according to text height
 }
 
 
 void Button::Draw(const unsigned int x, const unsigned int y) const {
-   Draw2::Rectangle(GetBase(), Rect<unsigned int>(x, y, m_width, m_height), m_color);
+   const Rect<unsigned int> rect(x, y, m_width, m_height);
+
+   Draw2::Rectangle(GetHandler(), rect, m_color);
+   Draw2::Text(GetHandler(), rect, m_text);
 }

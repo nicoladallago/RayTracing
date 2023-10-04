@@ -37,16 +37,19 @@ class Layout {
    constexpr void SetBorderMargin(unsigned int margin) noexcept;
    constexpr void SetInnerMargin(unsigned int margin) noexcept;
 
-   void AddWidget(const unsigned int row,
-                  const unsigned int col,
-                  Widget& widget,
-                  const VAlignement vAlignement = VAlignement::Center,
-                  const HAlignement hAlignement = HAlignement::Center);
+   API void AddWidget(const unsigned int row,
+                      const unsigned int col,
+                      Widget* pWidget,
+                      const VAlignement vAlignement = VAlignement::Center,
+                      const HAlignement hAlignement = HAlignement::Center);
 
    [[nodiscard]] bool IsPreset(const unsigned int row, const unsigned int col) const;
 
    [[nodiscard]] const Widget& GetWidget(const unsigned int row, const unsigned int col) const;
    [[nodiscard]] Widget& GetWidget(const unsigned int row, const unsigned int col);
+
+   void Draw(const unsigned int width,
+             const unsigned int height) const;
 };
 
 #include "Layout.hpp"
