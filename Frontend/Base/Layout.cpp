@@ -28,7 +28,7 @@ Widget& Layout::GetWidget(const unsigned int row, const unsigned int col) {
 }
 
 
-void Layout::Draw(const WindowHandler& handler,
+void Layout::Draw(const GraphicsHandler& handler,
                   const unsigned int /*width*/,
                   const unsigned int /*height*/) const {
    // first compute column and row dimensions

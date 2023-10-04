@@ -7,6 +7,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 
 set(SOURCES 
     "App/Application.cpp"
+    "App/GraphicsHandler.hpp"
+    "App/WindowHandler.hpp"
     "App/WindowHandler.cpp"
 
     "Base/Layout.cpp"

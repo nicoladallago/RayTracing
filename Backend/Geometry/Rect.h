@@ -26,6 +26,10 @@ class Rect {
    API [[nodiscard]] constexpr T GetY() const noexcept;
    API [[nodiscard]] constexpr T GetWidth() const noexcept;
    API [[nodiscard]] constexpr T GetHeight() const noexcept;
+   API [[nodiscard]] constexpr T GetLeft() const noexcept;
+   API [[nodiscard]] constexpr T GetRight() const noexcept;
+   API [[nodiscard]] constexpr T GetBottom() const noexcept;
+   API [[nodiscard]] constexpr T GetTop() const noexcept;
 };
 
 #include "Rect.hpp"

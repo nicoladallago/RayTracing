@@ -2,7 +2,7 @@
 #define LAYOUT_H
 #pragma once
 class Widget;
-class WindowHandler;
+class GraphicsHandler;
 
 class Layout {
  public:
@@ -49,7 +49,7 @@ class Layout {
    [[nodiscard]] const Widget& GetWidget(const unsigned int row, const unsigned int col) const;
    [[nodiscard]] Widget& GetWidget(const unsigned int row, const unsigned int col);
 
-   void Draw(const WindowHandler& handler,
+   void Draw(const GraphicsHandler& handler,
              const unsigned int width,
              const unsigned int height) const;
 };

@@ -5,7 +5,7 @@
 
 class MainWidget: public Widget {
  public:
-   API virtual void Draw(const WindowHandler& handler,
+   API virtual void Draw(const GraphicsHandler& handler,
                          const unsigned int width,
                          const unsigned int height) const override final;
 };

@@ -1,30 +1,26 @@
 #include "Draw2.h"
-#include "App/WindowHandler.h"
+#include "App/GraphicsHandler.h"
 
-inline void Draw2::Rectangle(const WindowHandler& handler,
+inline void Draw2::Rectangle(const GraphicsHandler& handler,
                              const Rect<unsigned int>& rect,
                              const Color& color) {
-   const COLORREF ref = RGB(color.GetRed(), color.GetGreen(), color.GetBlue());
    RECT reg{};
-   reg.left = rect.GetX();
-   reg.right = rect.GetX() + rect.GetWidth();
-   reg.bottom = rect.GetY();
-   reg.top = rect.GetY() + rect.GetHeight();
+   reg.left = rect.GetLeft();
+   reg.right = rect.GetRight();
+   reg.bottom = rect.GetBottom();
+   reg.top = rect.GetTop();
 
-   FillRect(handler.GetBase(), &reg, CreateSolidBrush(ref));
+   FillRect(handler.GetBase(), &reg, CreateSolidBrush(color.ToPlatform()));
 }
 
 
-void Draw2::Text(const WindowHandler& handler,
+void Draw2::Text(const GraphicsHandler& handler,
                  const Rect<unsigned int>& rect,
+                 const Color& color,
                  const std::string& text) {
-   RECT reg{};
-   reg.left = rect.GetX();
-   reg.right = rect.GetX() + rect.GetWidth();
-   reg.bottom = rect.GetY();
-   reg.top = rect.GetY() + rect.GetHeight();
-
-   SetTextColor(handler.GetBase(), 0x00000000);
+   MoveToEx(handler.GetBase(), rect.GetX(), rect.GetY(), NULL);
+   SetTextAlign(handler.GetBase(), TA_CENTER); // TODO Parameter for text alignement
+   SetTextColor(handler.GetBase(), color.ToPlatform());
    SetBkMode(handler.GetBase(), TRANSPARENT);
-   DrawText(handler.GetBase(), text.c_str(), static_cast<int>(text.size()), &reg, DT_CENTER | DT_VCENTER);
+   TextOut(handler.GetBase(), rect.GetWidth() / 2, rect.GetBottom(), text.c_str(), static_cast<int>(text.size()));
 }

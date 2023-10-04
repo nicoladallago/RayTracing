@@ -3,7 +3,7 @@
 #pragma once
 #include "Layout.h"
 
-class WindowHandler;
+class GraphicsHandler;
 
 class Widget {
  protected:
@@ -22,7 +22,7 @@ class Widget {
    [[nodiscard]] constexpr unsigned int GetWidth() const noexcept;
    [[nodiscard]] constexpr unsigned int GetHeight() const noexcept;
 
-   virtual void Draw(const WindowHandler& handler,
+   virtual void Draw(const GraphicsHandler& handler,
                      const unsigned int x,
                      const unsigned int y) const = 0;
 };

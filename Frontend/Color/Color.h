@@ -26,6 +26,8 @@ class Color {
    [[nodiscard]] constexpr unsigned char GetGreen() const noexcept;
    [[nodiscard]] constexpr unsigned char GetBlue() const noexcept;
    [[nodiscard]] constexpr unsigned char GetAlpha() const noexcept;
+
+   [[nodiscard]] constexpr COLORREF ToPlatform() const noexcept;
 };
 
 #include "Color.hpp"

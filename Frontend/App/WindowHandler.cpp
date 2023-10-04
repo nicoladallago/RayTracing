@@ -1,10 +1,14 @@
 #include "WindowHandler.h"
 
-API WindowHandler::WindowHandler(HDC handler) noexcept:
-    m_handler(handler) {
-}
-
-
-HDC WindowHandler::GetBase() const noexcept {
-   return m_handler;
+WindowHandler::WindowHandler(const char* name,
+                             HINSTANCE hInstance) noexcept {
+   m_handle = CreateWindowEx(0,
+                             name,
+                             name,
+                             WS_OVERLAPPEDWINDOW,
+                             CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+                             NULL,
+                             NULL,
+                             hInstance,
+                             NULL);
 }

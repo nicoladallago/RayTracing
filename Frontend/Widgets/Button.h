@@ -2,13 +2,13 @@
 #define BUTTON_H
 #pragma once
 #include "Base/Widget.h"
-#include "Color/DefaultColors.h"
 
 class Button: public Widget {
  private:
-   std::string m_text;
-   Color m_color = COLOR_BUTTON_BKG;
+   static constexpr unsigned int DEFAULT_WIDTH = 80;
+   static constexpr unsigned int DEFAULT_HEIGHT = 24;
 
+   std::string m_text;
    Layout::VAlignement m_vTxtAlignement = Layout::VAlignement::Center;
    Layout::HAlignement m_hTxtAlignement = Layout::HAlignement::Center;
 
@@ -21,7 +21,7 @@ class Button: public Widget {
    constexpr void SetHTextAlignement(const Layout::HAlignement& align) noexcept;
 
  protected:
-   virtual void Draw(const WindowHandler& handler,
+   virtual void Draw(const GraphicsHandler& handler,
                      const unsigned int x,
                      const unsigned int y) const override final;
 };

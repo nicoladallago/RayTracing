@@ -1,5 +1,5 @@
 #include "App/Application.h"
-#include "App/WindowHandler.h"
+#include "App/GraphicsHandler.h"
 #include "Color/DefaultColors.h"
 #include "Widgets/MainWidget.h"
 #include "Widgets/Button.h"
@@ -16,11 +16,10 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
       const HDC hdc = BeginPaint(hwnd, &ps);
 
       // All painting occurs here, between BeginPaint and EndPaint.
-      const COLORREF color = RGB(COLOR_WINDOW_BKG.GetRed(), COLOR_WINDOW_BKG.GetGreen(), COLOR_WINDOW_BKG.GetBlue());
-      const HBRUSH brush = CreateSolidBrush(color);
+      const HBRUSH brush = CreateSolidBrush(COLOR_WINDOW_BKG.ToPlatform());
       FillRect(hdc, &ps.rcPaint, brush);
 
-      m_upMainWidget->Draw(WindowHandler(hdc),
+      m_upMainWidget->Draw(GraphicsHandler(hdc),
                            ps.rcPaint.right - ps.rcPaint.left,
                            ps.rcPaint.top - ps.rcPaint.bottom);
 

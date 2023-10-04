@@ -54,3 +54,8 @@ constexpr unsigned char Color::GetBlue() const noexcept {
 constexpr unsigned char Color::GetAlpha() const noexcept {
    return m_alpha;
 }
+
+
+constexpr COLORREF Color::ToPlatform() const noexcept {
+   return RGB(GetRed(), GetGreen(), GetBlue());
+}
