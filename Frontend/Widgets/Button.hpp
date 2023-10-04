@@ -1,6 +1,6 @@
 #include "Button.h"
 
-constexpr void Button::SetText(const std::string& text) {
+constexpr void Button::SetText(const char* text) {
    m_text = text;
 }
 

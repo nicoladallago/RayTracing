@@ -3,11 +3,11 @@
 #include "Draw/Draw2.h"
 
 API Button::Button():
-    Button(std::string()) {
+    Button("") {
 }
 
 
-API Button::Button(const std::string& text):
+API Button::Button(const char* text):
     m_text(text) {
    m_width = DEFAULT_WIDTH;   // TODO adjust according to text width
    m_height = DEFAULT_HEIGHT; // TODO adjust according to text height

@@ -8,15 +8,15 @@ class Button: public Widget {
    static constexpr unsigned int DEFAULT_WIDTH = 80;
    static constexpr unsigned int DEFAULT_HEIGHT = 24;
 
-   std::string m_text;
+   const char* m_text;
    Layout::VAlignement m_vTxtAlignement = Layout::VAlignement::Center;
    Layout::HAlignement m_hTxtAlignement = Layout::HAlignement::Center;
 
  public:
    API Button();
-   API explicit Button(const std::string& text);
+   API explicit Button(const char* text);
 
-   constexpr void SetText(const std::string& text);
+   constexpr void SetText(const char* text);
    constexpr void SetVTextAlignement(const Layout::VAlignement& align) noexcept;
    constexpr void SetHTextAlignement(const Layout::HAlignement& align) noexcept;
 

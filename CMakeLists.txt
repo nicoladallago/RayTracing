@@ -25,6 +25,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 
+# clang tidy setup
+if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+   set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+   set(CMAKE_CXX_CLANG_TIDY_EXPORT_FIXES_DIR clang-tidy)
+endif()
+
 add_subdirectory(Backend)
 add_subdirectory(Frontend)
 
@@ -38,9 +44,3 @@ target_link_libraries(RayTracing PUBLIC Frontend)
 #if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
 #    set_property(TARGET RayTracing PROPERTY WIN32_EXECUTABLE true)
 #endif()
-
-# clang tidy setup
-if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-   set(CMAKE_CXX_CLANG_TIDY clang-tidy)
-   set(CMAKE_CXX_CLANG_TIDY_EXPORT_FIXES_DIR clang-tidy)
-endif()

@@ -1,9 +1,8 @@
 #ifndef DRAW2_H
 #define DRAW2_H
 #pragma once
-#include "Color/COlor.h"
-
 class GraphicsHandler;
+class Color;
 
 namespace Draw2 {
    inline void Rectangle(const GraphicsHandler& handler,

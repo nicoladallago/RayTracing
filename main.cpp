@@ -12,18 +12,17 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
       return 0;
    }
    if(uMsg == WM_PAINT) {
-      PAINTSTRUCT ps{};
-      const HDC hdc = BeginPaint(hwnd, &ps);
+      PAINTSTRUCT paint{};
+      HDC hdc = BeginPaint(hwnd, &paint);
 
       // All painting occurs here, between BeginPaint and EndPaint.
-      const HBRUSH brush = CreateSolidBrush(COLOR_WINDOW_BKG.ToPlatform());
-      FillRect(hdc, &ps.rcPaint, brush);
+      FillRect(hdc, &paint.rcPaint, CreateSolidBrush(COLOR_WINDOW_BKG.ToPlatform()));
 
       m_upMainWidget->Draw(GraphicsHandler(hdc),
-                           ps.rcPaint.right - ps.rcPaint.left,
-                           ps.rcPaint.top - ps.rcPaint.bottom);
+                           static_cast<unsigned int>(paint.rcPaint.right - paint.rcPaint.left),
+                           static_cast<unsigned int>(paint.rcPaint.top - paint.rcPaint.bottom));
 
-      EndPaint(hwnd, &ps);
+      EndPaint(hwnd, &paint);
       return 0;
    }
 
@@ -39,36 +38,39 @@ void CreateMainLayout() {
 }
 
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow) {
-   const std::string name = "Ray Tracing";
+int WINAPI wWinMain(_In_ HINSTANCE hInstance,
+                    [[maybe_unused]] _In_opt_ HINSTANCE hPrevInstance,
+                    [[maybe_unused]] _In_ LPWSTR lpCmdLine,
+                    _In_ int nShowCmd) {
+   const char* name = "Ray Tracing";
 
    // Register the window class
-   WNDCLASS wc{};
-   wc.lpfnWndProc = WindowProc;
-   wc.hInstance = hInstance;
-   wc.lpszClassName = name.c_str();
-   RegisterClass(&wc);
+   WNDCLASS wnd{};
+   wnd.lpfnWndProc = WindowProc;
+   wnd.hInstance = hInstance;
+   wnd.lpszClassName = name;
+   RegisterClass(&wnd);
 
    // Create the window
-   const HWND hwnd = CreateWindowEx(0,
-                                    name.c_str(),
-                                    name.c_str(),
-                                    WS_OVERLAPPEDWINDOW,
-                                    CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-                                    NULL,
-                                    NULL,
-                                    hInstance,
-                                    NULL);
-   if(hwnd == NULL) {
+   HWND hwnd = CreateWindowEx(0,
+                              name,
+                              name,
+                              WS_OVERLAPPEDWINDOW,
+                              CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+                              nullptr,
+                              nullptr,
+                              hInstance,
+                              nullptr);
+   if(hwnd == nullptr) {
       return 0;
    }
 
    CreateMainLayout();
-   ShowWindow(hwnd, nCmdShow);
+   ShowWindow(hwnd, nShowCmd);
 
    // Run the message loop
    MSG msg{};
-   while(GetMessage(&msg, NULL, 0, 0) > 0) {
+   while(GetMessage(&msg, nullptr, 0, 0) > 0) {
       TranslateMessage(&msg);
       DispatchMessage(&msg);
    }

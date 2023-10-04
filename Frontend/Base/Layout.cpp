@@ -19,12 +19,12 @@ bool Layout::IsPreset(const unsigned int row, const unsigned int col) const {
 
 
 const Widget& Layout::GetWidget(const unsigned int row, const unsigned int col) const {
-   return *m_widgets.at(Point2<unsigned int>(col, row)).m_upWidget.get();
+   return *m_widgets.at(Point2<unsigned int>(col, row)).m_upWidget;
 }
 
 
 Widget& Layout::GetWidget(const unsigned int row, const unsigned int col) {
-   return *m_widgets.at(Point2<unsigned int>(col, row)).m_upWidget.get();
+   return *m_widgets.at(Point2<unsigned int>(col, row)).m_upWidget;
 }
 
 
@@ -66,8 +66,8 @@ void Layout::Draw(const GraphicsHandler& handler,
       const unsigned int row = position.GetY();
 
       // TODO use aignement flags
-      unsigned int x = startX.at(col);
-      unsigned int y = startY.at(row);
+      const unsigned int x = startX.at(col);
+      const unsigned int y = startY.at(row);
       widget.Draw(handler, x, y);
    }
 }

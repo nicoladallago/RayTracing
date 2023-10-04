@@ -17,9 +17,9 @@ class Point3 {
    API constexpr void SetY(const T y) noexcept;
    API constexpr void SetZ(const T z) noexcept;
 
-   API [[nodiscard]] constexpr T GetX() const noexcept;
-   API [[nodiscard]] constexpr T GetY() const noexcept;
-   API [[nodiscard]] constexpr T GetZ() const noexcept;
+   [[nodiscard]] API constexpr T GetX() const noexcept;
+   [[nodiscard]] API constexpr T GetY() const noexcept;
+   [[nodiscard]] API constexpr T GetZ() const noexcept;
 };
 
 #include "Point3.hpp"

@@ -28,12 +28,6 @@ target_sources(Frontend PRIVATE ${SOURCES})
 target_include_directories(Frontend PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_precompile_headers(Frontend PUBLIC pch.h)
 
-# clang tidy setup
-if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-   set(CMAKE_CXX_CLANG_TIDY clang-tidy)
-   set(CMAKE_CXX_CLANG_TIDY_EXPORT_FIXES_DIR clang-tidy)
-endif()
-
 # External dependencies:
 
 # Backend

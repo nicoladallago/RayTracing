@@ -21,15 +21,15 @@ class Rect {
    API constexpr void SetWidth(const T width) noexcept;
    API constexpr void SetHeight(const T height) noexcept;
 
-   API [[nodiscard]] constexpr const Point2<T>& GetOrigin() const noexcept;
-   API [[nodiscard]] constexpr T GetX() const noexcept;
-   API [[nodiscard]] constexpr T GetY() const noexcept;
-   API [[nodiscard]] constexpr T GetWidth() const noexcept;
-   API [[nodiscard]] constexpr T GetHeight() const noexcept;
-   API [[nodiscard]] constexpr T GetLeft() const noexcept;
-   API [[nodiscard]] constexpr T GetRight() const noexcept;
-   API [[nodiscard]] constexpr T GetBottom() const noexcept;
-   API [[nodiscard]] constexpr T GetTop() const noexcept;
+   [[nodiscard]] API constexpr const Point2<T>& GetOrigin() const noexcept;
+   [[nodiscard]] API constexpr T GetX() const noexcept;
+   [[nodiscard]] API constexpr T GetY() const noexcept;
+   [[nodiscard]] API constexpr T GetWidth() const noexcept;
+   [[nodiscard]] API constexpr T GetHeight() const noexcept;
+   [[nodiscard]] API constexpr T GetLeft() const noexcept;
+   [[nodiscard]] API constexpr T GetRight() const noexcept;
+   [[nodiscard]] API constexpr T GetBottom() const noexcept;
+   [[nodiscard]] API constexpr T GetTop() const noexcept;
 };
 
 #include "Rect.hpp"
