@@ -11,7 +11,9 @@ set(SOURCES
 
     "Geometry/Point2.hpp"
     "Geometry/Point3.hpp"
-    "Geometry/Rect.hpp")
+    "Geometry/Rect.hpp"
+
+    "Image/Image.hpp")
 
 add_library(Backend SHARED)
 target_sources(Backend PRIVATE ${SOURCES})

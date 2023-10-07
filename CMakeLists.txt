@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 set(CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 20) # C++20 Project
+set(CMAKE_CXX_STANDARD 23) # C++20 Project
 
 # Version
 set(VERSION_MAJOR 0)

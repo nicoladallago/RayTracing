@@ -9,10 +9,10 @@ class Signal: public SignalBase {
    T m_data;
 
  public:
-   explicit Signal(T&& data) noexcept;
+   constexpr explicit Signal(T&& data) noexcept;
 
-   [[nodiscard]] T& Get() noexcept;
-   [[nodiscard]] const T& Get() const noexcept;
+   [[nodiscard]] constexpr T& Get() noexcept;
+   [[nodiscard]] constexpr const T& Get() const noexcept;
 };
 
 #include "Signal.hpp"

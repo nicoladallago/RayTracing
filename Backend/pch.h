@@ -5,6 +5,8 @@
 #include "Export.h"
 
 #include <map>
+#include <filesystem>
+#include <fstream>
 
 #include <sigslot/signal.hpp>
 
