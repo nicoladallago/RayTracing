@@ -11,6 +11,7 @@ set(SOURCES
 
     "Geometry/Point2.hpp"
     "Geometry/Point3.hpp"
+    "Geometry/Ray.hpp"
     "Geometry/Rect.hpp"
 
     "Image/Image.cpp"

@@ -36,6 +36,10 @@ class Point3 {
    [[nodiscard]] API constexpr T LenghtSquared() const noexcept;
 };
 
+typedef Point3<unsigned int> Point3ui;
+typedef Point3<double> Point3d;
+typedef Point3<double> Vector3d;
+
 template<typename T>
 [[nodiscard]] API inline std::ostream& operator<<(std::ostream& out, const Point3<T>& point);
 
