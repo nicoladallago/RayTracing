@@ -6,10 +6,10 @@ class Color;
 
 namespace Draw2 {
    inline void Rectangle(const GraphicsHandler& handler,
-                         const Rect<unsigned int>& rect,
+                         const Rectui& rect,
                          const Color& color);
    inline void Text(const GraphicsHandler& handler,
-                    const Rect<unsigned int>& rect,
+                    const Rectui& rect,
                     const Color& color,
                     const std::string& text);
 }

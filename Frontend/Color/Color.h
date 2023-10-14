@@ -4,28 +4,28 @@
 
 class Color {
  private:
-   unsigned char m_red = 0;
-   unsigned char m_green = 0;
-   unsigned char m_blue = 0;
-   unsigned char m_alpha = std::numeric_limits<unsigned char>::max();
+   uint8_t m_red = 0;
+   uint8_t m_green = 0;
+   uint8_t m_blue = 0;
+   uint8_t m_alpha = std::numeric_limits<uint8_t>::max();
 
  public:
    constexpr Color() noexcept = default;
-   constexpr Color(const unsigned char red,
-                   const unsigned char green,
-                   const unsigned char blue,
-                   const unsigned char alpha = std::numeric_limits<unsigned char>::max()) noexcept;
-   constexpr Color(const Color& color, const unsigned char alpha = std::numeric_limits<unsigned char>::max()) noexcept;
+   constexpr Color(const uint8_t red,
+                   const uint8_t green,
+                   const uint8_t blue,
+                   const uint8_t alpha = std::numeric_limits<uint8_t>::max()) noexcept;
+   constexpr Color(const Color& color, const uint8_t alpha = std::numeric_limits<uint8_t>::max()) noexcept;
 
-   constexpr void SetRred(const unsigned char red) noexcept;
-   constexpr void SetGreen(const unsigned char green) noexcept;
-   constexpr void SetBlue(const unsigned char blue) noexcept;
-   constexpr void SetAlpha(const unsigned char alpha) noexcept;
+   constexpr void SetRred(const uint8_t red) noexcept;
+   constexpr void SetGreen(const uint8_t green) noexcept;
+   constexpr void SetBlue(const uint8_t blue) noexcept;
+   constexpr void SetAlpha(const uint8_t alpha) noexcept;
 
-   [[nodiscard]] constexpr unsigned char GetRed() const noexcept;
-   [[nodiscard]] constexpr unsigned char GetGreen() const noexcept;
-   [[nodiscard]] constexpr unsigned char GetBlue() const noexcept;
-   [[nodiscard]] constexpr unsigned char GetAlpha() const noexcept;
+   [[nodiscard]] constexpr uint8_t GetRed() const noexcept;
+   [[nodiscard]] constexpr uint8_t GetGreen() const noexcept;
+   [[nodiscard]] constexpr uint8_t GetBlue() const noexcept;
+   [[nodiscard]] constexpr uint8_t GetAlpha() const noexcept;
 
    [[nodiscard]] constexpr COLORREF ToPlatform() const noexcept;
 };

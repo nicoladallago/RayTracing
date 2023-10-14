@@ -1,5 +1,3 @@
-#ifndef PCH_H
-#define PCH_H
 #pragma once
 #define NOMINMAX
 #include <windows.h>
@@ -13,5 +11,3 @@
 #include "Export.h"
 #include "Geometry/Point2.h"
 #include "Geometry/Rect.h"
-
-#endif

@@ -3,7 +3,7 @@
 #include "Color/Color.h"
 
 inline void Draw2::Rectangle(const GraphicsHandler& handler,
-                             const Rect<unsigned int>& rect,
+                             const Rectui& rect,
                              const Color& color) {
    RECT reg{};
    reg.left = static_cast<long>(rect.GetLeft());
@@ -16,7 +16,7 @@ inline void Draw2::Rectangle(const GraphicsHandler& handler,
 
 
 void Draw2::Text(const GraphicsHandler& handler,
-                 const Rect<unsigned int>& rect,
+                 const Rectui& rect,
                  const Color& color,
                  const std::string& text) {
    MoveToEx(handler.GetBase(), static_cast<int>(rect.GetX()), static_cast<int>(rect.GetY()), NULL);

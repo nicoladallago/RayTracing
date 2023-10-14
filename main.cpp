@@ -4,6 +4,8 @@
 #include "Widgets/MainWidget.h"
 #include "Widgets/Button.h"
 
+#include <Image/Image.h>
+
 std::unique_ptr<MainWidget> m_upMainWidget = nullptr;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -67,6 +69,24 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance,
 
    CreateMainLayout();
    ShowWindow(hwnd, nShowCmd);
+
+   // test print image
+   Image img(256, 256);
+   std::span<Image::Pixel> pixels = img.Get();
+   for(unsigned int j = 0; j < 256; ++j) {
+      for(unsigned int i = 0; i < 256; ++i) {
+         double r = i / 255.0;
+         double g = j / 255.0;
+         double b = 0;
+
+         Image::Pixel& p = pixels[j * 256 + i];
+
+         p.r = static_cast<uint8_t>(255.999 * r);
+         p.g = static_cast<uint8_t>(255.999 * g);
+         p.b = static_cast<uint8_t>(255.999 * b);
+      }
+   }
+   img.Save("image.ppm");
 
    // Run the message loop
    MSG msg{};

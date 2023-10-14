@@ -29,7 +29,7 @@ class Layout {
    };
 
  private:
-   std::map<Point2<unsigned int>, Data> m_widgets;
+   std::map<Point2ui, Data> m_widgets;
 
    unsigned int m_borderMargin = 4;
    unsigned int m_innerMargin = 4;

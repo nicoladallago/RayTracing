@@ -13,6 +13,7 @@ set(SOURCES
     "Geometry/Point3.hpp"
     "Geometry/Rect.hpp"
 
+    "Image/Image.cpp"
     "Image/Image.hpp")
 
 add_library(Backend SHARED)

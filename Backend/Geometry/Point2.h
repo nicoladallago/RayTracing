@@ -22,4 +22,7 @@ class Point2 {
 };
 
 #include "Point2.hpp"
+
+typedef Point2<unsigned int> Point2ui;
+
 #endif

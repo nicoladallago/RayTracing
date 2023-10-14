@@ -6,7 +6,7 @@ API void Layout::AddWidget(const unsigned int row,
                            Widget* pWidget,
                            const VAlignement vAlignement,
                            const HAlignement hAlignement) {
-   Data& data = m_widgets[Point2<unsigned int>(col, row)];
+   Data& data = m_widgets[Point2ui(col, row)];
    data.m_upWidget.reset(pWidget);
    data.m_vAlignement = vAlignement;
    data.m_hAlignement = hAlignement;
@@ -14,17 +14,17 @@ API void Layout::AddWidget(const unsigned int row,
 
 
 bool Layout::IsPreset(const unsigned int row, const unsigned int col) const {
-   return m_widgets.contains(Point2<unsigned int>(col, row));
+   return m_widgets.contains(Point2ui(col, row));
 }
 
 
 const Widget& Layout::GetWidget(const unsigned int row, const unsigned int col) const {
-   return *m_widgets.at(Point2<unsigned int>(col, row)).m_upWidget;
+   return *m_widgets.at(Point2ui(col, row)).m_upWidget;
 }
 
 
 Widget& Layout::GetWidget(const unsigned int row, const unsigned int col) {
-   return *m_widgets.at(Point2<unsigned int>(col, row)).m_upWidget;
+   return *m_widgets.at(Point2ui(col, row)).m_upWidget;
 }
 
 

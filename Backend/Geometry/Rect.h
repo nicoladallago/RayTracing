@@ -33,4 +33,7 @@ class Rect {
 };
 
 #include "Rect.hpp"
+
+typedef Rect<unsigned int> Rectui;
+
 #endif
