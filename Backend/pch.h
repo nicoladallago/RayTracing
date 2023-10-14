@@ -2,6 +2,7 @@
 
 #include "Export.h"
 
+#include <cmath>
 #include <map>
 #include <filesystem>
 #include <iostream>

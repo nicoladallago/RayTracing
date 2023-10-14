@@ -10,7 +10,16 @@ class Point2 {
 
  public:
    API constexpr Point2() noexcept = default;
-   API constexpr Point2(const T x, const T y) noexcept;
+   API constexpr Point2(const T& x, const T& y) noexcept;
+
+   [[nodiscard]] API constexpr Point2<T> operator-() const noexcept;
+
+   [[nodiscard]] API constexpr T operator[](const unsigned int index) const;
+   [[nodiscard]] API constexpr T& operator[](const unsigned int index);
+
+   [[nodiscard]] API constexpr Point2<T>& operator+=(const Point2<T>& point) noexcept;
+   [[nodiscard]] API constexpr Point2<T>& operator*=(const T& val) noexcept;
+   [[nodiscard]] API constexpr Point2<T>& operator/=(const T& val) noexcept;
 
    API constexpr bool operator<(const Point2<T>& point) const noexcept;
 
@@ -19,10 +28,50 @@ class Point2 {
 
    [[nodiscard]] API constexpr T GetX() const noexcept;
    [[nodiscard]] API constexpr T GetY() const noexcept;
+
+   [[nodiscard]] API constexpr T Length() const noexcept;
+   [[nodiscard]] API constexpr T LenghtSquared() const noexcept;
 };
 
-#include "Point2.hpp"
-
 typedef Point2<unsigned int> Point2ui;
+typedef Point2<double> Point2d;
 
+template<typename T>
+[[nodiscard]] API inline std::ostream& operator<<(std::ostream& out, const Point2<T>& point);
+
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> operator+(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> operator-(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> operator*(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> operator*(const T& val, const Point2<T>& p) noexcept;
+
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> operator*(const Point2<T>& p, const T& val) noexcept;
+
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> operator/(const Point2<T>& p, const T& val) noexcept;
+
+
+template<typename T>
+[[nodiscard]] API inline T Dot(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+
+
+// TODO Cross?
+
+template<typename T>
+[[nodiscard]] API inline Point2<T> UnitVector(const Point2<T>& p) noexcept;
+
+#include "Point2.hpp"
 #endif

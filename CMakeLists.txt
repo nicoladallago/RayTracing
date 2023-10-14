@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 set(CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 23) # C++20 Project
+set(CMAKE_CXX_STANDARD 23) # C++23 Project
 
 # Version
 set(VERSION_MAJOR 0)
@@ -36,7 +36,8 @@ add_subdirectory(Frontend)
 
 # Create executable
 set(SOURCES "main.cpp")
-add_executable(RayTracing WIN32 ${SOURCES})
+#add_executable(RayTracing WIN32 ${SOURCES})
+add_executable(RayTracing ${SOURCES})
 target_include_directories(RayTracing PUBLIC ${CMAKE_SOURCE_DIR}/Frontend)
 target_link_libraries(RayTracing PUBLIC Frontend)
 
