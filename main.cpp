@@ -7,15 +7,16 @@
 #include <Image/Image.h>
 #include <Geometry/Point3.h>
 #include <Geometry/Ray.h>
+#include <Objects/Sphere.h>
 
-void RayColor(Image::Pixel& p, const Ray& ray) {
-   Vector3d unitDirection = UnitVector(ray.GetDirection());
-   const double a = 0.5 * (unitDirection.GetY() + 1);
-
-   p.r = (1 - a) + 0.5 * a;
-   p.g = (1 - a) + 0.7 * a;
-   p.b = (1 - a) + 1 * a;
-}
+//void RayColor(Image::Pixel& p, const Ray& ray) {
+//   Vector3d unitDirection = UnitVector(ray.GetDirection());
+//   const double a = 0.5 * (unitDirection.GetY() + 1);
+//
+//   p.r = (1 - a) + 0.5 * a;
+//   p.g = (1 - a) + 0.7 * a;
+//   p.b = (1 - a) + 1 * a;
+//}
 
 void Render() {
    const double aspectRatio = 16.0 / 9.0;
@@ -48,7 +49,8 @@ void Render() {
          const Ray ray(cameraCenter, rayDirection);
 
          Image::Pixel& p = pixels[offset + i];
-         RayColor(p, ray);
+         Sphere::Color(p, ray);
+         /*RayColor(p, ray);*/
       }
       std::cout << "Progress " << std::to_string(j * 100.0 / height) << '%' << '\n';
    }
