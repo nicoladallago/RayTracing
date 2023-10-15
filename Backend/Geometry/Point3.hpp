@@ -120,56 +120,56 @@ API inline std::ostream& operator<<(std::ostream& out, const Point3<T>& point) {
 
 
 template<typename T>
-API inline Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept {
+API constexpr Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept {
    return Point3<T>(p1.GetXY() + p2.GetXY(), p1.GetZ() + p2.GetZ());
 }
 
 
 template<typename T>
-API inline Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept {
+API constexpr Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept {
    return Point3<T>(p1.GetXY() - p2.GetXY(), p1.GetZ() - p2.GetZ());
 }
 
 
 template<typename T>
-API inline Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept {
+API constexpr Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept {
    return Point3<T>(p1.GetXY() * p2.GetXY(), p1.GetZ() * p2.GetZ());
 }
 
 
 template<typename T>
-API inline Point3<T> operator*(const T& val, const Point3<T>& p) noexcept {
-   return Point3<T>(val * p..GetXY(), val * p.GetZ());
+API constexpr Point3<T> operator*(const T& val, const Point3<T>& p) noexcept {
+   return Point3<T>(val * p.GetXY(), val * p.GetZ());
 }
 
 
 template<typename T>
-API inline Point3<T> operator*(const Point3<T>& p, const T& val) noexcept {
+API constexpr Point3<T> operator*(const Point3<T>& p, const T& val) noexcept {
    return val * p;
 }
 
 
 template<typename T>
-API inline Point3<T> operator/(const Point3<T>& p, const T& val) noexcept {
+API constexpr Point3<T> operator/(const Point3<T>& p, const T& val) noexcept {
    return (1 / val) * p;
 }
 
 
 template<typename T>
-API inline T Dot(const Point3<T>& p1, const Point3<T>& p2) noexcept {
-   return Dot(pi.GetXY(), p2.GetXY()) + p1.GetZ() * p2.GetZ();
+API constexpr T Dot(const Point3<T>& p1, const Point3<T>& p2) noexcept {
+   return Dot(p1.GetXY(), p2.GetXY()) + p1.GetZ() * p2.GetZ();
 }
 
 
 template<typename T>
-API inline Point3<T> Cross(const Point3<T>& p1, const Point3<T>& p2) noexcept {
+API constexpr Point3<T> Cross(const Point3<T>& p1, const Point3<T>& p2) noexcept {
    return Point3<T>(p1.GetY() * p2.GetZ() - p1.GetZ() * p2.GetY(),
                     p1.GetZ() * p2.GetX() - p1.GetX() * p2.GetZ(),
-                    p1.GetX() * p2.GetY() - p1.GetY() * p2.GetX())
+                    p1.GetX() * p2.GetY() - p1.GetY() * p2.GetX());
 }
 
 
 template<typename T>
-API inline Point3<T> UnitVector(const Point3<T>& p) noexcept {
+API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept {
    return p / p.Length();
 }

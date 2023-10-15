@@ -7,7 +7,7 @@ template<class T>
 class Point3 {
  private:
    Point2<T> m_xy;
-   constexpr T m_z = 0;
+   T m_z = 0;
 
  public:
    API constexpr Point3() noexcept = default;
@@ -45,37 +45,37 @@ template<typename T>
 
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+[[nodiscard]] API constexpr Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+[[nodiscard]] API constexpr Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+[[nodiscard]] API constexpr Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> operator*(const T& val, const Point3<T>& p) noexcept;
+[[nodiscard]] API constexpr Point3<T> operator*(const T& val, const Point3<T>& p) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> operator*(const Point3<T>& p, const T& val) noexcept;
+[[nodiscard]] API constexpr Point3<T> operator*(const Point3<T>& p, const T& val) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> operator/(const Point3<T>& p, const T& val) noexcept;
+[[nodiscard]] API constexpr Point3<T> operator/(const Point3<T>& p, const T& val) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline T Dot(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+[[nodiscard]] API constexpr T Dot(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> Cross(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+[[nodiscard]] API constexpr Point3<T> Cross(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 template<typename T>
-[[nodiscard]] API inline Point3<T> UnitVector(const Point3<T>& p) noexcept;
+[[nodiscard]] API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept;
 
 #include "Point3.hpp"
 #endif

@@ -5,26 +5,50 @@
 //#include "Widgets/Button.h"
 
 #include <Image/Image.h>
+#include <Geometry/Point3.h>
+#include <Geometry/Ray.h>
+
+void RayColor(Image::Pixel& p, const Ray& ray) {
+   Vector3d unitDirection = UnitVector(ray.GetDirection());
+   const double a = 0.5 * (unitDirection.GetY() + 1);
+
+   p.r = (1 - a) + 0.5 * a;
+   p.g = (1 - a) + 0.7 * a;
+   p.b = (1 - a) + 1 * a;
+}
 
 void Render() {
-   const unsigned int width = 256;
-   const unsigned int height = 256;
+   const double aspectRatio = 16.0 / 9.0;
+   const unsigned int width = 400;
+   const unsigned int height = static_cast<unsigned int>(width / aspectRatio);
 
+   const double focalLenght = 1;
+   const double viewportHeight = 2;
+   const double viewportWidth = viewportHeight * static_cast<double>(width) / height;
+   const Point3d cameraCenter(0, 0, 0);
+
+   const Vector3d viewportU(viewportWidth, 0, 0);
+   const Vector3d viewportV(0, -viewportHeight, 0);
+
+   const Vector3d pixelDeltaU = viewportU / static_cast<double>(width);
+   const Vector3d pixelDeltaV = viewportV / static_cast<double>(height);
+
+   const Point3d viewportUpperLeft = cameraCenter - Vector3d(0, 0, focalLenght) - viewportU / 2.0 - viewportV / 2.0;
+   const Point3d pixell00Loc = viewportUpperLeft + 0.5 * (pixelDeltaU + pixelDeltaV);
+
+   // Render
    Image img(width, height);
    std::span<Image::Pixel> pixels = img.Get();
 
    for(unsigned int j = 0; j < height; ++j) {
       unsigned int offset = j * width;
       for(unsigned int i = 0; i < width; ++i) {
-         double r = i / (width - 1);
-         double g = j / (height - 1);
-         double b = 0;
+         const Point3d pixelCenter = pixell00Loc + (static_cast<double>(i) * pixelDeltaU) + (static_cast<double>(j) * pixelDeltaV);
+         const Vector3d rayDirection = pixelCenter - cameraCenter;
+         const Ray ray(cameraCenter, rayDirection);
 
          Image::Pixel& p = pixels[offset + i];
-
-         p.r = static_cast<uint8_t>(255.999 * r);
-         p.g = static_cast<uint8_t>(255.999 * g);
-         p.b = static_cast<uint8_t>(255.999 * b);
+         RayColor(p, ray);
       }
       std::cout << "Progress " << std::to_string(j * 100.0 / height) << '%' << '\n';
    }
