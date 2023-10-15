@@ -17,6 +17,7 @@ set(SOURCES
     "Image/Image.cpp"
     "Image/Image.hpp"
 
+    "Objects/Hittable.hpp"
     "Objects/Sphere.hpp")
 
 add_library(Backend SHARED)
