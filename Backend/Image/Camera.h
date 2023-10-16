@@ -12,19 +12,26 @@ class Camera {
    const unsigned int m_samplesPerPixels;
    const unsigned int m_maxDepth;
    const double m_vfov;
+   const Point3d m_lookFrom;
+   const Point3d m_lookAt;
+   const Vector3d m_vup;
 
    unsigned int m_height;  // Rendered image height
    Point3d m_center;       // Camera center
    Point3d m_pixel00Loc;   // Location of pixel 0, 0
    Vector3d m_pixelDeltaU; // Offset to pixel to the right
    Vector3d m_pixelDeltaV; // Offset to pixel below
+   Vector3d m_u, m_v, m_w; // Camera frame basis vectors
 
  public:
    API Camera(const double aspectRatio,
               const unsigned int width,
               const unsigned int samplesPerPixels,
               const unsigned int maxDepth,
-              const double vfov) noexcept;
+              const double vfov,
+              const Point3d& lookFrom,
+              const Point3d& lookAt,
+              const Vector3d& vup) noexcept;
 
    API void Render(const Hittable& world) noexcept; // TODO make it constexpr
 

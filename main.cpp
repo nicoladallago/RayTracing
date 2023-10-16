@@ -19,19 +19,25 @@ void Render() {
    // World
    HittableList world;
 
-   const double R = std::cos(std::numbers::pi / 4);
+   const std::shared_ptr<Lambertian> material_ground = std::make_shared<Lambertian>(Image::Pixel(0.8, 0.8, 0));
+   const std::shared_ptr<Lambertian> material_center = std::make_shared<Lambertian>(Image::Pixel(0.1, 0.2, 0.5));
+   const std::shared_ptr<Dielectric> material_left = std::make_shared<Dielectric>(1.5);
+   const std::shared_ptr<Metal> material_right = std::make_shared<Metal>(Image::Pixel(0.8, 0.6, 0.2), 0);
 
-   std::shared_ptr<Lambertian> matLeft = std::make_shared<Lambertian>(Image::Pixel(0, 0, 1));
-   std::shared_ptr<Lambertian> matRight = std::make_shared<Lambertian>(Image::Pixel(1, 0, 0));
+   world.Add(std::make_shared<Sphere>(Point3d(0.0, -100.5, -1.0), 100.0, material_ground));
+   world.Add(std::make_shared<Sphere>(Point3d(0.0, 0.0, -1.0), 0.5, material_center));
+   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), 0.5, material_left));
+   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), -0.4, material_left));
+   world.Add(std::make_shared<Sphere>(Point3d(1.0, 0.0, -1.0), 0.5, material_right));
 
-   world.Add(std::make_shared<Sphere>(Point3d(-R, 0, -1), R, matLeft));
-   world.Add(std::make_shared<Sphere>(Point3d(R, 0, -1), R, matRight));
-
-   Camera cam(16.0 / 9.0, // Aspect ratio
-              400,        // Width
-              100,        // Samples per pixel
-              50,         // Maximum depth
-              90);        // Vertical view angle (field of view)
+   Camera cam(16.0 / 9.0,         // Aspect ratio
+              400,                // Width
+              100,                // Samples per pixel
+              50,                 // Maximum depth
+              90,                 // Vertical view angle (field of view)
+              Point3d(-2, 2, 1),  // Point camera is looking from
+              Point3d(0, 0, -1),  // Point camera is looking at
+              Vector3d(0, 1, 0)); // Camera-relative "up" direction
    cam.Render(world);
 }
 

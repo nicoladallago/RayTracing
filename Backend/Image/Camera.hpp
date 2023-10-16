@@ -6,12 +6,18 @@ API Camera::Camera(const double aspectRatio,
                    const unsigned int width,
                    const unsigned int samplesPerPixels,
                    const unsigned int maxDepth,
-                   const double vfov) noexcept:
+                   const double vfov,
+                   const Point3d& lookFrom,
+                   const Point3d& lookAt,
+                   const Vector3d& vup) noexcept:
     m_aspectRatio(aspectRatio),
     m_width(width),
     m_samplesPerPixels(samplesPerPixels),
     m_maxDepth(maxDepth),
-    m_vfov(vfov) {
+    m_vfov(vfov),
+    m_lookFrom(lookFrom),
+    m_lookAt(lookAt),
+    m_vup(vup) {
    Initialize();
 }
 
@@ -50,21 +56,26 @@ API void Camera::Render(const Hittable& world) noexcept {
 void Camera::Initialize() noexcept {
    m_height = static_cast<unsigned int>(m_width / m_aspectRatio);
 
-   m_center = Point3d(0, 0, 0);
+   m_center = m_lookFrom;
 
-   const double focalLenght = 1;
+   const double focalLenght = (m_lookFrom - m_lookAt).Length();
    const double theta = Utils::DegreesToRadians(m_vfov);
    const double h = std::tan(theta / 2);
    const double viewportHeight = 2 * h * focalLenght;
    const double viewportWidth = viewportHeight * static_cast<double>(m_width) / m_height;
 
-   const Vector3d viewportU(viewportWidth, 0, 0);
-   const Vector3d viewportV(0, -viewportHeight, 0);
+   // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
+   m_w = UnitVector(m_lookFrom - m_lookAt);
+   m_u = UnitVector(Cross(m_vup, m_w));
+   m_v = Cross(m_w, m_u);
+
+   const Vector3d viewportU = viewportWidth * m_u;
+   const Vector3d viewportV = viewportHeight * -m_v;
 
    m_pixelDeltaU = viewportU / static_cast<double>(m_width);
    m_pixelDeltaV = viewportV / static_cast<double>(m_height);
 
-   const Point3d viewportUpperLeft = m_center - Vector3d(0, 0, focalLenght) - viewportU / 2.0 - viewportV / 2.0;
+   const Point3d viewportUpperLeft = m_center - (focalLenght * m_w) - viewportU / 2.0 - viewportV / 2.0;
    m_pixel00Loc = viewportUpperLeft + 0.5 * (m_pixelDeltaU + m_pixelDeltaV);
 }
 
