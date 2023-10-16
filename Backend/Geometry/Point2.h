@@ -1,10 +1,12 @@
 #ifndef POINT2_H
 #define POINT2_H
 #pragma once
-#include "Utils/Utils.h"
 
 template<class T>
 class Point2 {
+ public:
+   static constexpr double NEAR_ZERO = 1E-8;
+
  private:
    T m_x = 0;
    T m_y = 0;
@@ -32,8 +34,9 @@ class Point2 {
 
    [[nodiscard]] API constexpr T Length() const noexcept;
    [[nodiscard]] API constexpr T LenghtSquared() const noexcept;
+   [[nodiscard]] API constexpr bool NearZero() const noexcept;
 
-   [[nodiscard]] API static inline Point2<T> Random() noexcept; // TODO constexpr
+   [[nodiscard]] API static inline Point2<T> Random() noexcept;                                   // TODO constexpr
    [[nodiscard]] API static inline Point2<T> Random(const double min, const double max) noexcept; // TODO constexpr
 };
 

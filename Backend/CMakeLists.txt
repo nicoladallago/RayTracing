@@ -18,6 +18,9 @@ set(SOURCES
     "Image/Image.cpp"
     "Image/Image.hpp"
 
+    "Materials/Lambertian.hpp"
+    "Materials/Metal.hpp"
+
     "Objects/Hittable.hpp"
     "Objects/Sphere.hpp"
 

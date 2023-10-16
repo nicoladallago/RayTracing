@@ -113,6 +113,12 @@ API constexpr T Point3<T>::LenghtSquared() const noexcept {
 }
 
 
+template<typename T>
+API constexpr bool Point3<T>::NearZero() const noexcept {
+   return m_xy.NearZero() && (std::fabs(m_z) < Point2<T>::NEAR_ZERO);
+}
+
+
 template<class T>
 API inline Point3<T> Point3<T>::Random() noexcept {
    return Point3<T>(Point2<T>::Random(), Utils::Random());
@@ -189,9 +195,9 @@ API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept {
 
 template<typename T>
 API inline Point3<T> RandomInUnitSphere() noexcept {
-    while (true) {
+   while(true) {
       const Point3<T> p = Point3<T>::Random(-1, 1);
-      if (p.LenghtSquared() < 1) {
+      if(p.LenghtSquared() < 1) {
          return p;
       }
    }
@@ -207,8 +213,14 @@ API inline Point3<T> RandomUnitVector() noexcept {
 template<typename T>
 API inline Point3<T> RandomOnHemisphere(const Point3<T>& normal) noexcept {
    const Point3<T> onUnitSphere = RandomUnitVector<T>();
-   if (Dot(onUnitSphere, normal) > 0) {
+   if(Dot(onUnitSphere, normal) > 0) {
       return onUnitSphere;
    }
    return -onUnitSphere;
+}
+
+
+template<typename T>
+API constexpr Point3<T> Reflect(const Point3<T>& v, const Point3<T>& n) noexcept {
+   return v - 2 * Dot(v, n) * n;
 }

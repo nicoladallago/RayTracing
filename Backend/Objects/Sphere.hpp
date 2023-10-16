@@ -1,8 +1,9 @@
 #include "Sphere.h"
 
-API constexpr Sphere::Sphere(const Point3d& center, const double radius):
+API Sphere::Sphere(const Point3d& center, const double radius, const std::shared_ptr<Material>& spMaterial):
     m_center(center),
-    m_radius(radius) {
+    m_radius(radius),
+    m_spMaterial(spMaterial) {
 }
 
 
@@ -31,6 +32,7 @@ API constexpr bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& 
    rec.p = ray.At(rec.t);
    const Vector3d outwardNormal = (rec.p - m_center) / m_radius;
    rec.SetFaceFront(ray, outwardNormal);
+   rec.mat = m_spMaterial;
 
    return true;
 }

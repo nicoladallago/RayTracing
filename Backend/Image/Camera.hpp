@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Materials/Material.h"
 #include "Utils/Utils.h"
 
 API constexpr Camera::Camera(const double aspectRatio,
@@ -8,7 +9,7 @@ API constexpr Camera::Camera(const double aspectRatio,
     m_aspectRatio(aspectRatio),
     m_width(width),
     m_samplesPerPixels(samplesPerPixels),
-    m_maxDepth(maxDepth){
+    m_maxDepth(maxDepth) {
    Initialize();
 }
 
@@ -83,18 +84,23 @@ Vector3d Camera::PixelSampleSquare() const noexcept {
 }
 
 
-constexpr Image::Pixel Camera::RayColor(const Ray& ray, 
+constexpr Image::Pixel Camera::RayColor(const Ray& ray,
                                         const unsigned int depth,
                                         const Hittable& world) noexcept {
    Hittable::HitRecord rec;
 
-   if (depth <= 0) {
+   if(depth <= 0) {
       return Image::Pixel(0, 0, 0);
    }
 
    if(world.Hit(ray, Interval(0.001, std::numeric_limits<double>::max()), rec)) {
-      const Vector3d direction = rec.normal + RandomUnitVector<double>();
-      return 0.1 * RayColor(Ray(rec.p, direction), depth - 1, world);
+      Ray scattered;
+      Image::Pixel attenuation;
+
+      if(rec.mat->Scatter(ray, rec, attenuation, scattered)) {
+         return attenuation * RayColor(scattered, depth - 1, world);
+      }
+      return Image::Pixel(0, 0, 0);
    }
 
    const Vector3d unitDirection = UnitVector(ray.GetDirection());

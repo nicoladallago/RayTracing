@@ -2,8 +2,10 @@
 #define HITTABLE_H
 #pragma once
 #include "Geometry/Point3.h"
-#include "Geometry/Ray.h"
-#include "Utils/Interval.h"
+
+class Material;
+class Ray;
+class Interval;
 
 class Hittable {
  public:
@@ -11,6 +13,7 @@ class Hittable {
    {
       Point3d p;
       Vector3d normal;
+      std::shared_ptr<Material> mat;
       double t = 0;
       bool frontFace = false;
 

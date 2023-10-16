@@ -1,4 +1,5 @@
 #include "Point2.h"
+#include "Utils/Utils.h"
 
 #include <cmath> // TODO Remove this
 
@@ -106,6 +107,12 @@ API constexpr T Point2<T>::Length() const noexcept {
 template<class T>
 API constexpr T Point2<T>::LenghtSquared() const noexcept {
    return m_x * m_x + m_y * m_y;
+}
+
+
+template<typename T>
+API constexpr bool Point2<T>::NearZero() const noexcept {
+   return (std::fabs(m_x) < NEAR_ZERO) && (std::fabs(m_y) < NEAR_ZERO);
 }
 
 

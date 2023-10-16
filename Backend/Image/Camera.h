@@ -2,7 +2,8 @@
 #define CAMERA_H
 #pragma once
 #include "Image/Image.h"
-#include "Objects/Hittable.h"
+
+class Hittable;
 
 class Camera {
  private:

@@ -1,4 +1,5 @@
 #include "HittableList.h"
+#include "Utils/Interval.h"
 
 API HittableList::HittableList(const std::shared_ptr<Hittable>& spObject) {
    Add(spObject);

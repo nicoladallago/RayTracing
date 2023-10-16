@@ -34,6 +34,7 @@ class Point3 {
 
    [[nodiscard]] API constexpr T Length() const noexcept;
    [[nodiscard]] API constexpr T LenghtSquared() const noexcept;
+   [[nodiscard]] API constexpr bool NearZero() const noexcept;
 
    [[nodiscard]] API static inline Point3<T> Random() noexcept;                                   // TODO constexpr
    [[nodiscard]] API static inline Point3<T> Random(const double min, const double max) noexcept; // TODO constexpr
@@ -88,6 +89,9 @@ template<typename T>
 
 template<typename T>
 [[nodiscard]] API inline Point3<T> RandomOnHemisphere(const Point3<T>& normal) noexcept; // TODO constexpr
+
+template<typename T>
+[[nodiscard]] API constexpr Point3<T> Reflect(const Point3<T>& v, const Point3<T>& n) noexcept;
 
 #include "Point3.hpp"
 #endif
