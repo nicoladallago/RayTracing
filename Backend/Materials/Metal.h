@@ -7,9 +7,10 @@
 class Metal: public Material {
  private:
    const Image::Pixel m_albedo;
+   const double m_fuzz;
 
  public:
-   API constexpr Metal(const Image::Pixel& a) noexcept;
+   API constexpr Metal(const Image::Pixel& a, const double f) noexcept;
 
    [[nodiscard]] API virtual constexpr bool Scatter(const Ray& ray,
                                                     const Hittable::HitRecord& rec,

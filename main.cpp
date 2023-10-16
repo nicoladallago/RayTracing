@@ -17,10 +17,10 @@
 void Render() {
    // World
    HittableList world;
-   std::shared_ptr<Lambertian> matGround = std::make_shared<Lambertian>(Image::Pixel(0.8, 0.8, 0.0));
+   std::shared_ptr<Lambertian> matGround = std::make_shared<Lambertian>(Image::Pixel(0.8, 0.8, 0));
    std::shared_ptr<Lambertian> matCenter = std::make_shared<Lambertian>(Image::Pixel(0.7, 0.3, 0.3));
-   std::shared_ptr<Metal> matLeft = std::make_shared<Metal>(Image::Pixel(0.8, 0.8, 0.8));
-   std::shared_ptr<Metal> matRight = std::make_shared<Metal>(Image::Pixel(0.8, 0.6, 0.2));
+   std::shared_ptr<Metal> matLeft = std::make_shared<Metal>(Image::Pixel(0.8, 0.8, 0.8), 0.3);
+   std::shared_ptr<Metal> matRight = std::make_shared<Metal>(Image::Pixel(0.8, 0.6, 0.2), 1);
 
    world.Add(std::make_shared<Sphere>(Point3d(0.0, -100.5, -1.0), 100.0, matGround));
    world.Add(std::make_shared<Sphere>(Point3d(0.0, 0.0, -1.0), 0.5, matCenter));
