@@ -82,6 +82,9 @@ template<typename T>
 [[nodiscard]] API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept;
 
 template<typename T>
+[[nodiscard]] API inline Point3<T> RandomInUnitDisk() noexcept;
+
+template<typename T>
 [[nodiscard]] API inline Point3<T> RandomInUnitSphere() noexcept; // TODO constexpr
 
 template<typename T>

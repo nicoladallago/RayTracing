@@ -194,6 +194,16 @@ API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept {
 
 
 template<typename T>
+API inline Point3<T> RandomInUnitDisk() noexcept {
+   while(true) {
+      const Point3<T> p = Point3<T>(Utils::Random(-1, 1), Utils::Random(-1, 1), 0);
+      if(p.LenghtSquared() < 1)
+         return p;
+   }
+}
+
+
+template<typename T>
 API inline Point3<T> RandomInUnitSphere() noexcept {
    while(true) {
       const Point3<T> p = Point3<T>::Random(-1, 1);

@@ -19,25 +19,58 @@ void Render() {
    // World
    HittableList world;
 
-   const std::shared_ptr<Lambertian> material_ground = std::make_shared<Lambertian>(Image::Pixel(0.8, 0.8, 0));
-   const std::shared_ptr<Lambertian> material_center = std::make_shared<Lambertian>(Image::Pixel(0.1, 0.2, 0.5));
-   const std::shared_ptr<Dielectric> material_left = std::make_shared<Dielectric>(1.5);
-   const std::shared_ptr<Metal> material_right = std::make_shared<Metal>(Image::Pixel(0.8, 0.6, 0.2), 0);
+   const std::shared_ptr<Lambertian> groundMaterial = std::make_shared<Lambertian>(Image::Pixel(0.5, 0.5, 0.5));
+   world.Add(std::make_shared<Sphere>(Point3d(0, -1000, 0), 1000, groundMaterial));
 
-   world.Add(std::make_shared<Sphere>(Point3d(0.0, -100.5, -1.0), 100.0, material_ground));
-   world.Add(std::make_shared<Sphere>(Point3d(0.0, 0.0, -1.0), 0.5, material_center));
-   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), 0.5, material_left));
-   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), -0.4, material_left));
-   world.Add(std::make_shared<Sphere>(Point3d(1.0, 0.0, -1.0), 0.5, material_right));
+   for(int a = -11; a < 11; ++a) {
+      for(int b = -11; b < 11; ++b) {
+         const double chooseMat = Utils::Random();
+         const Point3d center(a + 0.9 * Utils::Random(), 0.2, b + 0.9 * Utils::Random());
 
-   Camera cam(16.0 / 9.0,         // Aspect ratio
-              400,                // Width
-              100,                // Samples per pixel
-              50,                 // Maximum depth
-              90,                 // Vertical view angle (field of view)
-              Point3d(-2, 2, 1),  // Point camera is looking from
-              Point3d(0, 0, -1),  // Point camera is looking at
-              Vector3d(0, 1, 0)); // Camera-relative "up" direction
+         if((center - Point3d(4, 0.2, 0)).Length() > 0.9) {
+            std::shared_ptr<Material> sphereMaterial;
+
+            if(chooseMat < 0.8) {
+               // diffuse
+               const Image::Pixel albedo = Image::Pixel::Random() * Image::Pixel::Random();
+               sphereMaterial = std::make_shared<Lambertian>(albedo);
+               world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
+            }
+            else if(chooseMat < 0.95) {
+               // metal
+               const Image::Pixel albedo = Image::Pixel::Random(0.5, 1);
+               const double fuzz = Utils::Random(0, 0.5);
+               sphereMaterial = std::make_shared<Metal>(albedo, fuzz);
+               world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
+            }
+            else {
+               // glass
+               sphereMaterial = std::make_shared<Dielectric>(1.5);
+               world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
+            }
+         }
+      }
+   }
+
+   const std::shared_ptr<Dielectric> material1 = std::make_shared<Dielectric>(1.5);
+   world.Add(std::make_shared<Sphere>(Point3d(0, 1, 0), 1.0, material1));
+
+   const std::shared_ptr<Lambertian> material2 = std::make_shared<Lambertian>(Image::Pixel(0.4, 0.2, 0.1));
+   world.Add(std::make_shared<Sphere>(Point3d(-4, 1, 0), 1.0, material2));
+
+   const std::shared_ptr<Metal> material3 = std::make_shared<Metal>(Image::Pixel(0.7, 0.6, 0.5), 0.0);
+   world.Add(std::make_shared<Sphere>(Point3d(4, 1, 0), 1.0, material3));
+
+   Camera cam(16.0 / 9.0,        // Aspect ratio
+              1200,              // Width
+              500,               // Samples per pixel
+              50,                // Maximum depth
+              20,                // Vertical view angle (field of view)
+              Point3d(13, 2, 3), // Point camera is looking from
+              Point3d(0, 0, 0),  // Point camera is looking at
+              Vector3d(0, 1, 0), // Camera-relative "up" direction
+              0.6,               // Defocus disk horizontal radius
+              10);               // Defocus disk vertical radius
    cam.Render(world);
 }
 

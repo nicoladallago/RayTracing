@@ -9,7 +9,9 @@ API Camera::Camera(const double aspectRatio,
                    const double vfov,
                    const Point3d& lookFrom,
                    const Point3d& lookAt,
-                   const Vector3d& vup) noexcept:
+                   const Vector3d& vup,
+                   const double defocusAngle,
+                   const double focusDist) noexcept:
     m_aspectRatio(aspectRatio),
     m_width(width),
     m_samplesPerPixels(samplesPerPixels),
@@ -17,7 +19,9 @@ API Camera::Camera(const double aspectRatio,
     m_vfov(vfov),
     m_lookFrom(lookFrom),
     m_lookAt(lookAt),
-    m_vup(vup) {
+    m_vup(vup),
+    m_defocusAngle(defocusAngle),
+    m_focusDist(focusDist) {
    Initialize();
 }
 
@@ -58,10 +62,10 @@ void Camera::Initialize() noexcept {
 
    m_center = m_lookFrom;
 
-   const double focalLenght = (m_lookFrom - m_lookAt).Length();
+   //const double focalLenght = (m_lookFrom - m_lookAt).Length();
    const double theta = Utils::DegreesToRadians(m_vfov);
    const double h = std::tan(theta / 2);
-   const double viewportHeight = 2 * h * focalLenght;
+   const double viewportHeight = 2 * h * m_focusDist;
    const double viewportWidth = viewportHeight * static_cast<double>(m_width) / m_height;
 
    // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
@@ -75,8 +79,13 @@ void Camera::Initialize() noexcept {
    m_pixelDeltaU = viewportU / static_cast<double>(m_width);
    m_pixelDeltaV = viewportV / static_cast<double>(m_height);
 
-   const Point3d viewportUpperLeft = m_center - (focalLenght * m_w) - viewportU / 2.0 - viewportV / 2.0;
+   const Point3d viewportUpperLeft = m_center - (m_focusDist * m_w) - viewportU / 2.0 - viewportV / 2.0;
    m_pixel00Loc = viewportUpperLeft + 0.5 * (m_pixelDeltaU + m_pixelDeltaV);
+
+   // Calculate the camera defocus disk basis vectors.
+   const double defocusRadius = m_focusDist * std::tan(Utils::DegreesToRadians(m_defocusAngle / 2));
+   m_defocusDiskU = m_u * defocusRadius;
+   m_defocusDiskV = m_v * defocusRadius;
 }
 
 
@@ -85,7 +94,7 @@ constexpr Ray Camera::GetRay(const unsigned int i, const unsigned int j) const n
        (static_cast<double>(j) * m_pixelDeltaV);
    const Point3d pixelSample = pixelCenter + PixelSampleSquare();
 
-   const Point3d rayOrigin = m_center;
+   const Point3d rayOrigin = (m_defocusAngle <= 0) ? m_center : DefocusDiskSample();
    const Vector3d rayDirection = pixelSample - rayOrigin;
 
    return Ray(rayOrigin, rayDirection);
@@ -96,6 +105,13 @@ Vector3d Camera::PixelSampleSquare() const noexcept {
    const double px = -0.5 + Utils::Random();
    const double py = -0.5 + Utils::Random();
    return (px * m_pixelDeltaU) + (py * m_pixelDeltaV);
+}
+
+
+Point3d Camera::DefocusDiskSample() const {
+   // Returns a random point in the camera defocus disk.
+   const Point3d p = RandomInUnitDisk<double>();
+   return m_center + (p.GetX() * m_defocusDiskU) + (p.GetY() * m_defocusDiskV);
 }
 
 
