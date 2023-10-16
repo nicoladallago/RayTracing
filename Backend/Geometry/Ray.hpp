@@ -1,3 +1,6 @@
+#ifndef RAY_HPP
+#define RAY_HPP
+#pragma once
 #include "Ray.h"
 
 API constexpr Ray::Ray(const Point3d& orig, const Vector3d& dir) noexcept:
@@ -19,3 +22,5 @@ API constexpr const Vector3d& Ray::GetDirection() const noexcept {
 API constexpr Point3d Ray::At(const double t) const noexcept {
    return m_orig + t * m_dir;
 }
+
+#endif

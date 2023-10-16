@@ -1,3 +1,6 @@
+#ifndef IMAGE_HPP
+#define IMAGE_HPP
+#pragma once
 #include "Image.h"
 
 API Image::Image(const unsigned int width, const unsigned int height):
@@ -25,3 +28,5 @@ API constexpr size_t Image::GetSize() const noexcept {
 API constexpr std::span<Image::Pixel> Image::Get() noexcept {
    return m_data;
 }
+
+#endif

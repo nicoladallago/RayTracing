@@ -4,12 +4,8 @@
 //#include "Widgets/MainWidget.h"
 //#include "Widgets/Button.h"
 
-#include <Image/Image.h>
-#include <Geometry/Point3.h>
-#include <Geometry/Ray.h>
 #include <Objects/HittableList.h>
 #include <Objects/Sphere.h>
-#include <Utils/Interval.h>
 #include <Image/Camera.h>
 #include <Materials/Lambertian.h>
 #include <Materials/Metal.h>

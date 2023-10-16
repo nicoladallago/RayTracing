@@ -1,3 +1,6 @@
+#ifndef INTERVAL_HPP
+#define INTERVAL_HPP
+#pragma once
 #include "Interval.h"
 
 API constexpr Interval::Interval() noexcept:
@@ -41,3 +44,5 @@ API constexpr bool Interval::Contains(const double val) const noexcept {
 API constexpr bool Interval::Surrounds(const double val) const noexcept {
    return m_min < val && val < m_max;
 }
+
+#endif

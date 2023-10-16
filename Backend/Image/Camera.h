@@ -47,9 +47,9 @@ class Camera {
    Vector3d PixelSampleSquare() const noexcept; // TODO constexpr
    Point3d DefocusDiskSample() const;
 
-   static constexpr Image::Pixel RayColor(const Ray& ray,
-                                          const unsigned int depth,
-                                          const Hittable& world) noexcept;
+   static Image::Pixel RayColor(const Ray& ray,
+                                const unsigned int depth,
+                                const Hittable& world) noexcept;
    static double LinearToGamma(const double linear) noexcept;
 };
 

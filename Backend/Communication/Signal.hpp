@@ -1,3 +1,6 @@
+#ifndef SIGNAL_HPP
+#define SIGNAL_HPP
+#pragma once
 #include "Signal.h"
 
 template<class T>
@@ -16,3 +19,5 @@ template<class T>
 constexpr const T& Signal<T>::Get() const noexcept {
    return m_data;
 }
+
+#endif

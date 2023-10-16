@@ -14,7 +14,7 @@ class HittableList: public Hittable {
    API constexpr void Clear() noexcept;
    API constexpr void Add(const std::shared_ptr<Hittable>& spObject);
 
-   [[nodiscard]] API virtual constexpr bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept override final;
+   [[nodiscard]] API virtual bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept override final;
 };
 
 #include "HittableList.hpp"

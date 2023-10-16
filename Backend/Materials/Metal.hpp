@@ -1,3 +1,6 @@
+#ifndef METAL_HPP
+#define METAL_HPP
+#pragma once
 #include "Metal.h"
 
 API constexpr Metal::Metal(const Image::Pixel& a, const double f) noexcept:
@@ -7,7 +10,7 @@ API constexpr Metal::Metal(const Image::Pixel& a, const double f) noexcept:
 
 
 API bool Metal::Scatter(const Ray& ray,
-                        const Hittable::HitRecord& rec,
+                        const HitRecord& rec,
                         Image::Pixel& attenuation,
                         Ray& scattered) const noexcept {
    const Vector3d reflected = Reflect(UnitVector(ray.GetDirection()), rec.normal);
@@ -15,3 +18,5 @@ API bool Metal::Scatter(const Ray& ray,
    attenuation = m_albedo;
    return (Dot(scattered.GetDirection(), rec.normal) > 0);
 }
+
+#endif

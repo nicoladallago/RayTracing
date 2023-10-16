@@ -11,7 +11,7 @@ class Dielectric: public Material {
    API constexpr Dielectric(const double indexOfRefraction) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
-                                          const Hittable::HitRecord& rec,
+                                          const HitRecord& rec,
                                           Image::Pixel& attenuation,
                                           Ray& scattered) const noexcept override final;
 

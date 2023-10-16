@@ -1,3 +1,6 @@
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
+#pragma once
 #include "Camera.h"
 #include "Materials/Material.h"
 #include "Utils/Utils.h"
@@ -115,10 +118,10 @@ Point3d Camera::DefocusDiskSample() const {
 }
 
 
-constexpr Image::Pixel Camera::RayColor(const Ray& ray,
-                                        const unsigned int depth,
-                                        const Hittable& world) noexcept {
-   Hittable::HitRecord rec;
+Image::Pixel Camera::RayColor(const Ray& ray,
+                              const unsigned int depth,
+                              const Hittable& world) noexcept {
+   HitRecord rec;
 
    if(depth <= 0) {
       return Image::Pixel(0, 0, 0);
@@ -143,3 +146,5 @@ constexpr Image::Pixel Camera::RayColor(const Ray& ray,
 double Camera::LinearToGamma(const double linear) noexcept {
    return std::sqrt(linear);
 }
+
+#endif

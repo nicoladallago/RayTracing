@@ -13,7 +13,7 @@ class Metal: public Material {
    API constexpr Metal(const Image::Pixel& a, const double f) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
-                                          const Hittable::HitRecord& rec,
+                                          const HitRecord& rec,
                                           Image::Pixel& attenuation,
                                           Ray& scattered) const noexcept override final;
 };

@@ -22,7 +22,7 @@ set(SOURCES
     "Materials/Lambertian.hpp"
     "Materials/Metal.hpp"
 
-    "Objects/Hittable.hpp"
+    "Objects/HitRecord.hpp"
     "Objects/Sphere.hpp"
 
     "Utils/Interval.hpp"

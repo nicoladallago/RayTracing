@@ -1,3 +1,6 @@
+#ifndef POINT3_HPP
+#define POINT3_HPP
+#pragma once
 #include "Point3.h"
 
 template<class T>
@@ -16,24 +19,6 @@ API constexpr Point3<T>::Point3(const Point2<T> point, const T& z) noexcept:
 template<class T>
 API constexpr Point3<T> Point3<T>::operator-() const noexcept {
    return Point3<T>(-m_xy, -m_z);
-}
-
-
-template<class T>
-API constexpr T Point3<T>::operator[](const unsigned int index) const {
-   if constexpr(index == 2) {
-      return m_z;
-   }
-   return m_xy[index];
-}
-
-
-template<class T>
-API constexpr T& Point3<T>::operator[](const unsigned int index) {
-   if constexpr(index == 2) {
-      return m_z;
-   }
-   return m_xy[index];
 }
 
 
@@ -243,3 +228,5 @@ API constexpr Point3<T> Refract(const Point3<T>& uv, const Point3<T>& n, const T
    const Point3<T> rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.LenghtSquared())) * n;
    return rOutPerp + rOutParallel;
 }
+
+#endif

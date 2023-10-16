@@ -1,3 +1,6 @@
+#ifndef DIELECTRIC_HPP
+#define DIELECTRIC_HPP
+#pragma once
 #include "Dielectric.h"
 #include "Image/Image.h"
 
@@ -7,7 +10,7 @@ API constexpr Dielectric::Dielectric(const double indexOfRefraction) noexcept:
 
 
 API bool Dielectric::Scatter(const Ray& ray,
-                             const Hittable::HitRecord& rec,
+                             const HitRecord& rec,
                              Image::Pixel& attenuation,
                              Ray& scattered) const noexcept {
    attenuation = Image::Pixel(1, 1, 1);
@@ -38,3 +41,5 @@ double Dielectric::Reflectance(const double cosine, const double refIdx) noexcep
    r0 = r0 * r0;
    return r0 + (1 - r0) * std::pow((1 - cosine), 5);
 }
+
+#endif

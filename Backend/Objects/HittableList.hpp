@@ -1,4 +1,8 @@
+#ifndef HITTABLE_LIST_HPP
+#define HITTABLE_LIST_HPP
+#pragma once
 #include "HittableList.h"
+#include "Objects/HitRecord.hpp"
 #include "Utils/Interval.h"
 
 API HittableList::HittableList(const std::shared_ptr<Hittable>& spObject) {
@@ -16,7 +20,7 @@ API constexpr void HittableList::Add(const std::shared_ptr<Hittable>& spObject) 
 }
 
 
-API constexpr bool HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+API bool HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    HitRecord tempRec;
    bool hitAnything = false;
    double closestSoFar = rayT.GetMax();
@@ -31,3 +35,5 @@ API constexpr bool HittableList::Hit(const Ray& ray, const Interval& rayT, HitRe
 
    return hitAnything;
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef MODEL_HPP
+#define MODEL_HPP
+#pragma once
 #include "Signal.h"
 
 template<typename T>
@@ -39,3 +42,5 @@ API void Model::Connect(const std::string& key, F fun, P ptr) {
    sigslot::signal<T>& signal = dynamic_cast<Signal<sigslot::signal<T>>&>(*m_signals.at(key)).Get();
    signal.connect(fun, ptr);
 }
+
+#endif

@@ -1,7 +1,8 @@
+#ifndef POINT2_HPP
+#define POINT2_HPP
+#pragma once
 #include "Point2.h"
 #include "Utils/Utils.h"
-
-#include <cmath> // TODO Remove this
 
 template<class T>
 API constexpr Point2<T>::Point2(const T& x, const T& y) noexcept:
@@ -13,30 +14,6 @@ API constexpr Point2<T>::Point2(const T& x, const T& y) noexcept:
 template<class T>
 API constexpr Point2<T> Point2<T>::operator-() const noexcept {
    return Point2<T>(-m_x, -m_y);
-}
-
-
-template<class T>
-API constexpr T Point2<T>::operator[](const unsigned int index) const {
-   if constexpr(index == 0) {
-      return m_x;
-   }
-   if constexpr(index == 1) {
-      return m_y;
-   }
-   throw std::exception("Invalid index " + std::to_string(index));
-}
-
-
-template<class T>
-API constexpr T& Point2<T>::operator[](const unsigned int index) {
-   if constexpr(index == 0) {
-      return m_x;
-   }
-   if constexpr(index == 1) {
-      return m_y;
-   }
-   throw std::exception("Invalid index " + std::to_string(index));
 }
 
 
@@ -180,3 +157,5 @@ template<typename T>
 API inline Point2<T> UnitVector(const Point2<T>& p) noexcept {
    return p / p.Length();
 }
+
+#endif

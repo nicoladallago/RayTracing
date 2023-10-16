@@ -12,7 +12,7 @@ class Lambertian: public Material {
    API constexpr Lambertian(const Image::Pixel& a) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
-                                          const Hittable::HitRecord& rec,
+                                          const HitRecord& rec,
                                           Image::Pixel& attenuation,
                                           Ray& scattered) const noexcept override final;
 };

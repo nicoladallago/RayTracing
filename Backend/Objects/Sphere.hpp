@@ -1,3 +1,6 @@
+#ifndef SPHERE_HPP
+#define SPHERE_HPP
+#pragma once
 #include "Sphere.h"
 
 API Sphere::Sphere(const Point3d& center, const double radius, const std::shared_ptr<Material>& spMaterial):
@@ -7,7 +10,7 @@ API Sphere::Sphere(const Point3d& center, const double radius, const std::shared
 }
 
 
-API constexpr bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    const Vector3d oc = ray.GetOrigin() - m_center;
    const double a = ray.GetDirection().LenghtSquared();
    const double halfB = Dot(oc, ray.GetDirection());
@@ -36,3 +39,5 @@ API constexpr bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& 
 
    return true;
 }
+
+#endif

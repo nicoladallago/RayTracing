@@ -1,3 +1,6 @@
+#ifndef RECT_HPP
+#define RECT_HPP
+#pragma once
 #include "Rect.h"
 
 template<class T>
@@ -98,3 +101,5 @@ template<class T>
 API constexpr T Rect<T>::GetTop() const noexcept {
    return GetY() + GetHeight();
 }
+
+#endif

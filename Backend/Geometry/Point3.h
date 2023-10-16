@@ -16,9 +16,6 @@ class Point3 {
 
    [[nodiscard]] API constexpr Point3<T> operator-() const noexcept;
 
-   [[nodiscard]] API constexpr T operator[](const unsigned int index) const;
-   [[nodiscard]] API constexpr T& operator[](const unsigned int index);
-
    API constexpr Point3<T>& operator+=(const Point3<T>& point) noexcept;
    API constexpr Point3<T>& operator*=(const T& val) noexcept;
    API constexpr Point3<T>& operator/=(const T& val) noexcept;
