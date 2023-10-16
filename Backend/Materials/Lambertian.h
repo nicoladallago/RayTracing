@@ -11,10 +11,10 @@ class Lambertian: public Material {
  public:
    API constexpr Lambertian(const Image::Pixel& a) noexcept;
 
-   [[nodiscard]] API virtual constexpr bool Scatter(const Ray& ray,
-                                                    const Hittable::HitRecord& rec,
-                                                    Image::Pixel& attenuation,
-                                                    Ray& scattered) const noexcept override final;
+   [[nodiscard]] API virtual bool Scatter(const Ray& ray,
+                                          const Hittable::HitRecord& rec,
+                                          Image::Pixel& attenuation,
+                                          Ray& scattered) const noexcept override final;
 };
 
 #include "Lambertian.hpp"

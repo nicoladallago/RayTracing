@@ -15,7 +15,7 @@ class Material {
  public:
    API virtual ~Material() = default;
 
-   [[nodiscard]] API virtual constexpr bool Scatter(const Ray& ray, const Hittable::HitRecord& rec, Image::Pixel& attenuation, Ray& scattered) const noexcept = 0;
+   [[nodiscard]] API virtual bool Scatter(const Ray& ray, const Hittable::HitRecord& rec, Image::Pixel& attenuation, Ray& scattered) const noexcept = 0;
 };
 
 

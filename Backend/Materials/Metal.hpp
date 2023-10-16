@@ -6,10 +6,10 @@ API constexpr Metal::Metal(const Image::Pixel& a, const double f) noexcept:
 }
 
 
-API constexpr bool Metal::Scatter(const Ray& ray,
-                                  const Hittable::HitRecord& rec,
-                                  Image::Pixel& attenuation,
-                                  Ray& scattered) const noexcept {
+API bool Metal::Scatter(const Ray& ray,
+                        const Hittable::HitRecord& rec,
+                        Image::Pixel& attenuation,
+                        Ray& scattered) const noexcept {
    const Vector3d reflected = Reflect(UnitVector(ray.GetDirection()), rec.normal);
    scattered = Ray(rec.p, reflected + m_fuzz * RandomUnitVector<double>());
    attenuation = m_albedo;

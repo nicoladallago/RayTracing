@@ -10,10 +10,10 @@ class Dielectric: public Material {
  public:
    API constexpr Dielectric(const double indexOfRefraction) noexcept;
 
-   [[nodiscard]] API virtual constexpr bool Scatter(const Ray& ray,
-                                                    const Hittable::HitRecord& rec,
-                                                    Image::Pixel& attenuation,
-                                                    Ray& scattered) const noexcept override final;
+   [[nodiscard]] API virtual bool Scatter(const Ray& ray,
+                                          const Hittable::HitRecord& rec,
+                                          Image::Pixel& attenuation,
+                                          Ray& scattered) const noexcept override final;
 };
 
 #include "Dielectric.hpp"

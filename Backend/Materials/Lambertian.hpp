@@ -5,10 +5,10 @@ API constexpr Lambertian::Lambertian(const Image::Pixel& a) noexcept:
 }
 
 
-API constexpr bool Lambertian::Scatter([[maybe_unused]] const Ray& ray,
-                                       const Hittable::HitRecord& rec,
-                                       Image::Pixel& attenuation,
-                                       Ray& scattered) const noexcept {
+API bool Lambertian::Scatter([[maybe_unused]] const Ray& ray,
+                             const Hittable::HitRecord& rec,
+                             Image::Pixel& attenuation,
+                             Ray& scattered) const noexcept {
    Vector3d scatterDirection = rec.normal + RandomUnitVector<double>();
 
    // Catch degenerate scatter direction
