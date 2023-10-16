@@ -2,14 +2,16 @@
 #include "Materials/Material.h"
 #include "Utils/Utils.h"
 
-API constexpr Camera::Camera(const double aspectRatio,
-                             const unsigned int width,
-                             const unsigned int samplesPerPixels,
-                             const unsigned int maxDepth) noexcept:
+API Camera::Camera(const double aspectRatio,
+                   const unsigned int width,
+                   const unsigned int samplesPerPixels,
+                   const unsigned int maxDepth,
+                   const double vfov) noexcept:
     m_aspectRatio(aspectRatio),
     m_width(width),
     m_samplesPerPixels(samplesPerPixels),
-    m_maxDepth(maxDepth) {
+    m_maxDepth(maxDepth),
+    m_vfov(vfov) {
    Initialize();
 }
 
@@ -45,13 +47,15 @@ API void Camera::Render(const Hittable& world) noexcept {
 }
 
 
-constexpr void Camera::Initialize() noexcept {
+void Camera::Initialize() noexcept {
    m_height = static_cast<unsigned int>(m_width / m_aspectRatio);
 
    m_center = Point3d(0, 0, 0);
 
    const double focalLenght = 1;
-   const double viewportHeight = 2;
+   const double theta = Utils::DegreesToRadians(m_vfov);
+   const double h = std::tan(theta / 2);
+   const double viewportHeight = 2 * h * focalLenght;
    const double viewportWidth = viewportHeight * static_cast<double>(m_width) / m_height;
 
    const Vector3d viewportU(viewportWidth, 0, 0);

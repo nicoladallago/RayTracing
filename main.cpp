@@ -18,21 +18,20 @@
 void Render() {
    // World
    HittableList world;
-   std::shared_ptr<Lambertian> matGround = std::make_shared<Lambertian>(Image::Pixel(0.8, 0.8, 0));
-   std::shared_ptr<Lambertian> matCenter = std::make_shared<Lambertian>(Image::Pixel(0.1, 0.2, 0.5));
-   std::shared_ptr<Dielectric> matLeft = std::make_shared<Dielectric>(1.5);
-   std::shared_ptr<Metal> matRight = std::make_shared<Metal>(Image::Pixel(0.8, 0.6, 0.2), 0);
 
-   world.Add(std::make_shared<Sphere>(Point3d(0.0, -100.5, -1.0), 100.0, matGround));
-   world.Add(std::make_shared<Sphere>(Point3d(0.0, 0.0, -1.0), 0.5, matCenter));
-   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), 0.5, matLeft));
-   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), -0.4, matLeft));
-   world.Add(std::make_shared<Sphere>(Point3d(1.0, 0.0, -1.0), 0.5, matRight));
+   const double R = std::cos(std::numbers::pi / 4);
+
+   std::shared_ptr<Lambertian> matLeft = std::make_shared<Lambertian>(Image::Pixel(0, 0, 1));
+   std::shared_ptr<Lambertian> matRight = std::make_shared<Lambertian>(Image::Pixel(1, 0, 0));
+
+   world.Add(std::make_shared<Sphere>(Point3d(-R, 0, -1), R, matLeft));
+   world.Add(std::make_shared<Sphere>(Point3d(R, 0, -1), R, matRight));
 
    Camera cam(16.0 / 9.0, // Aspect ratio
               400,        // Width
               100,        // Samples per pixel
-              50);        // Maximum depth
+              50,         // Maximum depth
+              90);        // Vertical view angle (field of view)
    cam.Render(world);
 }
 
