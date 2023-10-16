@@ -9,6 +9,7 @@ class Camera {
    const double m_aspectRatio;
    const unsigned int m_width;
    const unsigned int m_samplesPerPixels;
+   const unsigned int m_maxDepth;
    unsigned int m_height;  // Rendered image height
    Point3d m_center;       // Camera center
    Point3d m_pixel00Loc;   // Location of pixel 0, 0
@@ -18,7 +19,8 @@ class Camera {
  public:
    API constexpr Camera(const double aspectRatio,
                         const unsigned int width,
-                        const unsigned int samplesPerPixels) noexcept;
+                        const unsigned int samplesPerPixels,
+                        const unsigned int maxDepth) noexcept;
 
    API void Render(const Hittable& world) noexcept; // TODO make it constexpr
 
@@ -27,7 +29,9 @@ class Camera {
    constexpr Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
    Vector3d PixelSampleSquare() const noexcept; // TODO constexpr
 
-   static constexpr Image::Pixel RayColor(const Ray& ray, const Hittable& world) noexcept;
+   static constexpr Image::Pixel RayColor(const Ray& ray,
+                                          const unsigned int depth,
+                                          const Hittable& world) noexcept;
 };
 
 #include "Camera.hpp"

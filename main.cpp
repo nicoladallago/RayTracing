@@ -18,7 +18,10 @@ void Render() {
    world.Add(std::make_shared<Sphere>(Point3d(0, 0, -1), 0.5));
    world.Add(std::make_shared<Sphere>(Point3d(0, -100.5, -1), 100));
 
-   Camera cam(16.0 / 9.0, 400, 100);
+   Camera cam(16.0 / 9.0, // Aspect ratio
+			  400,        // Width
+	          100,        // Samples per pixel
+	          50);        // Maximum depth
    cam.Render(world);
 }
 

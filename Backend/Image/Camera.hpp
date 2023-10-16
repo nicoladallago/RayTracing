@@ -3,10 +3,12 @@
 
 API constexpr Camera::Camera(const double aspectRatio,
                              const unsigned int width,
-                             const unsigned int samplesPerPixels) noexcept:
+                             const unsigned int samplesPerPixels,
+                             const unsigned int maxDepth) noexcept:
     m_aspectRatio(aspectRatio),
     m_width(width),
-    m_samplesPerPixels(samplesPerPixels) {
+    m_samplesPerPixels(samplesPerPixels),
+    m_maxDepth(maxDepth){
    Initialize();
 }
 
@@ -20,7 +22,7 @@ API void Camera::Render(const Hittable& world) noexcept {
          Image::Pixel& p = pixels[offset + i];
          for(unsigned int sample = 0; sample < m_samplesPerPixels; ++sample) {
             const Ray ray = GetRay(i, j);
-            p += RayColor(ray, world);
+            p += RayColor(ray, m_maxDepth, world);
          }
 
          const double scale = 1.0 / m_samplesPerPixels;
@@ -76,12 +78,18 @@ Vector3d Camera::PixelSampleSquare() const noexcept {
 }
 
 
-constexpr Image::Pixel Camera::RayColor(const Ray& ray, const Hittable& world) noexcept {
+constexpr Image::Pixel Camera::RayColor(const Ray& ray, 
+                                        const unsigned int depth,
+                                        const Hittable& world) noexcept {
    Hittable::HitRecord rec;
 
-   if(world.Hit(ray, Interval(0, std::numeric_limits<double>::max()), rec)) {
-      const Vector3d direction = RandomOnHemisphere(rec.normal);
-      return 0.5 * RayColor(Ray(rec.p, direction), world);
+   if (depth <= 0) {
+      return Image::Pixel(0, 0, 0);
+   }
+
+   if(world.Hit(ray, Interval(0.001, std::numeric_limits<double>::max()), rec)) {
+      const Vector3d direction = rec.normal + RandomUnitVector<double>();
+      return 0.5 * RayColor(Ray(rec.p, direction), depth - 1, world);
    }
 
    const Vector3d unitDirection = UnitVector(ray.GetDirection());
