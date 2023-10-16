@@ -12,5 +12,7 @@
 #include <span>
 #include <vector>
 #include <memory>
+#include <numbers>
+#include <random>
 
 #include <sigslot/signal.hpp>

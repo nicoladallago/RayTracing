@@ -21,7 +21,8 @@ set(SOURCES
     "Objects/Hittable.hpp"
     "Objects/Sphere.hpp"
 
-    "Utils/Interval.hpp")
+    "Utils/Interval.hpp"
+    "Utils/Utils.hpp")
 
 add_library(Backend SHARED)
 target_sources(Backend PRIVATE ${SOURCES})

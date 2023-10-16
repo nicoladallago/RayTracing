@@ -13,6 +13,7 @@ class Interval {
 
    [[nodiscard]] API constexpr double GetMin() const noexcept;
    [[nodiscard]] API constexpr double GetMax() const noexcept;
+   [[nodiscard]] API constexpr double Clamp(const double val) const noexcept;
 
    [[nodiscard]] API constexpr bool Contains(const double val) const noexcept;
    [[nodiscard]] API constexpr bool Surrounds(const double val) const noexcept;

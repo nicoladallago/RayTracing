@@ -22,6 +22,17 @@ API constexpr double Interval::GetMax() const noexcept {
 }
 
 
+API constexpr double Interval::Clamp(const double val) const noexcept {
+   if(val < m_min) {
+      return m_min;
+   }
+   if(val > m_max) {
+      return m_max;
+   }
+   return val;
+}
+
+
 API constexpr bool Interval::Contains(const double val) const noexcept {
    return m_min <= val && val <= m_max;
 }
