@@ -14,6 +14,7 @@ set(SOURCES
     "Geometry/Ray.hpp"
     "Geometry/Rect.hpp"
 
+    "Image/Camera.hpp"
     "Image/Image.cpp"
     "Image/Image.hpp"
 
