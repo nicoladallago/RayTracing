@@ -18,7 +18,9 @@ set(SOURCES
     "Image/Image.hpp"
 
     "Objects/Hittable.hpp"
-    "Objects/Sphere.hpp")
+    "Objects/Sphere.hpp"
+
+    "Utils/Interval.hpp")
 
 add_library(Backend SHARED)
 target_sources(Backend PRIVATE ${SOURCES})

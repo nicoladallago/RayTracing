@@ -9,10 +9,11 @@
 #include <Geometry/Ray.h>
 #include <Objects/HittableList.h>
 #include <Objects/Sphere.h>
+#include <Utils/Interval.h>
 
 void RayColor(Image::Pixel& p, const Ray& ray, const Hittable& world) {
    Hittable::HitRecord rec;
-   if(world.Hit(ray, 0, std::numeric_limits<double>::max(), rec)) {
+   if(world.Hit(ray, Interval(0, std::numeric_limits<double>::max()), rec)) {
       p.r = 0.5 * (rec.normal.GetX() + 1);
       p.g = 0.5 * (rec.normal.GetY() + 1);
       p.b = 0.5 * (rec.normal.GetZ() + 1);

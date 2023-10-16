@@ -15,13 +15,13 @@ API constexpr void HittableList::Add(const std::shared_ptr<Hittable>& spObject) 
 }
 
 
-API constexpr bool HittableList::Hit(const Ray& ray, const double rayMin, const double rayMax, HitRecord& rec) const noexcept {
+API constexpr bool HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    HitRecord tempRec;
    bool hitAnything = false;
-   auto closestSoFar = rayMax;
+   double closestSoFar = rayT.GetMax();
 
    for(const std::shared_ptr<Hittable>& spObject : m_objects) {
-      if(spObject->Hit(ray, rayMin, closestSoFar, tempRec)) {
+      if(spObject->Hit(ray, Interval(rayT.GetMin(), closestSoFar), tempRec)) {
          hitAnything = true;
          closestSoFar = tempRec.t;
          rec = tempRec;

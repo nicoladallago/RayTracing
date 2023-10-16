@@ -14,7 +14,7 @@ class Sphere: public Hittable {
  public:
    API constexpr Sphere(const Point3d& center, const double radius);
 
-   [[nodiscard]] API virtual constexpr bool Hit(const Ray& ray, const double rayMin, const double rayMax, HitRecord& rec) const noexcept override final;
+   [[nodiscard]] API virtual constexpr bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept override final;
 };
 
 #include "Sphere.hpp"

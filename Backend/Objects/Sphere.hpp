@@ -6,7 +6,7 @@ API constexpr Sphere::Sphere(const Point3d& center, const double radius):
 }
 
 
-API constexpr bool Sphere::Hit(const Ray& ray, const double rayMin, const double rayMax, HitRecord& rec) const noexcept {
+API constexpr bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    const Vector3d oc = ray.GetOrigin() - m_center;
    const double a = ray.GetDirection().LenghtSquared();
    const double halfB = Dot(oc, ray.GetDirection());
@@ -20,9 +20,9 @@ API constexpr bool Sphere::Hit(const Ray& ray, const double rayMin, const double
 
    // Find the nearest root that lies in the acceptable range.
    double root = (-halfB - sqrtd) / a;
-   if(root <= rayMin || rayMax <= root) {
+   if(!rayT.Surrounds(root)) {
       root = (-halfB + sqrtd) / a;
-      if(root <= rayMin || rayMax <= root) {
+      if(!rayT.Surrounds(root)) {
          return false;
       }
    }

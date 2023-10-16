@@ -3,6 +3,7 @@
 #pragma once
 #include "Geometry/Point3.h"
 #include "Geometry/Ray.h"
+#include "Utils/Interval.h"
 
 class Hittable {
  public:
@@ -18,7 +19,7 @@ class Hittable {
 
    API virtual ~Hittable() = default;
 
-   [[nodiscard]] API virtual constexpr bool Hit(const Ray& ray, const double rayMin, const double rayMax, HitRecord& rec) const noexcept = 0;
+   [[nodiscard]] API virtual constexpr bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept = 0;
 };
 
 #include "Hittable.hpp"
