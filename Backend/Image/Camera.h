@@ -32,6 +32,7 @@ class Camera {
    static constexpr Image::Pixel RayColor(const Ray& ray,
                                           const unsigned int depth,
                                           const Hittable& world) noexcept;
+   static double LinearToGamma(const double linear) noexcept;
 };
 
 #include "Camera.hpp"

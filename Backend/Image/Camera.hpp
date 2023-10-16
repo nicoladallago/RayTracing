@@ -12,6 +12,7 @@ API constexpr Camera::Camera(const double aspectRatio,
    Initialize();
 }
 
+
 API void Camera::Render(const Hittable& world) noexcept {
    Image img(m_width, m_height);
    std::span<Image::Pixel> pixels = img.Get();
@@ -27,6 +28,10 @@ API void Camera::Render(const Hittable& world) noexcept {
 
          const double scale = 1.0 / m_samplesPerPixels;
          p *= scale;
+
+         p.SetX(LinearToGamma(p.GetX()));
+         p.SetY(LinearToGamma(p.GetY()));
+         p.SetZ(LinearToGamma(p.GetZ()));
 
          const Interval intensity(0, 1);
          p.SetX(255 * intensity.Clamp(p.GetX()));
@@ -89,10 +94,15 @@ constexpr Image::Pixel Camera::RayColor(const Ray& ray,
 
    if(world.Hit(ray, Interval(0.001, std::numeric_limits<double>::max()), rec)) {
       const Vector3d direction = rec.normal + RandomUnitVector<double>();
-      return 0.5 * RayColor(Ray(rec.p, direction), depth - 1, world);
+      return 0.1 * RayColor(Ray(rec.p, direction), depth - 1, world);
    }
 
    const Vector3d unitDirection = UnitVector(ray.GetDirection());
    const double a = 0.5 * (unitDirection.GetY() + 1);
    return Image::Pixel(1 - a + 0.5 * a, 1 - a + 0.7 * a, 1 - a + a);
+}
+
+
+double Camera::LinearToGamma(const double linear) noexcept {
+   return std::sqrt(linear);
 }
