@@ -19,9 +19,9 @@ class Point3 {
    [[nodiscard]] API constexpr T operator[](const unsigned int index) const;
    [[nodiscard]] API constexpr T& operator[](const unsigned int index);
 
-   [[nodiscard]] API constexpr Point3<T>& operator+=(const Point3<T>& point) noexcept;
-   [[nodiscard]] API constexpr Point3<T>& operator*=(const T& val) noexcept;
-   [[nodiscard]] API constexpr Point3<T>& operator/=(const T& val) noexcept;
+   API constexpr Point3<T>& operator+=(const Point3<T>& point) noexcept;
+   API constexpr Point3<T>& operator*=(const T& val) noexcept;
+   API constexpr Point3<T>& operator/=(const T& val) noexcept;
 
    API constexpr void SetX(const T x) noexcept;
    API constexpr void SetY(const T y) noexcept;
@@ -34,6 +34,9 @@ class Point3 {
 
    [[nodiscard]] API constexpr T Length() const noexcept;
    [[nodiscard]] API constexpr T LenghtSquared() const noexcept;
+
+   [[nodiscard]] API static inline Point3<T> Random() noexcept;                                   // TODO constexpr
+   [[nodiscard]] API static inline Point3<T> Random(const double min, const double max) noexcept; // TODO constexpr
 };
 
 typedef Point3<unsigned int> Point3ui;
@@ -45,27 +48,27 @@ template<typename T>
 
 
 template<typename T>
-[[nodiscard]] API constexpr Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+API constexpr Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API constexpr Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+API constexpr Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API constexpr Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept;
+API constexpr Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API constexpr Point3<T> operator*(const T& val, const Point3<T>& p) noexcept;
+API constexpr Point3<T> operator*(const T& val, const Point3<T>& p) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API constexpr Point3<T> operator*(const Point3<T>& p, const T& val) noexcept;
+API constexpr Point3<T> operator*(const Point3<T>& p, const T& val) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API constexpr Point3<T> operator/(const Point3<T>& p, const T& val) noexcept;
+API constexpr Point3<T> operator/(const Point3<T>& p, const T& val) noexcept;
 
 
 template<typename T>
@@ -76,6 +79,15 @@ template<typename T>
 
 template<typename T>
 [[nodiscard]] API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept;
+
+template<typename T>
+[[nodiscard]] API inline Point3<T> RandomInUnitSphere() noexcept; // TODO constexpr
+
+template<typename T>
+[[nodiscard]] API inline Point3<T> RandomUnitVector() noexcept; // TODO constexpr
+
+template<typename T>
+[[nodiscard]] API inline Point3<T> RandomOnHemisphere(const Point3<T>& normal) noexcept; // TODO constexpr
 
 #include "Point3.hpp"
 #endif

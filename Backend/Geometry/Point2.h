@@ -1,6 +1,7 @@
 #ifndef POINT2_H
 #define POINT2_H
 #pragma once
+#include "Utils/Utils.h"
 
 template<class T>
 class Point2 {
@@ -17,9 +18,9 @@ class Point2 {
    [[nodiscard]] API constexpr T operator[](const unsigned int index) const;
    [[nodiscard]] API constexpr T& operator[](const unsigned int index);
 
-   [[nodiscard]] API constexpr Point2<T>& operator+=(const Point2<T>& point) noexcept;
-   [[nodiscard]] API constexpr Point2<T>& operator*=(const T& val) noexcept;
-   [[nodiscard]] API constexpr Point2<T>& operator/=(const T& val) noexcept;
+   API constexpr Point2<T>& operator+=(const Point2<T>& point) noexcept;
+   API constexpr Point2<T>& operator*=(const T& val) noexcept;
+   API constexpr Point2<T>& operator/=(const T& val) noexcept;
 
    API constexpr bool operator<(const Point2<T>& point) const noexcept;
 
@@ -31,6 +32,9 @@ class Point2 {
 
    [[nodiscard]] API constexpr T Length() const noexcept;
    [[nodiscard]] API constexpr T LenghtSquared() const noexcept;
+
+   [[nodiscard]] API static inline Point2<T> Random() noexcept; // TODO constexpr
+   [[nodiscard]] API static inline Point2<T> Random(const double min, const double max) noexcept; // TODO constexpr
 };
 
 typedef Point2<unsigned int> Point2ui;
@@ -41,27 +45,27 @@ template<typename T>
 
 
 template<typename T>
-[[nodiscard]] API inline Point2<T> operator+(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+API inline Point2<T> operator+(const Point2<T>& p1, const Point2<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point2<T> operator-(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+API inline Point2<T> operator-(const Point2<T>& p1, const Point2<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point2<T> operator*(const Point2<T>& p1, const Point2<T>& p2) noexcept;
+API inline Point2<T> operator*(const Point2<T>& p1, const Point2<T>& p2) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point2<T> operator*(const T& val, const Point2<T>& p) noexcept;
+API inline Point2<T> operator*(const T& val, const Point2<T>& p) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point2<T> operator*(const Point2<T>& p, const T& val) noexcept;
+API inline Point2<T> operator*(const Point2<T>& p, const T& val) noexcept;
 
 
 template<typename T>
-[[nodiscard]] API inline Point2<T> operator/(const Point2<T>& p, const T& val) noexcept;
+API inline Point2<T> operator/(const Point2<T>& p, const T& val) noexcept;
 
 
 template<typename T>

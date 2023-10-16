@@ -27,8 +27,7 @@ class Camera {
    constexpr Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
    Vector3d PixelSampleSquare() const noexcept; // TODO constexpr
 
-   static constexpr void RayColor(Image::Pixel& p, const Ray& ray, const Hittable& world) noexcept;
-   static constexpr void Normalize(Image::Pixel& p, const unsigned int samplesPerPixel) noexcept;
+   static constexpr Image::Pixel RayColor(const Ray& ray, const Hittable& world) noexcept;
 };
 
 #include "Camera.hpp"

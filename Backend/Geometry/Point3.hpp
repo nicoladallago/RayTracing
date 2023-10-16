@@ -113,6 +113,18 @@ API constexpr T Point3<T>::LenghtSquared() const noexcept {
 }
 
 
+template<class T>
+API inline Point3<T> Point3<T>::Random() noexcept {
+   return Point3<T>(Point2<T>::Random(), Utils::Random());
+}
+
+
+template<class T>
+API inline Point3<T> Point3<T>::Random(const double min, const double max) noexcept {
+   return Point3<T>(Point2<T>::Random(min, max), Utils::Random(min, max));
+}
+
+
 template<typename T>
 API inline std::ostream& operator<<(std::ostream& out, const Point3<T>& point) {
    return out << point.GetXY() << ' ' << point.GetZ();
@@ -172,4 +184,31 @@ API constexpr Point3<T> Cross(const Point3<T>& p1, const Point3<T>& p2) noexcept
 template<typename T>
 API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept {
    return p / p.Length();
+}
+
+
+template<typename T>
+API inline Point3<T> RandomInUnitSphere() noexcept {
+    while (true) {
+      const Point3<T> p = Point3<T>::Random(-1, 1);
+      if (p.LenghtSquared() < 1) {
+         return p;
+      }
+   }
+}
+
+
+template<typename T>
+API inline Point3<T> RandomUnitVector() noexcept {
+   return UnitVector(RandomInUnitSphere<T>());
+}
+
+
+template<typename T>
+API inline Point3<T> RandomOnHemisphere(const Point3<T>& normal) noexcept {
+   const Point3<T> onUnitSphere = RandomUnitVector<T>();
+   if (Dot(onUnitSphere, normal) > 0) {
+      return onUnitSphere;
+   }
+   return -onUnitSphere;
 }

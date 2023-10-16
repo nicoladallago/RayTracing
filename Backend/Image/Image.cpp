@@ -12,7 +12,7 @@ API void Image::Save(const std::filesystem::path& path) {
    std::cout << "P3\n"
              << m_width << ' ' << m_height << "\n255\n";
    for(const Pixel& p : m_data) {
-      std::cout << int(p.r) << ' ' << int(p.g) << ' ' << int(p.b) << '\n';
+      std::cout << int(p.GetX()) << ' ' << int(p.GetY()) << ' ' << int(p.GetZ()) << '\n';
    }
 
    std::cout << std::flush;

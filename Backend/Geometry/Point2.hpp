@@ -110,6 +110,18 @@ API constexpr T Point2<T>::LenghtSquared() const noexcept {
 
 
 template<typename T>
+API inline Point2<T> Point2<T>::Random() noexcept {
+   return Point2<T>(Utils::Random(), Utils::Random());
+}
+
+
+template<typename T>
+API inline Point2<T> Point2<T>::Random(const double min, const double max) noexcept {
+   return Point2<T>(Utils::Random(min, max), Utils::Random(min, max));
+}
+
+
+template<typename T>
 API inline std::ostream& operator<<(std::ostream& out, const Point2<T>& point) {
    return out << point.GetX() << ' ' << point.GetY();
 }

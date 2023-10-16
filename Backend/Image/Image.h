@@ -1,15 +1,11 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 #pragma once
+#include "Geometry/Point3.h"
 
 class Image {
  public:
-   struct Pixel
-   {
-      double r = 0;
-      double g = 0;
-      double b = 0;
-   };
+   typedef Point3d Pixel;
 
  private:
    const unsigned int m_width;
