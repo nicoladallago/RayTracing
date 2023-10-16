@@ -13,13 +13,14 @@
 #include <Image/Camera.h>
 #include <Materials/Lambertian.h>
 #include <Materials/Metal.h>
+#include <Materials/Dielectric.h>
 
 void Render() {
    // World
    HittableList world;
    std::shared_ptr<Lambertian> matGround = std::make_shared<Lambertian>(Image::Pixel(0.8, 0.8, 0));
-   std::shared_ptr<Lambertian> matCenter = std::make_shared<Lambertian>(Image::Pixel(0.7, 0.3, 0.3));
-   std::shared_ptr<Metal> matLeft = std::make_shared<Metal>(Image::Pixel(0.8, 0.8, 0.8), 0.3);
+   std::shared_ptr<Dielectric> matCenter = std::make_shared<Dielectric>(1.5);
+   std::shared_ptr<Dielectric> matLeft = std::make_shared<Dielectric>(1.5);
    std::shared_ptr<Metal> matRight = std::make_shared<Metal>(Image::Pixel(0.8, 0.6, 0.2), 1);
 
    world.Add(std::make_shared<Sphere>(Point3d(0.0, -100.5, -1.0), 100.0, matGround));

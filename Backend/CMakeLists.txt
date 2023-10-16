@@ -18,6 +18,7 @@ set(SOURCES
     "Image/Image.cpp"
     "Image/Image.hpp"
 
+    "Materials/Dielectric.hpp"
     "Materials/Lambertian.hpp"
     "Materials/Metal.hpp"
 

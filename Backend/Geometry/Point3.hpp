@@ -224,3 +224,12 @@ template<typename T>
 API constexpr Point3<T> Reflect(const Point3<T>& v, const Point3<T>& n) noexcept {
    return v - 2 * Dot(v, n) * n;
 }
+
+
+template<typename T>
+API constexpr Point3<T> Refract(const Point3<T>& uv, const Point3<T>& n, const T etaiOverEtat) noexcept {
+   const T cosTheta = std::fmin(Dot(-uv, n), 1.0);
+   const Point3<T> rOutPerp = etaiOverEtat * (uv + cosTheta * n);
+   const Point3<T> rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.LenghtSquared())) * n;
+   return rOutPerp + rOutParallel;
+}

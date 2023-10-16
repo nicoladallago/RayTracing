@@ -93,5 +93,8 @@ template<typename T>
 template<typename T>
 [[nodiscard]] API constexpr Point3<T> Reflect(const Point3<T>& v, const Point3<T>& n) noexcept;
 
+template<typename T>
+[[nodiscard]] API constexpr Point3<T> Refract(const Point3<T>& uv, const Point3<T>& n, const T etaiOverEtat) noexcept;
+
 #include "Point3.hpp"
 #endif
