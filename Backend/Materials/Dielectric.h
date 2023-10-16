@@ -14,6 +14,9 @@ class Dielectric: public Material {
                                           const Hittable::HitRecord& rec,
                                           Image::Pixel& attenuation,
                                           Ray& scattered) const noexcept override final;
+
+ private:
+   static double Reflectance(const double cosine, const double refIdx) noexcept;
 };
 
 #include "Dielectric.hpp"

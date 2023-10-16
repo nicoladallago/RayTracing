@@ -26,6 +26,7 @@ void Render() {
    world.Add(std::make_shared<Sphere>(Point3d(0.0, -100.5, -1.0), 100.0, matGround));
    world.Add(std::make_shared<Sphere>(Point3d(0.0, 0.0, -1.0), 0.5, matCenter));
    world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), 0.5, matLeft));
+   world.Add(std::make_shared<Sphere>(Point3d(-1.0, 0.0, -1.0), -0.4, matLeft));
    world.Add(std::make_shared<Sphere>(Point3d(1.0, 0.0, -1.0), 0.5, matRight));
 
    Camera cam(16.0 / 9.0, // Aspect ratio

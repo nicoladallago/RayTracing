@@ -20,7 +20,7 @@ API bool Dielectric::Scatter(const Ray& ray,
    const bool cannotRefract = refractionRatio * sinTheta > 1;
    Vector3d direction;
 
-   if(cannotRefract) {
+   if(cannotRefract || Reflectance(cosTheta, refractionRatio) > Utils::Random()) {
       direction = Reflect<double>(unitDirection, rec.normal);
    }
    else {
@@ -29,4 +29,12 @@ API bool Dielectric::Scatter(const Ray& ray,
 
    scattered = Ray(rec.p, direction);
    return true;
+}
+
+
+double Dielectric::Reflectance(const double cosine, const double refIdx) noexcept {
+   // Use Schlick's approximation for reflectance.
+   double r0 = (1 - refIdx) / (1 + refIdx);
+   r0 = r0 * r0;
+   return r0 + (1 - r0) * std::pow((1 - cosine), 5);
 }
