@@ -106,12 +106,6 @@ API inline Point2<T> Point2<T>::Random(const double min, const double max) noexc
 
 
 template<typename T>
-API inline std::ostream& operator<<(std::ostream& out, const Point2<T>& point) {
-   return out << point.GetX() << ' ' << point.GetY();
-}
-
-
-template<typename T>
 API inline Point2<T> operator+(const Point2<T>& p1, const Point2<T>& p2) noexcept {
    return Point2<T>(p1.GetX() + p2.GetX(), p1.GetY() + p2.GetY());
 }

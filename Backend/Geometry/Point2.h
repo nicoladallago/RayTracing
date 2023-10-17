@@ -40,9 +40,6 @@ class Point2 {
 typedef Point2<unsigned int> Point2ui;
 typedef Point2<double> Point2d;
 
-template<typename T>
-[[nodiscard]] API inline std::ostream& operator<<(std::ostream& out, const Point2<T>& point);
-
 
 template<typename T>
 API inline Point2<T> operator+(const Point2<T>& p1, const Point2<T>& p2) noexcept;
