@@ -11,10 +11,10 @@ class Sphere: public Hittable {
  private:
    const Point3d m_center;
    const double m_radius;
-   const std::shared_ptr<Material> m_spMaterial;
+   const std::unique_ptr<Material> m_upMaterial;
 
  public:
-   API Sphere(const Point3d& center, const double radius, const std::shared_ptr<Material>& spMaterial);
+   API Sphere(const Point3d& center, const double radius, std::unique_ptr<Material> upMaterial);
 
    [[nodiscard]] API virtual bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept override final;
 };

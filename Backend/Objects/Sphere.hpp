@@ -4,10 +4,10 @@
 #include "Sphere.h"
 #include "Geometry/Ray.h"
 
-API Sphere::Sphere(const Point3d& center, const double radius, const std::shared_ptr<Material>& spMaterial):
+API Sphere::Sphere(const Point3d& center, const double radius, std::unique_ptr<Material> upMaterial):
     m_center(center),
     m_radius(radius),
-    m_spMaterial(spMaterial) {
+    m_upMaterial(std::move(upMaterial)) {
 }
 
 
@@ -36,7 +36,7 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
    rec.p = ray.At(rec.t);
    const Vector3d outwardNormal = (rec.p - m_center) / m_radius;
    rec.SetFaceFront(ray, outwardNormal);
-   rec.mat = m_spMaterial;
+   rec.mat = m_upMaterial.get();
 
    return true;
 }

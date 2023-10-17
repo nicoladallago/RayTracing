@@ -12,11 +12,8 @@
 #include <Materials/Dielectric.h>
 
 void Render() {
-   // World
    HittableList world;
-
-   const std::shared_ptr<Lambertian> groundMaterial = std::make_shared<Lambertian>(Pixel(0.5, 0.5, 0.5));
-   world.Add(std::make_shared<Sphere>(Point3d(0, -1000, 0), 1000, groundMaterial));
+   world.Add(std::make_shared<Sphere>(Point3d(0, -1000, 0), 1000, std::make_unique<Lambertian>(Pixel(0.5, 0.5, 0.5))));
 
    for(int a = -11; a < 11; ++a) {
       for(int b = -11; b < 11; ++b) {
@@ -24,38 +21,28 @@ void Render() {
          const Point3d center(a + 0.9 * Utils::Random(), 0.2, b + 0.9 * Utils::Random());
 
          if((center - Point3d(4, 0.2, 0)).Length() > 0.9) {
-            std::shared_ptr<Material> sphereMaterial;
-
             if(chooseMat < 0.8) {
                // diffuse
                const Pixel albedo = Pixel::Random() * Pixel::Random();
-               sphereMaterial = std::make_shared<Lambertian>(albedo);
-               world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
+               world.Add(std::make_shared<Sphere>(center, 0.2, std::make_unique<Lambertian>(albedo)));
             }
             else if(chooseMat < 0.95) {
                // metal
                const Pixel albedo = Pixel::Random(0.5, 1);
                const double fuzz = Utils::Random(0, 0.5);
-               sphereMaterial = std::make_shared<Metal>(albedo, fuzz);
-               world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
+               world.Add(std::make_shared<Sphere>(center, 0.2, std::make_unique<Metal>(albedo, fuzz)));
             }
             else {
                // glass
-               sphereMaterial = std::make_shared<Dielectric>(1.5);
-               world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
+               world.Add(std::make_shared<Sphere>(center, 0.2, std::make_unique<Dielectric>(1.5)));
             }
          }
       }
    }
 
-   const std::shared_ptr<Dielectric> material1 = std::make_shared<Dielectric>(1.5);
-   world.Add(std::make_shared<Sphere>(Point3d(0, 1, 0), 1.0, material1));
-
-   const std::shared_ptr<Lambertian> material2 = std::make_shared<Lambertian>(Pixel(0.4, 0.2, 0.1));
-   world.Add(std::make_shared<Sphere>(Point3d(-4, 1, 0), 1.0, material2));
-
-   const std::shared_ptr<Metal> material3 = std::make_shared<Metal>(Pixel(0.7, 0.6, 0.5), 0.0);
-   world.Add(std::make_shared<Sphere>(Point3d(4, 1, 0), 1.0, material3));
+   world.Add(std::make_shared<Sphere>(Point3d(0, 1, 0), 1.0, std::make_unique<Dielectric>(1.5)));
+   world.Add(std::make_shared<Sphere>(Point3d(-4, 1, 0), 1.0, std::make_unique<Lambertian>(Pixel(0.4, 0.2, 0.1))));
+   world.Add(std::make_shared<Sphere>(Point3d(4, 1, 0), 1.0, std::make_unique<Metal>(Pixel(0.7, 0.6, 0.5), 0.0)));
 
    Camera cam(16.0 / 9.0,        // Aspect ratio
               1200,              // Width

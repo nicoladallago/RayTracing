@@ -10,7 +10,7 @@ class HitRecord {
  public:
    Point3d p;
    Vector3d normal;
-   std::shared_ptr<Material> mat = nullptr;
+   Material* mat = nullptr;
    double t = 0;
    bool frontFace = false;
 
