@@ -1,5 +1,12 @@
 #include "Image.h"
 
+API Image::Image(const unsigned int width, const unsigned int height):
+    m_width(width),
+    m_height(height),
+    m_data(std::vector<Pixel>(width * height)) {
+}
+
+
 API void Image::Save(const std::filesystem::path& path) {
    std::ofstream file(path, std::ios::binary);
    if(!file.is_open()) {

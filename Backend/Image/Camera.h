@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 #pragma once
-#include "Image/Image.h"
+#include "Geometry/Ray.h"
 
 class Hittable;
 
@@ -41,16 +41,18 @@ class Camera {
 
    API void Render(const Hittable& world) noexcept; // TODO make it constexpr
 
+   [[nodiscard]] API constexpr unsigned int GetSamplesPerPixels() const noexcept;
+   [[nodiscard]] API constexpr unsigned int GetMaxDepth() const noexcept;
+
+   [[nodiscard]] API Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
+
+   [[nodiscard]] API static Pixel RayColor(const Ray& ray, const unsigned int depth, const Hittable& world) noexcept;
+   [[nodiscard]] API static double LinearToGamma(const double linear) noexcept;
+
  private:
    void Initialize() noexcept;
-   constexpr Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
    Vector3d PixelSampleSquare() const noexcept; // TODO constexpr
    Point3d DefocusDiskSample() const;
-
-   static Image::Pixel RayColor(const Ray& ray,
-                                const unsigned int depth,
-                                const Hittable& world) noexcept;
-   static double LinearToGamma(const double linear) noexcept;
 };
 
 #include "Camera.hpp"

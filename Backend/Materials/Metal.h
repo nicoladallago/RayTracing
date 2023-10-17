@@ -1,20 +1,20 @@
 #ifndef METAL_H
 #define METAL_H
 #pragma once
+#include "Geometry/Point3.h"
 #include "Materials/Material.h"
-#include "Image/Image.h"
 
 class Metal: public Material {
  private:
-   const Image::Pixel m_albedo;
+   const Pixel m_albedo;
    const double m_fuzz;
 
  public:
-   API constexpr Metal(const Image::Pixel& a, const double f) noexcept;
+   API constexpr Metal(const Pixel& a, const double f) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
                                           const HitRecord& rec,
-                                          Image::Pixel& attenuation,
+                                          Pixel& attenuation,
                                           Ray& scattered) const noexcept override final;
 };
 

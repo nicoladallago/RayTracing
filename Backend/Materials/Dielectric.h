@@ -12,7 +12,7 @@ class Dielectric: public Material {
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
                                           const HitRecord& rec,
-                                          Image::Pixel& attenuation,
+                                          Pixel& attenuation,
                                           Ray& scattered) const noexcept override final;
 
  private:

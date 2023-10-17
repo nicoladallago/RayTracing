@@ -14,16 +14,23 @@ set(SOURCES
     "Geometry/Ray.hpp"
     "Geometry/Rect.hpp"
 
+    "Image/Camera.cpp"
     "Image/Camera.hpp"
     "Image/Image.cpp"
     "Image/Image.hpp"
 
+    "Materials/Dielectric.cpp"
     "Materials/Dielectric.hpp"
+    "Materials/Lambertian.cpp"
     "Materials/Lambertian.hpp"
+    "Materials/Metal.cpp"
     "Materials/Metal.hpp"
 
-    "Objects/HitRecord.hpp"
+    "Objects/HitRecord.cpp"
     "Objects/Sphere.hpp"
+
+    "Threads/Thread.cpp"
+    "Threads/ThreadsManager.cpp"
 
     "Utils/Interval.hpp"
     "Utils/Utils.cpp"

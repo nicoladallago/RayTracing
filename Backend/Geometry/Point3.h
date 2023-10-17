@@ -40,6 +40,7 @@ class Point3 {
 typedef Point3<unsigned int> Point3ui;
 typedef Point3<double> Point3d;
 typedef Point3<double> Vector3d;
+typedef Point3<double> Pixel;
 
 template<typename T>
 [[nodiscard]] API inline std::ostream& operator<<(std::ostream& out, const Point3<T>& point);

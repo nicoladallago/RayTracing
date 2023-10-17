@@ -4,9 +4,6 @@
 #include "Geometry/Point3.h"
 
 class Image {
- public:
-   typedef Point3d Pixel;
-
  private:
    const unsigned int m_width;
    const unsigned int m_height;

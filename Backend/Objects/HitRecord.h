@@ -18,5 +18,4 @@ class HitRecord {
    API void SetFaceFront(const Ray& ray, const Vector3d& outwardNormal) noexcept;
 };
 
-#include "HitRecord.hpp"
 #endif

@@ -2,7 +2,7 @@
 #define HITTABLE_LIST_HPP
 #pragma once
 #include "HittableList.h"
-#include "Objects/HitRecord.hpp"
+#include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
 API HittableList::HittableList(const std::shared_ptr<Hittable>& spObject) {

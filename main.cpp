@@ -15,7 +15,7 @@ void Render() {
    // World
    HittableList world;
 
-   const std::shared_ptr<Lambertian> groundMaterial = std::make_shared<Lambertian>(Image::Pixel(0.5, 0.5, 0.5));
+   const std::shared_ptr<Lambertian> groundMaterial = std::make_shared<Lambertian>(Pixel(0.5, 0.5, 0.5));
    world.Add(std::make_shared<Sphere>(Point3d(0, -1000, 0), 1000, groundMaterial));
 
    for(int a = -11; a < 11; ++a) {
@@ -28,13 +28,13 @@ void Render() {
 
             if(chooseMat < 0.8) {
                // diffuse
-               const Image::Pixel albedo = Image::Pixel::Random() * Image::Pixel::Random();
+               const Pixel albedo = Pixel::Random() * Pixel::Random();
                sphereMaterial = std::make_shared<Lambertian>(albedo);
                world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
             }
             else if(chooseMat < 0.95) {
                // metal
-               const Image::Pixel albedo = Image::Pixel::Random(0.5, 1);
+               const Pixel albedo = Pixel::Random(0.5, 1);
                const double fuzz = Utils::Random(0, 0.5);
                sphereMaterial = std::make_shared<Metal>(albedo, fuzz);
                world.Add(std::make_shared<Sphere>(center, 0.2, sphereMaterial));
@@ -51,10 +51,10 @@ void Render() {
    const std::shared_ptr<Dielectric> material1 = std::make_shared<Dielectric>(1.5);
    world.Add(std::make_shared<Sphere>(Point3d(0, 1, 0), 1.0, material1));
 
-   const std::shared_ptr<Lambertian> material2 = std::make_shared<Lambertian>(Image::Pixel(0.4, 0.2, 0.1));
+   const std::shared_ptr<Lambertian> material2 = std::make_shared<Lambertian>(Pixel(0.4, 0.2, 0.1));
    world.Add(std::make_shared<Sphere>(Point3d(-4, 1, 0), 1.0, material2));
 
-   const std::shared_ptr<Metal> material3 = std::make_shared<Metal>(Image::Pixel(0.7, 0.6, 0.5), 0.0);
+   const std::shared_ptr<Metal> material3 = std::make_shared<Metal>(Pixel(0.7, 0.6, 0.5), 0.0);
    world.Add(std::make_shared<Sphere>(Point3d(4, 1, 0), 1.0, material3));
 
    Camera cam(16.0 / 9.0,        // Aspect ratio

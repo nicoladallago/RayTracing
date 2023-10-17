@@ -2,6 +2,7 @@
 #define SPHERE_HPP
 #pragma once
 #include "Sphere.h"
+#include "Geometry/Ray.h"
 
 API Sphere::Sphere(const Point3d& center, const double radius, const std::shared_ptr<Material>& spMaterial):
     m_center(center),
