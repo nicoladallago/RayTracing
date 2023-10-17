@@ -32,21 +32,38 @@ ThreadsManager::ThreadsManager(Image& img, const Hittable& world, const Camera& 
    }
 
    // Wait
+   const std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
    while(true) {
-      std::this_thread::sleep_for(std::chrono::seconds(1));
+      std::this_thread::sleep_for(std::chrono::seconds(5));
 
       bool computationDone = true;
+      std::vector<double> time(2 * threads);
       for(const std::unique_ptr<Thread>& upThread : m_threads) {
          if(!upThread->RenderDone()) {
             computationDone = false;
          }
 
          // compute percentage remaing
-         const double remains = static_cast<double>(upThread->ItemsRemaining()) * 100.0 / static_cast<double>(pixelsPerThread);
-         std::cout << "Thread " + std::to_string(upThread->GetId()) + " " + std::to_string(remains) << "%\n";
+         time.at(2 * upThread->GetId() + 0) = static_cast<double>(upThread->ItemsRemaining());
+         time.at(2 * upThread->GetId() + 1) = static_cast<double>(upThread->ItemsRemaining()) * 100.0 / static_cast<double>(pixelsPerThread);
       }
+
+      for(size_t i = 0; i < time.size(); ++i) {
+         if(i % 2 == 0) {
+            std::cout << std::to_string(static_cast<size_t>(time[i])) << " ";
+         }
+         else {
+            std::cout << std::format("[ {}%]   ", static_cast<size_t>(time[i] * 100) / 100.0);
+         }
+      }
+      std::cout << '\n';
+
       if(computationDone) {
          break;
       }
    }
+
+   const std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+   std::cout << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " [s]" << std::endl;
 }

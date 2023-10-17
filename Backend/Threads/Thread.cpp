@@ -10,7 +10,7 @@ API Thread::Data::Data(Pixel& p, const unsigned int i, const unsigned int j) noe
 }
 
 
-API Thread::Thread(const unsigned int id, const Camera& camera, const Hittable& world) noexcept:
+API Thread::Thread(const size_t id, const Camera& camera, const Hittable& world) noexcept:
     m_id(id),
     m_camera(camera),
     m_world(world) {
@@ -31,9 +31,9 @@ API void Thread::StartRender() {
    m_thread = std::thread(&Thread::Render, this);
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__) // Windows only
    HANDLE handle = m_thread.native_handle();
-   if(SetThreadPriority(handle, THREAD_PRIORITY_TIME_CRITICAL) == 0) {
-      throw std::exception(std::to_string(GetLastError()).c_str());
-   }
+   //if(SetThreadPriority(handle, THREAD_PRIORITY_TIME_CRITICAL) == 0) {
+   //   throw std::exception(std::to_string(GetLastError()).c_str());
+   //}
    const DWORD mask = (static_cast<DWORD>(1) << m_id);
    if(SetThreadAffinityMask(handle, mask) == 0) {
       throw std::exception(std::to_string(GetLastError()).c_str());
@@ -42,7 +42,7 @@ API void Thread::StartRender() {
 }
 
 
-API unsigned int Thread::GetId() const noexcept {
+API size_t Thread::GetId() const noexcept {
    return m_id;
 }
 
