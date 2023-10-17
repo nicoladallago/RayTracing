@@ -3,9 +3,9 @@
 #pragma once
 #include "Objects/Hittable.h"
 #include "Geometry/Point3.h"
+#include "Materials/Material.h"
 
 class Ray;
-class Material;
 
 class Sphere: public Hittable {
  private:

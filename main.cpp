@@ -45,7 +45,7 @@ void Render() {
    world.Add(std::make_shared<Sphere>(Point3d(4, 1, 0), 1.0, std::make_unique<Metal>(Pixel(0.7, 0.6, 0.5), 0.0)));
 
    Camera cam(16.0 / 9.0,        // Aspect ratio
-              1200,              // Width
+              2560,              // Width
               500,               // Samples per pixel
               50,                // Maximum depth
               20,                // Vertical view angle (field of view)
