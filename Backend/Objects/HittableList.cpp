@@ -12,7 +12,7 @@ API std::pair<bool, Material*> HittableList::Hit(const Ray& ray, const Interval&
       if(const std::pair<bool, Material*> hit = upSpehre->Hit(ray, Interval(rayT.GetMin(), closestSoFar), tempRec); hit.first) {
          hitAnything = true;
          pMaterial = hit.second;
-         closestSoFar = tempRec.t;
+         closestSoFar = tempRec.GetRoot();
          rec = tempRec;
       }
    }

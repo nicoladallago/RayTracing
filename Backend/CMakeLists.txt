@@ -23,10 +23,10 @@ set(SOURCES
     "Materials/Metal.hpp"
 
     "Objects/HitRecord.cpp"
+    "Objects/HitRecord.hpp"
     "Objects/HittableList.cpp"
     "Objects/HittableList.hpp"
     "Objects/Sphere.cpp"
-    "Objects/Sphere.hpp"
 
     "Threads/Thread.cpp"
     "Threads/ThreadsManager.cpp"

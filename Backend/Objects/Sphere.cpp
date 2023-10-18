@@ -34,10 +34,9 @@ API std::pair<bool, Material*> Sphere::Hit(const Ray& ray, const Interval& rayT,
       }
    }
 
-   rec.t = root;
-   rec.p = ray.At(rec.t);
-   const Vector3 outwardNormal = (rec.p - m_center) / m_radius;
-   rec.SetFaceFront(ray, outwardNormal);
+   rec.SetRoot(root);
+   rec.SetPoint(ray.At(rec.GetRoot()));
+   rec.SetFaceFront(ray, (rec.GetPoint() - m_center) / m_radius);
 
    return std::make_pair(true, m_upMaterial.get());
 }
