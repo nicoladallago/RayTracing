@@ -178,9 +178,9 @@ API constexpr Point3 Reflect(const Point3& v, const Point3& n) noexcept {
 
 
 API inline Point3 Refract(const Point3& uv, const Point3& n, const double etaiOverEtat) noexcept {
-   const double cosTheta = std::fmin(Dot(-uv, n), 1.0);
+   const double cosTheta = std::fmin(Dot(-uv, n), 1);
    const Point3 rOutPerp = etaiOverEtat * (uv + cosTheta * n);
-   const Point3 rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.LenghtSquared())) * n;
+   const Point3 rOutParallel = -std::sqrt(std::fabs(1 - rOutPerp.LenghtSquared())) * n;
    return rOutPerp + rOutParallel;
 }
 

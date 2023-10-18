@@ -2,11 +2,15 @@
 #define CAMERA_H
 #pragma once
 #include "Geometry/Ray.h"
+#include "Utils/Interval.h"
 
 class HittableList;
 
 class Camera {
  private:
+   static constexpr Interval INTERVAL = Interval(0.001, std::numeric_limits<double>::max());
+   static constexpr Pixel ZERO_PIXEL = Pixel(0, 0, 0);
+
    const double m_aspectRatio;
    const unsigned int m_width;
    const unsigned int m_samplesPerPixels;
@@ -18,7 +22,7 @@ class Camera {
    const double m_defocusAngle;
    const double m_focusDist;
 
-   unsigned int m_height;   // Rendered image height
+   unsigned int m_height;  // Rendered image height
    Point3 m_center;        // Camera center
    Point3 m_pixel00Loc;    // Location of pixel 0, 0
    Vector3 m_pixelDeltaU;  // Offset to pixel to the right

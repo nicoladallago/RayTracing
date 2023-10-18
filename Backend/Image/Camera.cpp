@@ -4,7 +4,6 @@
 #include "Objects/HittableList.h"
 #include "Materials/Material.h"
 #include "Threads/ThreadsManager.h"
-#include "Utils/Interval.h"
 
 API Camera::Camera(const double aspectRatio,
                    const unsigned int width,
@@ -33,54 +32,30 @@ API Camera::Camera(const double aspectRatio,
 API void Camera::Render(const HittableList& world) noexcept {
    Image img(m_width, m_height);
    ThreadsManager(img, world, *this, 4);
-   //std::span<Pixel> pixels = img.Get();
 
-   //for(unsigned int j = 0; j < m_height; ++j) {
-   //   unsigned int offset = j * m_width;
-   //   for(unsigned int i = 0; i < m_width; ++i) {
-   //      Pixel& p = pixels[offset + i];
-   //      for(unsigned int sample = 0; sample < m_samplesPerPixels; ++sample) {
-   //         const Ray ray = GetRay(i, j);
-   //         p += RayColor(ray, m_maxDepth, world);
-   //      }
-
-   //      const double scale = 1.0 / m_samplesPerPixels;
-   //      p *= scale;
-
-   //      p.SetX(LinearToGamma(p.GetX()));
-   //      p.SetY(LinearToGamma(p.GetY()));
-   //      p.SetZ(LinearToGamma(p.GetZ()));
-
-   //      const Interval intensity(0, 1);
-   //      p.SetX(255 * intensity.Clamp(p.GetX()));
-   //      p.SetY(255 * intensity.Clamp(p.GetY()));
-   //      p.SetZ(255 * intensity.Clamp(p.GetZ()));
-   //   }
-   //   std::cout << "Progress " << std::to_string(j * 100.0 / m_height) << '%' << '\n';
-   //}
    img.Save("image.ppm");
 }
 
 
 API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept {
    if(depth <= 0) {
-      return Pixel(0.0, 0.0, 0.0);
+      return ZERO_PIXEL;
    }
 
    HitRecord rec;
-   if(world.Hit(ray, Interval(0.001, std::numeric_limits<double>::max()), rec)) {
+   if(world.Hit(ray, INTERVAL, rec)) {
       Ray scattered;
       Pixel attenuation;
 
       if(rec.mat->Scatter(ray, rec, attenuation, scattered)) {
          return attenuation * RayColor(scattered, depth - 1, world);
       }
-      return Pixel(0, 0, 0);
+      return ZERO_PIXEL;
    }
 
    const Vector3 unitDirection = UnitVector(ray.GetDirection());
    const double a = 0.5 * (unitDirection.GetY() + 1);
-   return Pixel(1 - a + 0.5 * a, 1 - a + 0.7 * a, 1 - a + a);
+   return Pixel(1 - 0.5 * a, 1 - 0.3 * a, 1);
 }
 
 
@@ -111,7 +86,7 @@ void Camera::Initialize() noexcept {
    m_pixelDeltaU = viewportU / static_cast<double>(m_width);
    m_pixelDeltaV = viewportV / static_cast<double>(m_height);
 
-   const Point3 viewportUpperLeft = m_center - (m_focusDist * m_w) - viewportU / 2.0 - viewportV / 2.0;
+   const Point3 viewportUpperLeft = m_center - (m_focusDist * m_w) - viewportU / 2 - viewportV / 2;
    m_pixel00Loc = viewportUpperLeft + 0.5 * (m_pixelDeltaU + m_pixelDeltaV);
 
    // Calculate the camera defocus disk basis vectors.

@@ -6,6 +6,7 @@
 class Dielectric: public Material {
  private:
    const double m_ir; // index of refraction
+   const double m_inverseIr;
 
  public:
    API constexpr Dielectric(const double indexOfRefraction) noexcept;
