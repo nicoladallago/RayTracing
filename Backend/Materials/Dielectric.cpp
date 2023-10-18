@@ -9,18 +9,18 @@ API bool Dielectric::Scatter(const Ray& ray,
    attenuation = Pixel(1, 1, 1);
    const double refractionRatio = rec.frontFace ? (1.0 / m_ir) : m_ir;
 
-   const Vector3d unitDirection = UnitVector(ray.GetDirection());
+   const Vector3 unitDirection = UnitVector(ray.GetDirection());
    const double cosTheta = std::fmin(Dot(-unitDirection, rec.normal), 1.0);
    const double sinTheta = std::sqrt(1 - cosTheta * cosTheta);
 
    const bool cannotRefract = refractionRatio * sinTheta > 1;
-   Vector3d direction;
+   Vector3 direction;
 
    if(cannotRefract || Reflectance(cosTheta, refractionRatio) > Utils::Random()) {
-      direction = Reflect<double>(unitDirection, rec.normal);
+      direction = Reflect(unitDirection, rec.normal);
    }
    else {
-      direction = Refract<double>(unitDirection, rec.normal, refractionRatio);
+      direction = Refract(unitDirection, rec.normal, refractionRatio);
    }
 
    scattered = Ray(rec.p, direction);

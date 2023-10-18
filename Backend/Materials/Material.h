@@ -1,10 +1,9 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 #pragma once
-template<class T>
 class Point3;
+typedef Point3 Pixel;
 
-typedef Point3<double> Pixel;
 class HitRecord;
 class Ray;
 

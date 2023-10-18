@@ -12,20 +12,20 @@ class Camera {
    const unsigned int m_samplesPerPixels;
    const unsigned int m_maxDepth;
    const double m_vfov;
-   const Point3d m_lookFrom;
-   const Point3d m_lookAt;
-   const Vector3d m_vup;
+   const Point3 m_lookFrom;
+   const Point3 m_lookAt;
+   const Vector3 m_vup;
    const double m_defocusAngle;
    const double m_focusDist;
 
    unsigned int m_height;   // Rendered image height
-   Point3d m_center;        // Camera center
-   Point3d m_pixel00Loc;    // Location of pixel 0, 0
-   Vector3d m_pixelDeltaU;  // Offset to pixel to the right
-   Vector3d m_pixelDeltaV;  // Offset to pixel below
-   Vector3d m_u, m_v, m_w;  // Camera frame basis vectors
-   Vector3d m_defocusDiskU; // Defocus disk horizontal radius
-   Vector3d m_defocusDiskV; // Defocus disk vertical radius
+   Point3 m_center;        // Camera center
+   Point3 m_pixel00Loc;    // Location of pixel 0, 0
+   Vector3 m_pixelDeltaU;  // Offset to pixel to the right
+   Vector3 m_pixelDeltaV;  // Offset to pixel below
+   Vector3 m_u, m_v, m_w;  // Camera frame basis vectors
+   Vector3 m_defocusDiskU; // Defocus disk horizontal radius
+   Vector3 m_defocusDiskV; // Defocus disk vertical radius
 
  public:
    API Camera(const double aspectRatio,
@@ -33,9 +33,9 @@ class Camera {
               const unsigned int samplesPerPixels,
               const unsigned int maxDepth,
               const double vfov,
-              const Point3d& lookFrom,
-              const Point3d& lookAt,
-              const Vector3d& vup,
+              const Point3& lookFrom,
+              const Point3& lookAt,
+              const Vector3& vup,
               const double defocusAngle,
               const double focusDist) noexcept;
 
@@ -51,8 +51,8 @@ class Camera {
 
  private:
    void Initialize() noexcept;
-   Vector3d PixelSampleSquare() const noexcept; // TODO constexpr
-   Point3d DefocusDiskSample() const;
+   Vector3 PixelSampleSquare() const noexcept; // TODO constexpr
+   Point3 DefocusDiskSample() const;
 };
 
 #include "Camera.hpp"

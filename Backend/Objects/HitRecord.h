@@ -8,14 +8,14 @@ class Material;
 
 class HitRecord {
  public:
-   Point3d p;
-   Vector3d normal;
+   Point3 p;
+   Vector3 normal;
    Material* mat = nullptr;
    double t = 0;
    bool frontFace = false;
 
  public:
-   API void SetFaceFront(const Ray& ray, const Vector3d& outwardNormal) noexcept;
+   API void SetFaceFront(const Ray& ray, const Vector3& outwardNormal) noexcept;
 };
 
 #endif

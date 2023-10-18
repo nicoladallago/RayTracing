@@ -6,7 +6,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 
 set(SOURCES 
-    "Geometry/Point2.hpp"
     "Geometry/Point3.hpp"
     "Geometry/Ray.hpp"
     "Geometry/Rect.hpp"

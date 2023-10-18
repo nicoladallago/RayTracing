@@ -6,7 +6,7 @@ API bool Lambertian::Scatter([[maybe_unused]] const Ray& ray,
                              const HitRecord& rec,
                              Pixel& attenuation,
                              Ray& scattered) const noexcept {
-   Vector3d scatterDirection = rec.normal + RandomUnitVector<double>();
+   Vector3 scatterDirection = rec.normal + RandomUnitVector();
 
    // Catch degenerate scatter direction
    if(scatterDirection.NearZero()) {

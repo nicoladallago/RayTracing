@@ -2,190 +2,155 @@
 #define POINT3_HPP
 #pragma once
 #include "Point3.h"
+#include "Utils/Utils.h"
 
-template<class T>
-API constexpr Point3<T>::Point3(const T& x, const T& y, const T& z) noexcept:
-    Point3(Point2<T>(x, y), z) {
-}
-
-
-template<class T>
-API constexpr Point3<T>::Point3(const Point2<T> point, const T& z) noexcept:
-    m_xy(point),
+API constexpr Point3::Point3(const double x, const double y, const double z) noexcept:
+    m_x(x),
+    m_y(y),
     m_z(z) {
 }
 
 
-template<class T>
-API constexpr Point3<T> Point3<T>::operator-() const noexcept {
-   return Point3<T>(-m_xy, -m_z);
+API constexpr Point3 Point3::operator-() const noexcept {
+   return Point3(-m_x, -m_y, -m_z);
 }
 
 
-template<class T>
-API constexpr Point3<T>& Point3<T>::operator+=(const Point3<T>& point) noexcept {
-   m_xy += point.m_xy;
+API constexpr Point3& Point3::operator+=(const Point3& point) noexcept {
+   m_x += point.m_x;
+   m_y += point.m_y;
    m_z += point.m_z;
    return *this;
 }
 
 
-template<class T>
-API constexpr Point3<T>& Point3<T>::operator*=(const T& val) noexcept {
-   m_xy *= val;
+API constexpr Point3& Point3::operator*=(const double val) noexcept {
+   m_x *= val;
+   m_y *= val;
    m_z *= val;
    return *this;
 }
 
 
-template<class T>
-API constexpr Point3<T>& Point3<T>::operator/=(const T& val) noexcept {
+API constexpr Point3& Point3::operator/=(const double val) noexcept {
    return *this *= 1 / val;
 }
 
 
-template<class T>
-API constexpr void Point3<T>::SetX(const T x) noexcept {
-   m_xy.SetX(x);
+API constexpr void Point3::SetX(const double x) noexcept {
+   m_x = x;
 }
 
 
-template<class T>
-API constexpr void Point3<T>::SetY(const T y) noexcept {
-   m_xy.SetY(y);
+API constexpr void Point3::SetY(const double y) noexcept {
+   m_y = y;
 }
 
 
-template<class T>
-API constexpr void Point3<T>::SetZ(const T z) noexcept {
+API constexpr void Point3::SetZ(const double z) noexcept {
    m_z = z;
 }
 
 
-template<class T>
-API constexpr const Point2<T>& Point3<T>::GetXY() const noexcept {
-   return m_xy;
+API constexpr double Point3::GetX() const noexcept {
+   return m_x;
 }
 
 
-template<class T>
-API constexpr T Point3<T>::GetX() const noexcept {
-   return m_xy.GetX();
+API constexpr double Point3::GetY() const noexcept {
+   return m_y;
 }
 
 
-template<class T>
-API constexpr T Point3<T>::GetY() const noexcept {
-   return m_xy.GetY();
-}
-
-
-template<class T>
-API constexpr T Point3<T>::GetZ() const noexcept {
+API constexpr double Point3::GetZ() const noexcept {
    return m_z;
 }
 
 
-template<class T>
-API constexpr T Point3<T>::Length() const noexcept {
+API inline double Point3::Length() const noexcept {
    return std::sqrt(LenghtSquared());
 }
 
 
-template<class T>
-API constexpr T Point3<T>::LenghtSquared() const noexcept {
-   return m_xy.LenghtSquared() + m_z * m_z;
+API constexpr double Point3::LenghtSquared() const noexcept {
+   return m_x * m_x + m_y * m_y + m_z * m_z;
 }
 
 
-template<typename T>
-API constexpr bool Point3<T>::NearZero() const noexcept {
-   return m_xy.NearZero() && (std::fabs(m_z) < Point2<T>::NEAR_ZERO);
+API inline bool Point3::NearZero() const noexcept {
+   return (std::fabs(m_x) < NEAR_ZERO) && (std::fabs(m_y) < NEAR_ZERO) && (std::fabs(m_z) < NEAR_ZERO);
 }
 
 
-template<class T>
-API inline Point3<T> Point3<T>::Random() noexcept {
-   return Point3<T>(Point2<T>::Random(), Utils::Random());
+API inline Point3 Point3::Random() noexcept {
+   return Point3(Utils::Random(), Utils::Random(), Utils::Random());
 }
 
 
-template<class T>
-API inline Point3<T> Point3<T>::Random(const double min, const double max) noexcept {
-   return Point3<T>(Point2<T>::Random(min, max), Utils::Random(min, max));
+API inline Point3 Point3::Random(const double min, const double max) noexcept {
+   return Point3(Utils::Random(min, max), Utils::Random(min, max), Utils::Random(min, max));
 }
 
 
-template<typename T>
-API constexpr Point3<T> operator+(const Point3<T>& p1, const Point3<T>& p2) noexcept {
-   return Point3<T>(p1.GetXY() + p2.GetXY(), p1.GetZ() + p2.GetZ());
+API constexpr Point3 operator+(const Point3& p1, const Point3& p2) noexcept {
+   return Point3(p1.GetX() + p2.GetX(), p1.GetY() + p2.GetY(), p1.GetZ() + p2.GetZ());
 }
 
 
-template<typename T>
-API constexpr Point3<T> operator-(const Point3<T>& p1, const Point3<T>& p2) noexcept {
-   return Point3<T>(p1.GetXY() - p2.GetXY(), p1.GetZ() - p2.GetZ());
+API constexpr Point3 operator-(const Point3& p1, const Point3& p2) noexcept {
+   return Point3(p1.GetX() - p2.GetX(), p1.GetY() - p2.GetY(), p1.GetZ() - p2.GetZ());
 }
 
 
-template<typename T>
-API constexpr Point3<T> operator*(const Point3<T>& p1, const Point3<T>& p2) noexcept {
-   return Point3<T>(p1.GetXY() * p2.GetXY(), p1.GetZ() * p2.GetZ());
+API constexpr Point3 operator*(const Point3& p1, const Point3& p2) noexcept {
+   return Point3(p1.GetX() * p2.GetX(), p1.GetY() * p2.GetY(), p1.GetZ() * p2.GetZ());
 }
 
 
-template<typename T>
-API constexpr Point3<T> operator*(const T& val, const Point3<T>& p) noexcept {
-   return Point3<T>(val * p.GetXY(), val * p.GetZ());
+API constexpr Point3 operator*(const double val, const Point3& p) noexcept {
+   return Point3(val * p.GetX(), val * p.GetY(), val * p.GetZ());
 }
 
 
-template<typename T>
-API constexpr Point3<T> operator*(const Point3<T>& p, const T& val) noexcept {
+API constexpr Point3 operator*(const Point3& p, const double val) noexcept {
    return val * p;
 }
 
 
-template<typename T>
-API constexpr Point3<T> operator/(const Point3<T>& p, const T& val) noexcept {
+API constexpr Point3 operator/(const Point3& p, const double val) noexcept {
    return (1 / val) * p;
 }
 
 
-template<typename T>
-API constexpr T Dot(const Point3<T>& p1, const Point3<T>& p2) noexcept {
-   return Dot(p1.GetXY(), p2.GetXY()) + p1.GetZ() * p2.GetZ();
+API constexpr double Dot(const Point3& p1, const Point3& p2) noexcept {
+   return p1.GetX() * p2.GetX() + p1.GetY() * p2.GetY() + p1.GetZ() * p2.GetZ();
 }
 
 
-template<typename T>
-API constexpr Point3<T> Cross(const Point3<T>& p1, const Point3<T>& p2) noexcept {
-   return Point3<T>(p1.GetY() * p2.GetZ() - p1.GetZ() * p2.GetY(),
-                    p1.GetZ() * p2.GetX() - p1.GetX() * p2.GetZ(),
-                    p1.GetX() * p2.GetY() - p1.GetY() * p2.GetX());
+API constexpr Point3 Cross(const Point3& p1, const Point3& p2) noexcept {
+   return Point3(p1.GetY() * p2.GetZ() - p1.GetZ() * p2.GetY(),
+                 p1.GetZ() * p2.GetX() - p1.GetX() * p2.GetZ(),
+                 p1.GetX() * p2.GetY() - p1.GetY() * p2.GetX());
 }
 
 
-template<typename T>
-API constexpr Point3<T> UnitVector(const Point3<T>& p) noexcept {
+API constexpr Point3 UnitVector(const Point3& p) noexcept {
    return p / p.Length();
 }
 
 
-template<typename T>
-API inline Point3<T> RandomInUnitDisk() noexcept {
+API inline Point3 RandomInUnitDisk() noexcept {
    while(true) {
-      const Point3<T> p = Point3<T>(Utils::Random(-1, 1), Utils::Random(-1, 1), 0);
+      const Point3 p = Point3(Utils::Random(-1, 1), Utils::Random(-1, 1), 0);
       if(p.LenghtSquared() < 1)
          return p;
    }
 }
 
 
-template<typename T>
-API inline Point3<T> RandomInUnitSphere() noexcept {
+API inline Point3 RandomInUnitSphere() noexcept {
    while(true) {
-      const Point3<T> p = Point3<T>::Random(-1, 1);
+      const Point3 p = Point3::Random(-1, 1);
       if(p.LenghtSquared() < 1) {
          return p;
       }
@@ -193,15 +158,13 @@ API inline Point3<T> RandomInUnitSphere() noexcept {
 }
 
 
-template<typename T>
-API inline Point3<T> RandomUnitVector() noexcept {
-   return UnitVector(RandomInUnitSphere<T>());
+API inline Point3 RandomUnitVector() noexcept {
+   return UnitVector(RandomInUnitSphere());
 }
 
 
-template<typename T>
-API inline Point3<T> RandomOnHemisphere(const Point3<T>& normal) noexcept {
-   const Point3<T> onUnitSphere = RandomUnitVector<T>();
+API inline Point3 RandomOnHemisphere(const Point3& normal) noexcept {
+   const Point3 onUnitSphere = RandomUnitVector();
    if(Dot(onUnitSphere, normal) > 0) {
       return onUnitSphere;
    }
@@ -209,17 +172,15 @@ API inline Point3<T> RandomOnHemisphere(const Point3<T>& normal) noexcept {
 }
 
 
-template<typename T>
-API constexpr Point3<T> Reflect(const Point3<T>& v, const Point3<T>& n) noexcept {
+API constexpr Point3 Reflect(const Point3& v, const Point3& n) noexcept {
    return v - 2 * Dot(v, n) * n;
 }
 
 
-template<typename T>
-API constexpr Point3<T> Refract(const Point3<T>& uv, const Point3<T>& n, const T etaiOverEtat) noexcept {
-   const T cosTheta = std::fmin(Dot(-uv, n), 1.0);
-   const Point3<T> rOutPerp = etaiOverEtat * (uv + cosTheta * n);
-   const Point3<T> rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.LenghtSquared())) * n;
+API inline Point3 Refract(const Point3& uv, const Point3& n, const double etaiOverEtat) noexcept {
+   const double cosTheta = std::fmin(Dot(-uv, n), 1.0);
+   const Point3 rOutPerp = etaiOverEtat * (uv + cosTheta * n);
+   const Point3 rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.LenghtSquared())) * n;
    return rOutPerp + rOutParallel;
 }
 

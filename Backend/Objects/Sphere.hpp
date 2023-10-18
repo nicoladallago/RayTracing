@@ -4,7 +4,7 @@
 #include "Sphere.h"
 #include "Geometry/Ray.h"
 
-API Sphere::Sphere(const Point3d& center, const double radius, std::unique_ptr<Material> upMaterial):
+API Sphere::Sphere(const Point3& center, const double radius, std::unique_ptr<Material> upMaterial):
     m_center(center),
     m_radius(radius),
     m_upMaterial(std::move(upMaterial)) {
@@ -12,7 +12,7 @@ API Sphere::Sphere(const Point3d& center, const double radius, std::unique_ptr<M
 
 
 API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
-   const Vector3d oc = ray.GetOrigin() - m_center;
+   const Vector3 oc = ray.GetOrigin() - m_center;
    const double a = ray.GetDirection().LenghtSquared();
    const double halfB = Dot(oc, ray.GetDirection());
    const double c = oc.LenghtSquared() - m_radius * m_radius;
@@ -34,7 +34,7 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
 
    rec.t = root;
    rec.p = ray.At(rec.t);
-   const Vector3d outwardNormal = (rec.p - m_center) / m_radius;
+   const Vector3 outwardNormal = (rec.p - m_center) / m_radius;
    rec.SetFaceFront(ray, outwardNormal);
    rec.mat = m_upMaterial.get();
 
