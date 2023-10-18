@@ -1,5 +1,6 @@
 ---
 Checks: "*,
+         -bugprone-easily-swappable-parameters,
          -altera-id-dependent-backward-branch,
          -altera-unroll-loops,
          -fuchsia-default-arguments-calls,
@@ -10,9 +11,11 @@ Checks: "*,
          -llvmlibc-callee-namespace,
          -llvm-include-order,
          -modernize-use-trailing-return-type,
-         -modernize-return-braced-init-list, # I Don't really like it
-         -modernize-use-auto, # I Don't really like it
+         -modernize-return-braced-init-list,    # I Don't really like it
+         -modernize-use-auto,                   # I Don't really like it
          -hicpp-use-auto,
          -misc-include-cleaner,
          -readability-function-cognitive-complexity,
-         -readability-identifier-length"
+         -readability-identifier-length,
+         -cert-msc32-c,
+         -cert-msc51-cpp"

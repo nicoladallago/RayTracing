@@ -9,10 +9,12 @@ class Camera;
 
 class ThreadsManager {
  private:
+   static constexpr int SLEEP_S = 5;
+
    std::vector<std::unique_ptr<Thread>> m_threads;
 
  public:
-   ThreadsManager(Image& img, const HittableList& world, const Camera& camera, const size_t threads = 4);
+   ThreadsManager(Image& img, const HittableList& world, const Camera& camera, size_t threads);
 };
 
 #endif

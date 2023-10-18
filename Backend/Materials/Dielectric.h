@@ -5,6 +5,8 @@
 
 class Dielectric: public Material {
  private:
+   static constexpr int REFLECTANCE_EXPONENT = 5;
+
    const double m_ir; // index of refraction
    const double m_inverseIr;
 

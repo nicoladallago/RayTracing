@@ -1,20 +1,22 @@
 #include "ThreadsManager.h"
 #include "Image/Image.h"
 
-ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Camera& camera, const size_t threads) {
+ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Camera& camera, size_t threads) {
+   threads = std::max<size_t>(1, threads);
+   m_threads.reserve(threads);
    for(size_t i = 0; i < threads; ++i) {
-      m_threads.push_back(std::make_unique<Thread>(i, camera, world));
+      m_threads.emplace_back(std::make_unique<Thread>(i, camera, world));
    }
 
    // Set data
    const size_t pixelsPerThread = img.GetSize() / threads;
 
-   std::span<Pixel> pixels = img.Get();
+   const std::span<Pixel> pixels = img.Get();
    size_t index = 0;
    size_t threadIdx = 0;
 
    for(unsigned int j = 0; j < img.GetHeight(); ++j) {
-      unsigned int offset = j * img.GetWidth();
+      const unsigned int offset = j * img.GetWidth();
       for(unsigned int i = 0; i < img.GetWidth(); ++i) {
          m_threads.at(threadIdx)->Add(pixels[offset + i], i, j);
 
@@ -35,7 +37,7 @@ ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Came
    const std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
    while(true) {
-      std::this_thread::sleep_for(std::chrono::seconds(5));
+      std::this_thread::sleep_for(std::chrono::seconds(SLEEP_S));
 
       bool computationDone = true;
       std::vector<double> time(2 * threads);
@@ -65,5 +67,5 @@ ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Came
    }
 
    const std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-   std::cout << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " [s]" << std::endl;
+   std::cout << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " [s]\n";
 }
