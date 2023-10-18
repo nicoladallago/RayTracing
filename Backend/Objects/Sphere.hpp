@@ -13,7 +13,7 @@ API Sphere::Sphere(const Point3& center, const double radius, std::unique_ptr<Ma
 
 
 API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
-   const Vector3& direction = ray.GetOrigin();
+   const Vector3& direction = ray.GetDirection();
 
    const Vector3 oc = ray.GetOrigin() - m_center;
    const double a = direction.LenghtSquared();
