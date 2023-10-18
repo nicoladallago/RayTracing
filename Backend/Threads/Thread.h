@@ -4,7 +4,7 @@
 #include "Image/Image.h"
 
 class Camera;
-class Hittable;
+class HittableList;
 
 class Thread {
  private:
@@ -22,10 +22,10 @@ class Thread {
 
    const size_t m_id;
    const Camera& m_camera;
-   const Hittable& m_world;
+   const HittableList& m_world;
 
  public:
-   API Thread(const size_t id, const Camera& camera, const Hittable& world) noexcept;
+   API Thread(const size_t id, const Camera& camera, const HittableList& world) noexcept;
    API ~Thread();
 
    API void Add(Pixel& pixel, const unsigned int i, const unsigned int j);

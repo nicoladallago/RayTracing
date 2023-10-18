@@ -1,7 +1,7 @@
 #include "ThreadsManager.h"
 #include "Image/Image.h"
 
-ThreadsManager::ThreadsManager(Image& img, const Hittable& world, const Camera& camera, const size_t threads) {
+ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Camera& camera, const size_t threads) {
    for(size_t i = 0; i < threads; ++i) {
       m_threads.push_back(std::make_unique<Thread>(i, camera, world));
    }

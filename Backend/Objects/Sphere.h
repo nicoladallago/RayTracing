@@ -1,13 +1,13 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 #pragma once
-#include "Objects/Hittable.h"
 #include "Geometry/Point3.h"
 #include "Materials/Material.h"
 
 class Ray;
+class Interval;
 
-class Sphere: public Hittable {
+class Sphere {
  private:
    const Point3 m_center;
    const double m_radius;
@@ -18,8 +18,7 @@ class Sphere: public Hittable {
  public:
    API Sphere(const Point3& center, const double radius, std::unique_ptr<Material> upMaterial);
 
-   [[nodiscard]] API virtual bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept override final;
+   [[nodiscard]] API bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
-#include "Sphere.hpp"
 #endif

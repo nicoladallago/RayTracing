@@ -23,6 +23,9 @@ set(SOURCES
     "Materials/Metal.hpp"
 
     "Objects/HitRecord.cpp"
+    "Objects/HittableList.cpp"
+    "Objects/HittableList.hpp"
+    "Objects/Sphere.cpp"
     "Objects/Sphere.hpp"
 
     "Threads/Thread.cpp"

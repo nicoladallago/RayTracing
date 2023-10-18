@@ -1,6 +1,6 @@
 #include "Thread.h"
 #include "Image/Camera.h"
-#include "Objects/Hittable.h"
+#include "Objects/HittableList.h"
 #include "Utils/Interval.h"
 
 API Thread::Data::Data(Pixel& p, const unsigned int i, const unsigned int j) noexcept:
@@ -10,7 +10,7 @@ API Thread::Data::Data(Pixel& p, const unsigned int i, const unsigned int j) noe
 }
 
 
-API Thread::Thread(const size_t id, const Camera& camera, const Hittable& world) noexcept:
+API Thread::Thread(const size_t id, const Camera& camera, const HittableList& world) noexcept:
     m_id(id),
     m_camera(camera),
     m_world(world) {

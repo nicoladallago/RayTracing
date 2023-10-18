@@ -1,8 +1,7 @@
-#ifndef SPHERE_HPP
-#define SPHERE_HPP
-#pragma once
 #include "Sphere.h"
 #include "Geometry/Ray.h"
+#include "Objects/HitRecord.h"
+#include "Utils/Interval.h"
 
 API Sphere::Sphere(const Point3& center, const double radius, std::unique_ptr<Material> upMaterial):
     m_center(center),
@@ -43,5 +42,3 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
 
    return true;
 }
-
-#endif

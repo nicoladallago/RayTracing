@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "Image/Image.h"
 #include "Objects/HitRecord.h"
-#include "Objects/Hittable.h"
+#include "Objects/HittableList.h"
 #include "Materials/Material.h"
 #include "Threads/ThreadsManager.h"
 #include "Utils/Interval.h"
@@ -30,7 +30,7 @@ API Camera::Camera(const double aspectRatio,
 }
 
 
-API void Camera::Render(const Hittable& world) noexcept {
+API void Camera::Render(const HittableList& world) noexcept {
    Image img(m_width, m_height);
    ThreadsManager(img, world, *this, 4);
    //std::span<Pixel> pixels = img.Get();
@@ -62,7 +62,7 @@ API void Camera::Render(const Hittable& world) noexcept {
 }
 
 
-API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const Hittable& world) noexcept {
+API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept {
    if(depth <= 0) {
       return Pixel(0.0, 0.0, 0.0);
    }

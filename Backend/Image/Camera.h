@@ -3,7 +3,7 @@
 #pragma once
 #include "Geometry/Ray.h"
 
-class Hittable;
+class HittableList;
 
 class Camera {
  private:
@@ -39,14 +39,14 @@ class Camera {
               const double defocusAngle,
               const double focusDist) noexcept;
 
-   API void Render(const Hittable& world) noexcept; // TODO make it constexpr
+   API void Render(const HittableList& world) noexcept; // TODO make it constexpr
 
    [[nodiscard]] API constexpr unsigned int GetSamplesPerPixels() const noexcept;
    [[nodiscard]] API constexpr unsigned int GetMaxDepth() const noexcept;
 
    [[nodiscard]] API Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
 
-   [[nodiscard]] API static Pixel RayColor(const Ray& ray, const unsigned int depth, const Hittable& world) noexcept;
+   [[nodiscard]] API static Pixel RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept;
    [[nodiscard]] API static double LinearToGamma(const double linear) noexcept;
 
  private:

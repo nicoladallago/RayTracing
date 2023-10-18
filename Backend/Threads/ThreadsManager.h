@@ -4,7 +4,7 @@
 #include "Threads/Thread.h"
 
 class Image;
-class Hittable;
+class HittableList;
 class Camera;
 
 class ThreadsManager {
@@ -12,7 +12,7 @@ class ThreadsManager {
    std::vector<std::unique_ptr<Thread>> m_threads;
 
  public:
-   ThreadsManager(Image& img, const Hittable& world, const Camera& camera, const size_t threads = 4);
+   ThreadsManager(Image& img, const HittableList& world, const Camera& camera, const size_t threads = 4);
 };
 
 #endif
