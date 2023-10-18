@@ -27,9 +27,9 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
    const double sqrtd = std::sqrt(discriminant);
 
    // Find the nearest root that lies in the acceptable range.
-   double root = -(halfB + sqrtd) / a;
+   double root = (-halfB - sqrtd) / a;
    if(!rayT.Surrounds(root)) {
-      root = -(halfB - sqrtd) / a;
+      root = (-halfB + sqrtd) / a;
       if(!rayT.Surrounds(root)) {
          return false;
       }
