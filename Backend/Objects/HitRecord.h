@@ -4,13 +4,11 @@
 #include "Geometry/Point3.h"
 
 class Ray;
-class Material;
 
 class HitRecord {
  public:
    Point3 p;
    Vector3 normal;
-   Material* mat = nullptr;
    double t = 0;
    bool frontFace = false;
 

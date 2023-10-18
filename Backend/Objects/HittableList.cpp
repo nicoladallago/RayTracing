@@ -2,18 +2,20 @@
 #include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
-API bool HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+API std::pair<bool, Material*> HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    HitRecord tempRec;
    bool hitAnything = false;
+   Material* pMaterial = nullptr;
    double closestSoFar = rayT.GetMax();
 
    for(const std::unique_ptr<Sphere>& upSpehre : m_objects) {
-      if(upSpehre->Hit(ray, Interval(rayT.GetMin(), closestSoFar), tempRec)) {
+      if(const std::pair<bool, Material*> hit = upSpehre->Hit(ray, Interval(rayT.GetMin(), closestSoFar), tempRec); hit.first) {
          hitAnything = true;
+         pMaterial = hit.second;
          closestSoFar = tempRec.t;
          rec = tempRec;
       }
    }
 
-   return hitAnything;
+   return std::make_pair(hitAnything, pMaterial);
 }

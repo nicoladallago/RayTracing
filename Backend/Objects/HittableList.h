@@ -11,7 +11,7 @@ class HittableList {
    API constexpr void Clear() noexcept;
    API constexpr void Add(std::unique_ptr<Sphere> upObject);
 
-   [[nodiscard]] API bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API std::pair<bool, Material*> Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "HittableList.hpp"

@@ -43,11 +43,11 @@ API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const Hitta
    }
 
    HitRecord rec;
-   if(world.Hit(ray, INTERVAL, rec)) {
+   if(const std::pair<bool, Material*> hit = world.Hit(ray, INTERVAL, rec); hit.first) {
       Ray scattered;
       Pixel attenuation;
 
-      if(rec.mat->Scatter(ray, rec, attenuation, scattered)) {
+      if(hit.second->Scatter(ray, rec, attenuation, scattered)) {
          return attenuation * RayColor(scattered, depth - 1, world);
       }
       return ZERO_PIXEL;

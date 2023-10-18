@@ -18,7 +18,7 @@ class Sphere {
  public:
    API Sphere(const Point3& center, const double radius, std::unique_ptr<Material> upMaterial);
 
-   [[nodiscard]] API bool Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API std::pair<bool, Material*> Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #endif

@@ -11,7 +11,7 @@ API Sphere::Sphere(const Point3& center, const double radius, std::unique_ptr<Ma
 }
 
 
-API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+API std::pair<bool, Material*> Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    const Vector3& direction = ray.GetDirection();
 
    const Vector3 oc = ray.GetOrigin() - m_center;
@@ -20,7 +20,7 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
    const double c = oc.LenghtSquared() - m_radiusSquared;
    const double discriminant = halfB * halfB - a * c;
    if(discriminant < 0) {
-      return false;
+      return std::make_pair(false, nullptr);
    }
 
    const double sqrtd = std::sqrt(discriminant);
@@ -30,7 +30,7 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
    if(!rayT.Surrounds(root)) {
       root = (-halfB + sqrtd) / a;
       if(!rayT.Surrounds(root)) {
-         return false;
+         return std::make_pair(false, nullptr);
       }
    }
 
@@ -38,7 +38,6 @@ API bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const
    rec.p = ray.At(rec.t);
    const Vector3 outwardNormal = (rec.p - m_center) / m_radius;
    rec.SetFaceFront(ray, outwardNormal);
-   rec.mat = m_upMaterial.get();
 
-   return true;
+   return std::make_pair(true, m_upMaterial.get());
 }
