@@ -63,12 +63,11 @@ API void Camera::Render(const Hittable& world) noexcept {
 
 
 API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const Hittable& world) noexcept {
-   HitRecord rec;
-
    if(depth <= 0) {
       return Pixel(0.0, 0.0, 0.0);
    }
 
+   HitRecord rec;
    if(world.Hit(ray, Interval(0.001, std::numeric_limits<double>::max()), rec)) {
       Ray scattered;
       Pixel attenuation;

@@ -11,6 +11,8 @@ class Sphere: public Hittable {
  private:
    const Point3 m_center;
    const double m_radius;
+   const double m_radiusSquared;
+
    const std::unique_ptr<Material> m_upMaterial;
 
  public:
