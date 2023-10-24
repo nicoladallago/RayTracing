@@ -3,13 +3,6 @@
 #include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
-API BaseSphere::BaseSphere(const Point3& center, const double radius) noexcept:
-    m_center(center),
-    m_radius(radius),
-    m_radiusSquared(m_radius * m_radius) {
-}
-
-
 API bool BaseSphere::HitBase(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    const Vector3& direction = ray.GetDirection();
 

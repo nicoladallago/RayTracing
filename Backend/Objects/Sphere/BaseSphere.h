@@ -14,9 +14,10 @@ class BaseSphere {
    const double m_radiusSquared;
 
  public:
-   API BaseSphere(const Point3& center, const double radius) noexcept;
+   API constexpr BaseSphere(const Point3& center, const double radius) noexcept;
 
    [[nodiscard]] API bool HitBase(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
+#include "BaseSphere.hpp"
 #endif
