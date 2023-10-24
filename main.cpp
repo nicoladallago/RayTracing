@@ -45,7 +45,7 @@ void Render() {
               0.6,              // Defocus disk horizontal radius
               10);              // Defocus disk vertical radius
 
-   // 162 seconds -> 176 seconds -> 179 seconds
+   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds
 
    cam.Render(world);
 }

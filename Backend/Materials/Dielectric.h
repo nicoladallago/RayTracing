@@ -1,11 +1,13 @@
 #ifndef DIELECTRIC_H
 #define DIELECTRIC_H
 #pragma once
+#include "Geometry/Point3.h"
 #include "Materials/Material.h"
 
 class Dielectric: public Material {
  private:
    static constexpr int REFLECTANCE_EXPONENT = 5;
+   static constexpr Pixel ATTENUATION = Pixel(1, 1, 1);
 
    const double m_ir; // index of refraction
    const double m_inverseIr;

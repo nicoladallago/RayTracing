@@ -6,11 +6,11 @@ API bool Dielectric::Scatter(const Ray& ray,
                              const HitRecord& rec,
                              Pixel& attenuation,
                              Ray& scattered) const noexcept {
-   attenuation = Pixel(1, 1, 1);
+   attenuation = ATTENUATION;
    const double refractionRatio = rec.IsFrontFace() ? m_inverseIr : m_ir;
 
    const Vector3 unitDirection = UnitVector(ray.GetDirection());
-   const double cosTheta = std::fmin(Dot(-unitDirection, rec.GetNormal()), 1);
+   const double cosTheta = std::min(Dot(-unitDirection, rec.GetNormal()), 1.0);
    const double sinTheta = std::sqrt(1 - cosTheta * cosTheta);
 
    const bool cannotRefract = refractionRatio * sinTheta > 1;
