@@ -22,11 +22,14 @@ set(SOURCES
     "Materials/Metal.cpp"
     "Materials/Metal.hpp"
 
+    "Objects/BaseSphere.cpp"
+    "Objects/DielectricSphere.cpp"
     "Objects/HitRecord.cpp"
     "Objects/HitRecord.hpp"
     "Objects/HittableList.cpp"
     "Objects/HittableList.hpp"
-    "Objects/Sphere.cpp"
+    "Objects/LambertianSphere.cpp"
+    "Objects/MetalSphere.cpp"
 
     "Threads/Thread.cpp"
     "Threads/ThreadsManager.cpp"

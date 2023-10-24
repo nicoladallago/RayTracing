@@ -1,17 +1,23 @@
 #ifndef HITTABLE_LIST_H
 #define HITTABLE_LIST_H
 #pragma once
-#include "Objects/Sphere.h"
+#include "Objects/DielectricSphere.h"
+#include "Objects/LambertianSphere.h"
+#include "Objects/MetalSphere.h"
 
 class HittableList {
  private:
-   std::vector<std::unique_ptr<Sphere>> m_objects;
+   std::vector<DielectricSphere> m_dielectricSpheres;
+   std::vector<LambertianSphere> m_lambertianSpheres;
+   std::vector<MetalSphere> m_metalSpheres;
 
  public:
    API constexpr void Clear() noexcept;
-   API constexpr void Add(std::unique_ptr<Sphere> upObject);
+   API constexpr void AddDielectricSpehre(const DielectricSphere& sphere);
+   API constexpr void AddLambertianSpehre(const LambertianSphere& sphere);
+   API constexpr void AddMetalSpehre(const MetalSphere& sphere);
 
-   [[nodiscard]] API std::pair<bool, Material*> Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API std::pair<bool, const Material*> Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "HittableList.hpp"

@@ -56,7 +56,7 @@ ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Came
             std::cout << std::to_string(static_cast<size_t>(time[i])) << " ";
          }
          else {
-            std::cout << std::format("[ {}%]   ", std::floor(time[i] * 100.0) / 100.0);
+            std::cout << std::format("[{}%] ", std::floor(time[i] * 100.0) / 100.0);
          }
       }
       std::cout << '\n';
