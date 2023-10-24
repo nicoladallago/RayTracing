@@ -17,7 +17,7 @@ class HittableList {
    API constexpr void AddLambertianSpehre(const LambertianSphere& sphere);
    API constexpr void AddMetalSpehre(const MetalSphere& sphere);
 
-   [[nodiscard]] API std::pair<bool, const Material*> Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API const Material* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "HittableList.hpp"
