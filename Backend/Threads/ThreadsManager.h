@@ -9,7 +9,9 @@ class Camera;
 
 class ThreadsManager {
  private:
-   static constexpr int SLEEP_S = 5;
+   static constexpr int SLEEP_S = 1;
+   static constexpr int WRITE_EVERY_S = 5;
+   static constexpr int PERCENTAGE_PRECISION = 4;
 
    std::vector<std::unique_ptr<Thread>> m_threads;
 

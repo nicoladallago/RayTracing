@@ -2,6 +2,7 @@
 #define CAMERA_H
 #pragma once
 #include "Geometry/Ray.h"
+#include "Image/Image.h"
 #include "Utils/Interval.h"
 
 class HittableList;
@@ -43,7 +44,7 @@ class Camera {
               const double defocusAngle,
               const double focusDist) noexcept;
 
-   API void Render(const HittableList& world) noexcept; // TODO make it constexpr
+   [[nodiscard]] API Image Render(const HittableList& world) noexcept; // TODO make it constexpr
 
    [[nodiscard]] constexpr unsigned int GetSamplesPerPixels() const noexcept;
    [[nodiscard]] constexpr unsigned int GetMaxDepth() const noexcept;

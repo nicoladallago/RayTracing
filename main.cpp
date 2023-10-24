@@ -2,6 +2,7 @@
 #include <Image/Camera.h>
 
 void Render() {
+   std::cout << "Creating scene..\n";
    HittableList world;
    world.AddLambertianSpehre(LambertianSphere(Point3(0, -1000, 0), 1000, Pixel(0.5, 0.5, 0.5)));
 
@@ -45,9 +46,12 @@ void Render() {
               0.6,              // Defocus disk horizontal radius
               10);              // Defocus disk vertical radius
 
-   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds
+   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds -> 178 seconds
 
-   cam.Render(world);
+   std::cout << "Redering scene..\n";
+   const Image img = cam.Render(world);
+   std::cout << "Saving image..\n";
+   img.Save("image.ppm");
 }
 
 

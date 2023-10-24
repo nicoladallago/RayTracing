@@ -36,30 +36,31 @@ ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Came
    // Wait
    const std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
+   int seconds = 0;
    while(true) {
       std::this_thread::sleep_for(std::chrono::seconds(SLEEP_S));
 
       bool computationDone = true;
-      std::vector<double> time(2 * threads);
+      std::vector<double> time(threads);
       for(const std::unique_ptr<Thread>& upThread : m_threads) {
          if(!upThread->RenderDone()) {
             computationDone = false;
          }
 
          // compute percentage remaing
-         time.at(2 * upThread->GetId() + 0) = static_cast<double>(upThread->ItemsRemaining());
-         time.at(2 * upThread->GetId() + 1) = static_cast<double>(upThread->ItemsRemaining()) * 100.0 / static_cast<double>(pixelsPerThread);
+         time.at(upThread->GetId()) = static_cast<double>(upThread->ItemsRemaining()) * 100.0 / static_cast<double>(pixelsPerThread);
       }
 
-      for(size_t i = 0; i < time.size(); ++i) {
-         if(i % 2 == 0) {
-            std::cout << std::to_string(static_cast<size_t>(time[i])) << " ";
-         }
-         else {
-            std::cout << std::format("[{}%] ", std::floor(time[i] * 100.0) / 100.0);
-         }
+      ++seconds;
+      if(seconds < WRITE_EVERY_S) {
+         continue;
       }
-      std::cout << '\n';
+      seconds = 0;
+
+      std::cout << "\33[2K\r";
+      for(const double percentage : time) {
+         std::cout << '[' << std::setprecision(PERCENTAGE_PRECISION) << percentage << "%] ";
+      }
 
       if(computationDone) {
          break;
@@ -67,5 +68,6 @@ ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Came
    }
 
    const std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-   std::cout << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " [s]\n";
+   std::cout << "\33[2K\r"
+             << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " [s]\n";
 }

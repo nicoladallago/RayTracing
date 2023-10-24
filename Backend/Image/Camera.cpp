@@ -29,11 +29,10 @@ API Camera::Camera(const double aspectRatio,
 }
 
 
-API void Camera::Render(const HittableList& world) noexcept {
+API Image Camera::Render(const HittableList& world) noexcept {
    Image img(m_width, m_height);
    ThreadsManager(img, world, *this, std::thread::hardware_concurrency());
-
-   img.Save("image.ppm");
+   return img;
 }
 
 
