@@ -11,7 +11,7 @@ class Dielectric: public Material {
    const double m_inverseIr;
 
  public:
-   API constexpr Dielectric(const double indexOfRefraction) noexcept;
+   constexpr Dielectric(const double indexOfRefraction) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
                                           const HitRecord& rec,

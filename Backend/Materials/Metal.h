@@ -10,7 +10,7 @@ class Metal: public Material {
    const double m_fuzz;
 
  public:
-   API constexpr Metal(const Pixel& a, const double f) noexcept;
+   constexpr Metal(const Pixel& a, const double f) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
                                           const HitRecord& rec,

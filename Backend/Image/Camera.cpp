@@ -37,7 +37,7 @@ API void Camera::Render(const HittableList& world) noexcept {
 }
 
 
-API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept {
+Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept {
    if(depth <= 0) {
       return ZERO_PIXEL;
    }
@@ -59,7 +59,7 @@ API Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const Hitta
 }
 
 
-API double Camera::LinearToGamma(const double linear) noexcept {
+double Camera::LinearToGamma(const double linear) noexcept {
    return std::sqrt(linear);
 }
 
@@ -110,7 +110,7 @@ Point3 Camera::DefocusDiskSample() const {
 }
 
 
-API Ray Camera::GetRay(const unsigned int i, const unsigned int j) const noexcept {
+Ray Camera::GetRay(const unsigned int i, const unsigned int j) const noexcept {
    const Point3 pixelCenter = m_pixel00Loc + (static_cast<double>(i) * m_pixelDeltaU) + (static_cast<double>(j) * m_pixelDeltaV);
    const Point3 rayOrigin = (m_defocusAngle <= 0) ? m_center : DefocusDiskSample();
 

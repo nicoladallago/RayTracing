@@ -13,15 +13,15 @@ class HitRecord {
    bool m_frontFace = false;
 
  public:
-   API constexpr void SetRoot(const double t) noexcept;
-   API constexpr void SetPoint(const Point3& p) noexcept;
+   constexpr void SetRoot(const double t) noexcept;
+   constexpr void SetPoint(const Point3& p) noexcept;
 
-   [[nodiscard]] API constexpr const Point3& GetPoint() const noexcept;
-   [[nodiscard]] API constexpr const Vector3& GetNormal() const noexcept;
-   [[nodiscard]] API constexpr double GetRoot() const noexcept;
-   [[nodiscard]] API constexpr bool IsFrontFace() const noexcept;
+   [[nodiscard]] constexpr const Point3& GetPoint() const noexcept;
+   [[nodiscard]] constexpr const Vector3& GetNormal() const noexcept;
+   [[nodiscard]] constexpr double GetRoot() const noexcept;
+   [[nodiscard]] constexpr bool IsFrontFace() const noexcept;
 
-   API void SetFaceFront(const Ray& ray, const Vector3& outwardNormal) noexcept;
+   void SetFaceFront(const Ray& ray, const Vector3& outwardNormal) noexcept;
 };
 
 #include "HitRecord.hpp"

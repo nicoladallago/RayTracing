@@ -9,9 +9,9 @@ class Ray;
 
 class Material {
  public:
-   API virtual ~Material() = default;
+   virtual ~Material() = default;
 
-   [[nodiscard]] API virtual bool Scatter(const Ray& ray, const HitRecord& rec, Pixel& attenuation, Ray& scattered) const noexcept = 0;
+   [[nodiscard]] virtual bool Scatter(const Ray& ray, const HitRecord& rec, Pixel& attenuation, Ray& scattered) const noexcept = 0;
 };
 
 

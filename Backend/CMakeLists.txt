@@ -8,7 +8,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 set(SOURCES 
     "Geometry/Point3.hpp"
     "Geometry/Ray.hpp"
-    "Geometry/Rect.hpp"
 
     "Image/Camera.cpp"
     "Image/Camera.hpp"

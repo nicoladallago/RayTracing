@@ -10,14 +10,14 @@ class Image {
    std::vector<Pixel> m_data;
 
  public:
-   API Image(const unsigned int width, const unsigned int height);
+   Image(const unsigned int width, const unsigned int height);
 
-   [[nodiscard]] API constexpr unsigned int GetWidth() const noexcept;
-   [[nodiscard]] API constexpr unsigned int GetHeight() const noexcept;
-   [[nodiscard]] API constexpr size_t GetSize() const noexcept;
-   [[nodiscard]] API constexpr std::span<Pixel> Get() noexcept;
+   [[nodiscard]] constexpr unsigned int GetWidth() const noexcept;
+   [[nodiscard]] constexpr unsigned int GetHeight() const noexcept;
+   [[nodiscard]] constexpr size_t GetSize() const noexcept;
+   [[nodiscard]] constexpr std::span<Pixel> Get() noexcept;
 
-   API void Save(const std::filesystem::path& path);
+   void Save(const std::filesystem::path& path);
 };
 
 #include "Image.hpp"

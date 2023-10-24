@@ -9,7 +9,7 @@ class Lambertian: public Material {
    const Pixel m_albedo;
 
  public:
-   API constexpr Lambertian(const Pixel& a) noexcept;
+   constexpr Lambertian(const Pixel& a) noexcept;
 
    [[nodiscard]] API virtual bool Scatter(const Ray& ray,
                                           const HitRecord& rec,

@@ -45,13 +45,13 @@ class Camera {
 
    API void Render(const HittableList& world) noexcept; // TODO make it constexpr
 
-   [[nodiscard]] API constexpr unsigned int GetSamplesPerPixels() const noexcept;
-   [[nodiscard]] API constexpr unsigned int GetMaxDepth() const noexcept;
+   [[nodiscard]] constexpr unsigned int GetSamplesPerPixels() const noexcept;
+   [[nodiscard]] constexpr unsigned int GetMaxDepth() const noexcept;
 
-   [[nodiscard]] API Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
+   [[nodiscard]] Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
 
-   [[nodiscard]] API static Pixel RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept;
-   [[nodiscard]] API static double LinearToGamma(const double linear) noexcept;
+   [[nodiscard]] static Pixel RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept;
+   [[nodiscard]] static double LinearToGamma(const double linear) noexcept;
 
  private:
    void Initialize() noexcept;

@@ -20,11 +20,4 @@ class Interval {
 };
 
 #include "Interval.hpp"
-
-static constexpr Interval EMPTY = Interval(std::numeric_limits<double>::max(),
-                                           -std::numeric_limits<double>::max());
-
-static constexpr Interval UNIVERSE = Interval(-std::numeric_limits<double>::max(),
-                                              std::numeric_limits<double>::max());
-
 #endif

@@ -12,12 +12,12 @@ class HittableList {
    std::vector<MetalSphere> m_metalSpheres;
 
  public:
-   API constexpr void Clear() noexcept;
-   API constexpr void AddDielectricSpehre(const DielectricSphere& sphere);
-   API constexpr void AddLambertianSpehre(const LambertianSphere& sphere);
-   API constexpr void AddMetalSpehre(const MetalSphere& sphere);
+   constexpr void Clear() noexcept;
+   constexpr void AddDielectricSpehre(const DielectricSphere& sphere);
+   constexpr void AddLambertianSpehre(const LambertianSphere& sphere);
+   constexpr void AddMetalSpehre(const MetalSphere& sphere);
 
-   [[nodiscard]] API const Material* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] const Material* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "HittableList.hpp"

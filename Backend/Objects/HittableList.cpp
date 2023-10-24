@@ -2,7 +2,7 @@
 #include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
-API const Material* HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+const Material* HittableList::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    HitRecord tempRec;
    const Material* pMaterial = nullptr;
    double closestSoFar = rayT.GetMax();

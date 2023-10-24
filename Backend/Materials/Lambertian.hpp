@@ -3,7 +3,7 @@
 #pragma once
 #include "Lambertian.h"
 
-API constexpr Lambertian::Lambertian(const Pixel& a) noexcept:
+constexpr Lambertian::Lambertian(const Pixel& a) noexcept:
     m_albedo(a) {
 }
 
