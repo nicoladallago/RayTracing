@@ -1,7 +1,7 @@
 #ifndef DIELECTRIC_SPHERE_H
 #define DIELECTRIC_SPHERE_H
 #pragma once
-#include "Objects/BaseSphere.h"
+#include "Objects/Sphere/BaseSphere.h"
 #include "Materials/Dielectric.h"
 
 class DielectricSphere: public BaseSphere {

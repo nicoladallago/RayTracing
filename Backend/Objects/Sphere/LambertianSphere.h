@@ -1,7 +1,7 @@
 #ifndef LAMBERTIAN_SPHERE_H
 #define LAMBERTIAN_SPHERE_H
 #pragma once
-#include "Objects/BaseSphere.h"
+#include "Objects/Sphere/BaseSphere.h"
 #include "Materials/Lambertian.h"
 
 class LambertianSphere: public BaseSphere {

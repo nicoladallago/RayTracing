@@ -1,7 +1,7 @@
 #ifndef METAL_SPHERE_H
 #define METAL_SPHERE_H
 #pragma once
-#include "Objects/BaseSphere.h"
+#include "Objects/Sphere/BaseSphere.h"
 #include "Materials/Metal.h"
 
 class MetalSphere: public BaseSphere {

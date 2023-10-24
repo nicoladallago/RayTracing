@@ -1,9 +1,9 @@
 #ifndef HITTABLE_LIST_H
 #define HITTABLE_LIST_H
 #pragma once
-#include "Objects/DielectricSphere.h"
-#include "Objects/LambertianSphere.h"
-#include "Objects/MetalSphere.h"
+#include "Objects/Sphere/DielectricSphere.h"
+#include "Objects/Sphere/LambertianSphere.h"
+#include "Objects/Sphere/MetalSphere.h"
 
 class HittableList {
  private:

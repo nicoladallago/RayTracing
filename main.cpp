@@ -1,8 +1,5 @@
 #include <Objects/HittableList.h>
 #include <Image/Camera.h>
-#include <Objects/DielectricSphere.h>
-#include <Objects/LambertianSphere.h>
-#include <Objects/MetalSphere.h>
 
 void Render() {
    HittableList world;
@@ -59,7 +56,7 @@ int main() {
       Render();
    }
    catch(const std::exception& e) {
-      std::cout << e.what() << std::endl;
+      std::cout << e.what() << '\n';
    }
 
    return 1;
