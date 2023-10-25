@@ -28,9 +28,9 @@ class Point3 {
    [[nodiscard]] API constexpr double GetY() const noexcept;
    [[nodiscard]] API constexpr double GetZ() const noexcept;
 
-   [[nodiscard]] API inline double Length() const noexcept;
+   [[nodiscard]] API constexpr double Length() const noexcept;
    [[nodiscard]] API constexpr double LenghtSquared() const noexcept;
-   [[nodiscard]] API inline bool NearZero() const noexcept;
+   [[nodiscard]] API constexpr bool NearZero() const noexcept;
 
    [[nodiscard]] API static inline Point3 Random() noexcept;                                   // TODO constexpr
    [[nodiscard]] API static inline Point3 Random(const double min, const double max) noexcept; // TODO constexpr
@@ -53,7 +53,7 @@ API constexpr Point3 operator/(const Point3& p, const double val) noexcept;
 [[nodiscard]] API inline Point3 RandomUnitVector() noexcept;                       // TODO constexpr
 [[nodiscard]] API inline Point3 RandomOnHemisphere(const Point3& normal) noexcept; // TODO constexpr
 [[nodiscard]] API constexpr Point3 Reflect(const Point3& v, const Point3& n) noexcept;
-[[nodiscard]] API inline Point3 Refract(const Point3& uv, const Point3& n, const double etaiOverEtat) noexcept;
+[[nodiscard]] API constexpr Point3 Refract(const Point3& uv, const Point3& n, const double etaiOverEtat) noexcept;
 
 #include "Point3.hpp"
 #endif

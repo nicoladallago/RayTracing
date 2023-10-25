@@ -58,11 +58,6 @@ Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableL
 }
 
 
-double Camera::LinearToGamma(const double linear) noexcept {
-   return std::sqrt(linear);
-}
-
-
 void Camera::Initialize() noexcept {
    m_height = static_cast<unsigned int>(m_width / m_aspectRatio);
 

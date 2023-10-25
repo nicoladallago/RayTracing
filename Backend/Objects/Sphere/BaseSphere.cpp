@@ -15,7 +15,7 @@ API bool BaseSphere::HitBase(const Ray& ray, const Interval& rayT, HitRecord& re
       return false;
    }
 
-   const double sqrtd = std::sqrt(discriminant);
+   const double sqrtd = Utils::Sqrt(discriminant);
 
    // Find the nearest root that lies in the acceptable range.
    double root = (-halfB - sqrtd) / a;

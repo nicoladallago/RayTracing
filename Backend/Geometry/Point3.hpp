@@ -67,8 +67,8 @@ API constexpr double Point3::GetZ() const noexcept {
 }
 
 
-API inline double Point3::Length() const noexcept {
-   return std::sqrt(LenghtSquared());
+API constexpr double Point3::Length() const noexcept {
+   return Utils::Sqrt(LenghtSquared());
 }
 
 
@@ -77,8 +77,8 @@ API constexpr double Point3::LenghtSquared() const noexcept {
 }
 
 
-API inline bool Point3::NearZero() const noexcept {
-   return (std::abs(m_x) < NEAR_ZERO) && (std::abs(m_y) < NEAR_ZERO) && (std::abs(m_z) < NEAR_ZERO);
+API constexpr bool Point3::NearZero() const noexcept {
+   return (Utils::Abs(m_x) < NEAR_ZERO) && (Utils::Abs(m_y) < NEAR_ZERO) && (Utils::Abs(m_z) < NEAR_ZERO);
 }
 
 
@@ -177,10 +177,10 @@ API constexpr Point3 Reflect(const Point3& v, const Point3& n) noexcept {
 }
 
 
-API inline Point3 Refract(const Point3& uv, const Point3& n, const double etaiOverEtat) noexcept {
+API constexpr Point3 Refract(const Point3& uv, const Point3& n, const double etaiOverEtat) noexcept {
    const double cosTheta = std::min(Dot(-uv, n), 1.0);
    const Point3 rOutPerp = etaiOverEtat * (uv + cosTheta * n);
-   const Point3 rOutParallel = -std::sqrt(std::abs(1 - rOutPerp.LenghtSquared())) * n;
+   const Point3 rOutParallel = -Utils::Sqrt(Utils::Abs(1 - rOutPerp.LenghtSquared())) * n;
    return rOutPerp + rOutParallel;
 }
 

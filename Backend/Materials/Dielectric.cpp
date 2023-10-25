@@ -11,7 +11,7 @@ API bool Dielectric::Scatter(const Ray& ray,
 
    const Vector3 unitDirection = UnitVector(ray.GetDirection());
    const double cosTheta = std::min(Dot(-unitDirection, rec.GetNormal()), 1.0);
-   const double sinTheta = std::sqrt(1 - cosTheta * cosTheta);
+   const double sinTheta = Utils::Sqrt(1 - cosTheta * cosTheta);
 
    const bool cannotRefract = refractionRatio * sinTheta > 1;
    Vector3 direction;

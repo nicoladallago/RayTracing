@@ -12,4 +12,9 @@ constexpr unsigned int Camera::GetMaxDepth() const noexcept {
    return m_maxDepth;
 }
 
+
+constexpr double Camera::LinearToGamma(const double linear) noexcept {
+   return Utils::Sqrt(linear);
+}
+
 #endif
