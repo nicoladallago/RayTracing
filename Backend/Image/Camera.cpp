@@ -30,8 +30,9 @@ API Camera::Camera(const double aspectRatio,
 
 
 API Image Camera::Render(const HittableList& world) noexcept {
+   ThreadsManager manager(world, *this, std::thread::hardware_concurrency());
    Image img(m_width, m_height);
-   ThreadsManager(img, world, *this, std::thread::hardware_concurrency());
+   manager.Start(img);
    return img;
 }
 

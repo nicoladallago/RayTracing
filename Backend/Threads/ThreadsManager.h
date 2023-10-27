@@ -16,7 +16,9 @@ class ThreadsManager {
    std::vector<std::unique_ptr<Thread>> m_threads;
 
  public:
-   ThreadsManager(Image& img, const HittableList& world, const Camera& camera, size_t threads);
+   ThreadsManager(const HittableList& world, const Camera& camera, size_t threads);
+
+   void Start(Image& img);
 };
 
 #endif

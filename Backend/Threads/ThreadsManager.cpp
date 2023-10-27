@@ -1,12 +1,21 @@
 #include "ThreadsManager.h"
 #include "Image/Image.h"
 
-ThreadsManager::ThreadsManager(Image& img, const HittableList& world, const Camera& camera, size_t threads) {
+ThreadsManager::ThreadsManager(const HittableList& world, const Camera& camera, size_t threads) {
    threads = std::max<size_t>(1, threads);
    m_threads.reserve(threads);
    for(size_t i = 0; i < threads; ++i) {
       m_threads.emplace_back(std::make_unique<Thread>(i, camera, world));
    }
+}
+
+
+void ThreadsManager::Start(Image& img) {
+   if(m_threads.empty()) {
+      return;
+   }
+
+   const size_t threads = m_threads.size();
 
    // Set data
    const size_t pixelsPerThread = img.GetSize() / threads;
