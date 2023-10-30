@@ -36,6 +36,7 @@ set(SOURCES
     "Objects/HittableList.hpp"
 
     "Threads/Thread.cpp"
+    "Threads/Thread.hpp"
     "Threads/ThreadsManager.cpp"
 
     "Utils/Interval.hpp"

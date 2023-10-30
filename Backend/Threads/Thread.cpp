@@ -1,18 +1,11 @@
 #include "Thread.h"
 #include "Image/Camera.h"
 #include "Objects/HittableList.h"
-#include "Utils/Interval.h"
-
-API Thread::Data::Data(Pixel& p, const unsigned int i, const unsigned int j) noexcept:
-    m_p(p),
-    m_i(i),
-    m_j(j) {
-}
-
 
 API Thread::Thread(const size_t id, const Camera& camera, const HittableList& world) noexcept:
     m_id(id),
     m_camera(camera),
+    m_samplesPerPixel(camera.GetSamplesPerPixels()),
     m_world(world) {
 }
 
@@ -42,11 +35,6 @@ API void Thread::StartRender() {
 }
 
 
-API size_t Thread::GetId() const noexcept {
-   return m_id;
-}
-
-
 API bool Thread::RenderDone() const noexcept {
    return m_pixels.empty();
 }
@@ -68,18 +56,16 @@ void Thread::Render() noexcept {
 
 
 void Thread::RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept {
-   for(unsigned int sample = 0; sample < m_camera.GetSamplesPerPixels(); ++sample) {
+   for(unsigned int sample = 0; sample < m_samplesPerPixel; ++sample) {
       p += Camera::RayColor(m_camera.GetRay(i, j), m_camera.GetMaxDepth(), m_world);
    }
-
-   p *= (1.0 / m_camera.GetSamplesPerPixels());
+   p /= m_samplesPerPixel;
 
    p.SetX(Camera::LinearToGamma(p.GetX()));
    p.SetY(Camera::LinearToGamma(p.GetY()));
    p.SetZ(Camera::LinearToGamma(p.GetZ()));
 
-   const Interval intensity(0, 1);
-   p.SetX(255 * intensity.Clamp(p.GetX()));
-   p.SetY(255 * intensity.Clamp(p.GetY()));
-   p.SetZ(255 * intensity.Clamp(p.GetZ()));
+   p.SetX(255 * CLAMP.Clamp(p.GetX()));
+   p.SetY(255 * CLAMP.Clamp(p.GetY()));
+   p.SetZ(255 * CLAMP.Clamp(p.GetZ()));
 }
