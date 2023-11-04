@@ -4,7 +4,7 @@
 void Render() {
    std::cout << "Creating scene..\n";
    HittableList world;
-   world.AddLambertianSpehre(LambertianSphere(Point3(0, -1000, 0), 1000, Pixel(0.5, 0.5, 0.5)));
+   world.AddLambertianSpehre(Point3(0, -1000, 0), 1000, Pixel(0.5, 0.5, 0.5));
 
    for(int a = -11; a < 11; ++a) {
       for(int b = -11; b < 11; ++b) {
@@ -15,25 +15,25 @@ void Render() {
             if(chooseMat < 0.8) {
                // diffuse
                const Pixel albedo = Pixel::Random() * Pixel::Random();
-               world.AddLambertianSpehre(LambertianSphere(center, 0.2, albedo));
+               world.AddLambertianSpehre(center, 0.2, albedo);
             }
             else if(chooseMat < 0.95) {
                // metal
                const Pixel albedo = Pixel::Random(0.5, 1);
                const double fuzz = Utils::Random(0, 0.5);
-               world.AddMetalSpehre(MetalSphere(center, 0.2, albedo, fuzz));
+               world.AddMetalSpehre(center, 0.2, albedo, fuzz);
             }
             else {
                // glass
-               world.AddDielectricSpehre(DielectricSphere(center, 0.2, (1.5)));
+               world.AddDielectricSpehre(center, 0.2, 1.5);
             }
          }
       }
    }
 
-   world.AddDielectricSpehre(DielectricSphere(Point3(0, 1, 0), 1.0, 1.5));
-   world.AddLambertianSpehre(LambertianSphere(Point3(-4, 1, 0), 1.0, Pixel(0.4, 0.2, 0.1)));
-   world.AddMetalSpehre(MetalSphere(Point3(4, 1, 0), 1.0, Pixel(0.7, 0.6, 0.5), 0.0));
+   world.AddDielectricSpehre(Point3(0, 1, 0), 1, 1.5);
+   world.AddLambertianSpehre(Point3(-4, 1, 0), 1, Pixel(0.4, 0.2, 0.1));
+   world.AddMetalSpehre(Point3(4, 1, 0), 1, Pixel(0.7, 0.6, 0.5), 0);
 
    Camera cam(16.0 / 9.0,       // Aspect ratio
               2560,             // Width
@@ -46,7 +46,7 @@ void Render() {
               0.6,              // Defocus disk horizontal radius
               10);              // Defocus disk vertical radius
 
-   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds -> 178 seconds -> 190 seconds
+   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds -> 178 seconds -> 190 seconds -> 137 seconds
 
    std::cout << "Redering scene..\n";
    const Image img = cam.Render(world);

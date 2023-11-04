@@ -13,9 +13,9 @@ class HittableList {
 
  public:
    constexpr void Clear() noexcept;
-   constexpr void AddDielectricSpehre(const DielectricSphere& sphere);
-   constexpr void AddLambertianSpehre(const LambertianSphere& sphere);
-   constexpr void AddMetalSpehre(const MetalSphere& sphere);
+   constexpr void AddDielectricSpehre(const Point3& center, const double radius, const double indexOfRefraction);
+   constexpr void AddLambertianSpehre(const Point3& center, const double radius, const Pixel& albedo);
+   constexpr void AddMetalSpehre(const Point3& center, const double radius, const Pixel& albedo, const double fuzz);
 
    [[nodiscard]] const Material* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };

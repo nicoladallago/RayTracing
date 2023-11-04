@@ -21,7 +21,7 @@ class Thread {
    };
 
    std::thread m_thread;
-   std::queue<Data> m_pixels;
+   std::vector<Data> m_pixels;
 
    const size_t m_id;
    const Camera& m_camera;

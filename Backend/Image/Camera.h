@@ -24,7 +24,6 @@ class Camera {
    const double m_focusDist;
 
    unsigned int m_height;  // Rendered image height
-   Point3 m_center;        // Camera center
    Point3 m_pixel00Loc;    // Location of pixel 0, 0
    Vector3 m_pixelDeltaU;  // Offset to pixel to the right
    Vector3 m_pixelDeltaV;  // Offset to pixel below
@@ -38,9 +37,9 @@ class Camera {
               const unsigned int samplesPerPixels,
               const unsigned int maxDepth,
               const double vfov,
-              const Point3& lookFrom,
-              const Point3& lookAt,
-              const Vector3& vup,
+              Point3&& lookFrom,
+              Point3&& lookAt,
+              Vector3&& vup,
               const double defocusAngle,
               const double focusDist) noexcept;
 

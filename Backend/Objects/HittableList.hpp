@@ -10,18 +10,18 @@ constexpr void HittableList::Clear() noexcept {
 }
 
 
-constexpr void HittableList::AddDielectricSpehre(const DielectricSphere& sphere) {
-   m_dielectricSpheres.emplace_back(sphere);
+constexpr void HittableList::AddDielectricSpehre(const Point3& center, const double radius, const double indexOfRefraction) {
+   m_dielectricSpheres.emplace_back(center, radius, indexOfRefraction);
 }
 
 
-constexpr void HittableList::AddLambertianSpehre(const LambertianSphere& sphere) {
-   m_lambertianSpheres.emplace_back(sphere);
+constexpr void HittableList::AddLambertianSpehre(const Point3& center, const double radius, const Pixel& albedo) {
+   m_lambertianSpheres.emplace_back(center, radius, albedo);
 }
 
 
-constexpr void HittableList::AddMetalSpehre(const MetalSphere& sphere) {
-   m_metalSpheres.emplace_back(sphere);
+constexpr void HittableList::AddMetalSpehre(const Point3& center, const double radius, const Pixel& albedo, const double fuzz) {
+   m_metalSpheres.emplace_back(center, radius, albedo, fuzz);
 }
 
 #endif

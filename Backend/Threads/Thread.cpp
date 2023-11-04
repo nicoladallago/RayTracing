@@ -16,7 +16,7 @@ API Thread::~Thread() {
 
 
 API void Thread::Add(Pixel& pixel, const unsigned int i, const unsigned int j) {
-   m_pixels.emplace(pixel, i, j);
+   m_pixels.emplace_back(pixel, i, j);
 }
 
 
@@ -47,10 +47,10 @@ API size_t Thread::ItemsRemaining() const noexcept {
 
 void Thread::Render() noexcept {
    while(!m_pixels.empty()) {
-      Data& data = m_pixels.front();
+      Data& data = m_pixels.back();
       RenderPixel(data.m_p, data.m_i, data.m_j);
 
-      m_pixels.pop();
+      m_pixels.pop_back();
    }
 }
 
