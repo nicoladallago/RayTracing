@@ -18,21 +18,14 @@ void ThreadsManager::Start(Image& img) {
    const size_t threads = m_threads.size();
 
    // Set data
-   const size_t pixelsPerThread = img.GetSize() / threads;
-
    const std::span<Pixel> pixels = img.Get();
-   size_t index = 0;
    size_t threadIdx = 0;
-
    for(unsigned int j = 0; j < img.GetHeight(); ++j) {
       const unsigned int offset = j * img.GetWidth();
       for(unsigned int i = 0; i < img.GetWidth(); ++i) {
-         m_threads.at(threadIdx)->Add(pixels[offset + i], i, j);
-
-         ++index;
-         if(index >= pixelsPerThread) {
-            threadIdx = std::min(threadIdx + 1, threads - 1);
-            index = 0;
+         m_threads[threadIdx++]->Add(pixels[offset + i], i, j);
+         if(threadIdx >= threads) {
+            threadIdx = 0;
          }
       }
    }
@@ -46,6 +39,7 @@ void ThreadsManager::Start(Image& img) {
    const std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
    int seconds = 0;
+   const size_t pixelsPerThread = img.GetSize() / threads;
    while(true) {
       std::this_thread::sleep_for(std::chrono::seconds(SLEEP_S));
 
@@ -76,7 +70,6 @@ void ThreadsManager::Start(Image& img) {
       }
    }
 
-   const std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
    std::cout << "\33[2K\r"
-             << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " [s]\n";
+             << "Rendered in " << std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - begin).count() << " [s]\n";
 }
