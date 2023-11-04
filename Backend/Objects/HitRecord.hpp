@@ -2,6 +2,7 @@
 #define HIT_RECORD_HPP
 #pragma once
 #include "HitRecord.h"
+#include "Geometry/Ray.h"
 
 constexpr void HitRecord::SetRoot(const double t) noexcept {
    m_t = t;
@@ -30,6 +31,12 @@ constexpr double HitRecord::GetRoot() const noexcept {
 
 constexpr bool HitRecord::IsFrontFace() const noexcept {
    return m_frontFace;
+}
+
+
+constexpr void HitRecord::SetFaceFront(const Ray& ray, const Vector3& outwardNormal) noexcept {
+   m_frontFace = Dot(ray.GetDirection(), outwardNormal) < 0;
+   m_normal = m_frontFace ? outwardNormal : -outwardNormal;
 }
 
 #endif

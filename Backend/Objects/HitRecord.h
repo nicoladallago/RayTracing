@@ -21,7 +21,7 @@ class HitRecord {
    [[nodiscard]] constexpr double GetRoot() const noexcept;
    [[nodiscard]] constexpr bool IsFrontFace() const noexcept;
 
-   void SetFaceFront(const Ray& ray, const Vector3& outwardNormal) noexcept;
+   constexpr void SetFaceFront(const Ray& ray, const Vector3& outwardNormal) noexcept;
 };
 
 #include "HitRecord.hpp"

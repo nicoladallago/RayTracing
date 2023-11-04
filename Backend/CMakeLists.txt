@@ -30,7 +30,6 @@ set(SOURCES
     "Objects/Sphere/MetalSphere.cpp"
     "Objects/Sphere/MetalSphere.hpp"
 
-    "Objects/HitRecord.cpp"
     "Objects/HitRecord.hpp"
     "Objects/HittableList.cpp"
     "Objects/HittableList.hpp"

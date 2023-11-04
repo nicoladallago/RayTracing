@@ -46,7 +46,7 @@ void Render() {
               0.6,              // Defocus disk horizontal radius
               10);              // Defocus disk vertical radius
 
-   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds -> 178 seconds -> 190 seconds -> 137 seconds
+   // 162 seconds -> 176 seconds -> 179 seconds -> 182 seconds -> 178 seconds -> 190 seconds -> 136 seconds
 
    std::cout << "Redering scene..\n";
    const Image img = cam.Render(world);
