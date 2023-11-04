@@ -8,4 +8,9 @@ API constexpr MetalSphere::MetalSphere(const Point3& center, const double radius
     m_material(albedo, fuzz) {
 }
 
+
+API constexpr const Metal* MetalSphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+   return (BaseSphere::HitBase(ray, rayT, rec) ? &m_material : nullptr);
+}
+
 #endif

@@ -21,13 +21,9 @@ set(SOURCES
     "Materials/Metal.cpp"
     "Materials/Metal.hpp"
 
-    "Objects/Sphere/BaseSphere.cpp"
     "Objects/Sphere/BaseSphere.hpp"
-    "Objects/Sphere/DielectricSphere.cpp"
     "Objects/Sphere/DielectricSphere.hpp"
-    "Objects/Sphere/LambertianSphere.cpp"
     "Objects/Sphere/LambertianSphere.hpp"
-    "Objects/Sphere/MetalSphere.cpp"
     "Objects/Sphere/MetalSphere.hpp"
 
     "Objects/HitRecord.hpp"

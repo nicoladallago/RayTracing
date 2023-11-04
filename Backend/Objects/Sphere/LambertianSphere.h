@@ -11,7 +11,7 @@ class LambertianSphere: public BaseSphere {
  public:
    API constexpr LambertianSphere(const Point3& center, const double radius, const Pixel& albedo) noexcept;
 
-   [[nodiscard]] API const Lambertian* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API constexpr const Lambertian* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "LambertianSphere.hpp"

@@ -11,7 +11,7 @@ class MetalSphere: public BaseSphere {
  public:
    API constexpr MetalSphere(const Point3& center, const double radius, const Pixel& albedo, const double fuzz) noexcept;
 
-   [[nodiscard]] API const Metal* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API constexpr const Metal* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "MetalSphere.hpp"

@@ -11,7 +11,7 @@ class DielectricSphere: public BaseSphere {
  public:
    API constexpr DielectricSphere(const Point3& center, const double radius, const double indexOfRefraction) noexcept;
 
-   [[nodiscard]] API const Dielectric* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API constexpr const Dielectric* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "DielectricSphere.hpp"

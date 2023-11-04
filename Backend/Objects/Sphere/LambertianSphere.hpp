@@ -8,4 +8,9 @@ API constexpr LambertianSphere::LambertianSphere(const Point3& center, const dou
     m_material(albedo) {
 }
 
+
+API constexpr const Lambertian* LambertianSphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+   return (BaseSphere::HitBase(ray, rayT, rec) ? &m_material : nullptr);
+}
+
 #endif

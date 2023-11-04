@@ -16,7 +16,7 @@ class BaseSphere {
  public:
    API constexpr BaseSphere(const Point3& center, const double radius) noexcept;
 
-   [[nodiscard]] API bool HitBase(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] API constexpr bool HitBase(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "BaseSphere.hpp"
