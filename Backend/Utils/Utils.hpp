@@ -2,6 +2,7 @@
 #define UTILS_HPP
 #pragma once
 #include "Utils.h"
+#include "XoshiroCpp.hpp"
 
 API constexpr double Utils::DegreesToRadians(const double degrees) noexcept {
    return degrees * std::numbers::pi / 180.0;
@@ -41,9 +42,11 @@ API constexpr double Utils::Pow(const double val, const int exp) noexcept {
 
 
 API inline double Utils::Random() noexcept {
-   static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-   static std::mt19937 generator;
-   return distribution(generator);
+   using namespace XoshiroCpp;
+   using namespace std::chrono;
+
+   static Xoshiro256PlusPlus rng(static_cast<unsigned long long>(duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count()));
+   return DoubleFromBits(rng());
 }
 
 

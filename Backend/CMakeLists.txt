@@ -35,6 +35,7 @@ set(SOURCES
 
     "Utils/Interval.hpp"
     "Utils/Utils.hpp"
+    "Utils/XoshiroCpp.hpp"
 )
 
 add_library(Backend SHARED)
