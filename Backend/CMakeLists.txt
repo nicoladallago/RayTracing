@@ -27,7 +27,6 @@ set(SOURCES
     "Objects/Sphere/MetalSphere.hpp"
 
     "Objects/HitRecord.hpp"
-    "Objects/HittableList.cpp"
     "Objects/HittableList.hpp"
 
     "Threads/Thread.cpp"
@@ -35,7 +34,6 @@ set(SOURCES
     "Threads/ThreadsManager.cpp"
 
     "Utils/Interval.hpp"
-    "Utils/Utils.cpp"
     "Utils/Utils.hpp"
 )
 

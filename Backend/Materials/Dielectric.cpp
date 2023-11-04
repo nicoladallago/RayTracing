@@ -26,11 +26,3 @@ API bool Dielectric::Scatter(const Ray& ray,
    scattered = Ray(rec.GetPoint(), direction);
    return true;
 }
-
-
-double Dielectric::Reflectance(const double cosine, const double refIdx) noexcept {
-   // Use Schlick's approximation for reflectance.
-   double r0 = (1 - refIdx) / (1 + refIdx);
-   r0 = r0 * r0;
-   return r0 + (1 - r0) * std::pow((1 - cosine), REFLECTANCE_EXPONENT);
-}

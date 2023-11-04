@@ -17,7 +17,7 @@ class HittableList {
    constexpr void AddLambertianSpehre(const Point3& center, const double radius, const Pixel& albedo);
    constexpr void AddMetalSpehre(const Point3& center, const double radius, const Pixel& albedo, const double fuzz);
 
-   [[nodiscard]] const Material* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
+   [[nodiscard]] constexpr const Material* Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept;
 };
 
 #include "HittableList.hpp"

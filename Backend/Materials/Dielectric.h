@@ -21,7 +21,7 @@ class Dielectric: public Material {
                                           Ray& scattered) const noexcept override final;
 
  private:
-   static double Reflectance(const double cosine, const double refIdx) noexcept;
+   static constexpr double Reflectance(const double cosine, const double refIdx) noexcept;
 };
 
 #include "Dielectric.hpp"
