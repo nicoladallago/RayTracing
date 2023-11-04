@@ -10,9 +10,9 @@ API Camera::Camera(const double aspectRatio,
                    const unsigned int samplesPerPixels,
                    const unsigned int maxDepth,
                    const double vfov,
-                   Point3&& lookFrom,
-                   Point3&& lookAt,
-                   Vector3&& vup,
+                   const Point3& lookFrom,
+                   const Point3& lookAt,
+                   const Vector3& vup,
                    const double defocusAngle,
                    const double focusDist) noexcept:
     m_aspectRatio(aspectRatio),
@@ -20,9 +20,9 @@ API Camera::Camera(const double aspectRatio,
     m_samplesPerPixels(samplesPerPixels),
     m_maxDepth(maxDepth),
     m_vfov(vfov),
-    m_lookFrom(std::move(lookFrom)),
-    m_lookAt(std::move(lookAt)),
-    m_vup(std::move(vup)),
+    m_lookFrom(lookFrom),
+    m_lookAt(lookAt),
+    m_vup(vup),
     m_defocusAngle(defocusAngle),
     m_focusDist(focusDist) {
    Initialize();
@@ -53,9 +53,7 @@ Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableL
       return ZERO_PIXEL;
    }
 
-   const Vector3 unitDirection = UnitVector(ray.GetDirection());
-   const double a = 0.5 * (unitDirection.GetY() + 1);
-   return Pixel(1 - 0.5 * a, 1 - 0.3 * a, 1);
+   return RayBackground(ray);
 }
 
 
@@ -85,26 +83,4 @@ void Camera::Initialize() noexcept {
    const double defocusRadius = m_focusDist * std::tan(Utils::DegreesToRadians(m_defocusAngle / 2));
    m_defocusDiskU = m_u * defocusRadius;
    m_defocusDiskV = m_v * defocusRadius;
-}
-
-
-Vector3 Camera::PixelSampleSquare() const noexcept {
-   const double px = -0.5 + Utils::Random();
-   const double py = -0.5 + Utils::Random();
-   return (px * m_pixelDeltaU) + (py * m_pixelDeltaV);
-}
-
-
-Point3 Camera::DefocusDiskSample() const {
-   // Returns a random point in the camera defocus disk.
-   const Point3 p = RandomInUnitDisk();
-   return m_lookFrom + (p.GetX() * m_defocusDiskU) + (p.GetY() * m_defocusDiskV);
-}
-
-
-Ray Camera::GetRay(const unsigned int i, const unsigned int j) const noexcept {
-   const Point3 pixelCenter = m_pixel00Loc + (static_cast<double>(i) * m_pixelDeltaU) + (static_cast<double>(j) * m_pixelDeltaV);
-   const Point3 rayOrigin = (m_defocusAngle <= 0) ? m_lookFrom : DefocusDiskSample();
-
-   return Ray(rayOrigin, pixelCenter + PixelSampleSquare() - rayOrigin);
 }

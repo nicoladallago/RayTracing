@@ -10,6 +10,7 @@ class HittableList;
 class Thread {
  private:
    static constexpr Interval CLAMP = Interval(0, 1);
+   static constexpr double MAX_PIXEL_VAL = 255;
 
    struct Data
    {

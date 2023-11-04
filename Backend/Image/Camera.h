@@ -11,6 +11,10 @@ class Camera {
  private:
    static constexpr Interval INTERVAL = Interval(0.001, std::numeric_limits<double>::max());
    static constexpr Pixel ZERO_PIXEL = Pixel(0, 0, 0);
+   static constexpr double BKG_ATTENUATION = 0.5;
+   static constexpr double BKG_R = 0.5;
+   static constexpr double BKG_G = 0.5;
+   //static constexpr double BKG_B = 0;
 
    const double m_aspectRatio;
    const unsigned int m_width;
@@ -37,9 +41,9 @@ class Camera {
               const unsigned int samplesPerPixels,
               const unsigned int maxDepth,
               const double vfov,
-              Point3&& lookFrom,
-              Point3&& lookAt,
-              Vector3&& vup,
+              const Point3& lookFrom,
+              const Point3& lookAt,
+              const Vector3& vup,
               const double defocusAngle,
               const double focusDist) noexcept;
 
@@ -48,15 +52,18 @@ class Camera {
    [[nodiscard]] constexpr unsigned int GetSamplesPerPixels() const noexcept;
    [[nodiscard]] constexpr unsigned int GetMaxDepth() const noexcept;
 
-   [[nodiscard]] Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
+   [[nodiscard]] inline Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
 
    [[nodiscard]] static Pixel RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept;
    [[nodiscard]] static constexpr double LinearToGamma(const double linear) noexcept;
 
  private:
    void Initialize() noexcept;
-   Vector3 PixelSampleSquare() const noexcept; // TODO constexpr
-   Point3 DefocusDiskSample() const;
+
+   inline Vector3 PixelSampleSquare() const noexcept; // TODO constexpr
+   inline Point3 DefocusDiskSample() const noexcept;
+
+   static constexpr Pixel RayBackground(const Ray& ray) noexcept;
 };
 
 #include "Camera.hpp"

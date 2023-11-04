@@ -65,7 +65,7 @@ void Thread::RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) c
    p.SetY(Camera::LinearToGamma(p.GetY()));
    p.SetZ(Camera::LinearToGamma(p.GetZ()));
 
-   p.SetX(255 * CLAMP.Clamp(p.GetX()));
-   p.SetY(255 * CLAMP.Clamp(p.GetY()));
-   p.SetZ(255 * CLAMP.Clamp(p.GetZ()));
+   p.SetX(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetX()));
+   p.SetY(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetY()));
+   p.SetZ(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetZ()));
 }
