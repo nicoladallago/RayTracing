@@ -10,7 +10,7 @@ class Image {
    std::vector<Pixel> m_data;
 
  public:
-   Image(const unsigned int width, const unsigned int height);
+   constexpr Image(const unsigned int width, const unsigned int height) noexcept;
 
    [[nodiscard]] constexpr unsigned int GetWidth() const noexcept;
    [[nodiscard]] constexpr unsigned int GetHeight() const noexcept;

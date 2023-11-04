@@ -1,11 +1,5 @@
 #include "Image.h"
 
-Image::Image(const unsigned int width, const unsigned int height):
-    m_width(width),
-    m_height(height),
-    m_data(std::vector<Pixel>(width * height)) {
-}
-
 
 API void Image::Save(const std::filesystem::path& path) const {
    std::ofstream file(path, std::ios::binary);
