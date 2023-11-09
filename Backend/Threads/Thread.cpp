@@ -29,29 +29,3 @@ API void Thread::StartRender() {
    }
 #endif
 }
-
-
-void Thread::Render() noexcept {
-   while(!m_pixels.empty()) {
-      Data& data = m_pixels.back();
-      RenderPixel(data.m_p, data.m_i, data.m_j);
-
-      m_pixels.pop_back();
-   }
-}
-
-
-void Thread::RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept {
-   for(unsigned int sample = 0; sample < m_samplesPerPixel; ++sample) {
-      p += Camera::RayColor(m_camera.GetRay(i, j), m_maxDepth, m_world);
-   }
-   p /= m_samplesPerPixel;
-
-   p.SetX(Camera::LinearToGamma(p.GetX()));
-   p.SetY(Camera::LinearToGamma(p.GetY()));
-   p.SetZ(Camera::LinearToGamma(p.GetZ()));
-
-   p.SetX(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetX()));
-   p.SetY(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetY()));
-   p.SetZ(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetZ()));
-}

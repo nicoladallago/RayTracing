@@ -42,8 +42,8 @@ class Thread {
    [[nodiscard]] API constexpr size_t ItemsRemaining() const noexcept;
 
  private:
-   void Render() noexcept;
-   void RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept;
+   inline void Render() noexcept;
+   inline void RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept;
 };
 
 #include "Thread.hpp"

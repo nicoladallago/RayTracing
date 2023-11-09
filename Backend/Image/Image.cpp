@@ -1,6 +1,5 @@
 #include "Image.h"
 
-
 API void Image::Save(const std::filesystem::path& path) const {
    std::ofstream file(path, std::ios::binary);
    if(!file.is_open()) {

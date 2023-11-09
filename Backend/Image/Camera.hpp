@@ -2,6 +2,9 @@
 #define CAMERA_HPP
 #pragma once
 #include "Camera.h"
+#include "Objects/HitRecord.h"
+#include "Objects/HittableList.h"
+#include "Materials/Material.h"
 
 API constexpr Camera::Camera(const double aspectRatio,
                              const unsigned int width,
@@ -42,6 +45,26 @@ inline Ray Camera::GetRay(const unsigned int i, const unsigned int j) const noex
    const Point3 rayOrigin = (m_defocusAngle <= 0) ? m_lookFrom : DefocusDiskSample();
 
    return Ray(rayOrigin, pixelCenter + PixelSampleSquare() - rayOrigin);
+}
+
+
+inline Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept {
+   if(depth <= 0) {
+      return ZERO_PIXEL;
+   }
+
+   HitRecord rec;
+   if(const Material* pMaterial = world.Hit(ray, INTERVAL, rec); pMaterial != nullptr) {
+      Ray scattered;
+      Pixel attenuation;
+
+      if(pMaterial->Scatter(ray, rec, attenuation, scattered)) {
+         return attenuation * RayColor(scattered, depth - 1, world);
+      }
+      return ZERO_PIXEL;
+   }
+
+   return RayBackground(ray);
 }
 
 
