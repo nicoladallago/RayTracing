@@ -6,10 +6,11 @@
 #include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
-API constexpr Sphere::Sphere(const Point3& center, const double radius) noexcept:
+API constexpr Sphere::Sphere(const Point3& center, const double radius, Material* material) noexcept:
     m_center(center),
     m_radius(radius),
-    m_radiusSquared(radius * radius) {
+    m_radiusSquared(radius * radius),
+    m_upMaterial(std::unique_ptr<Material>(material)) {
 }
 
 
@@ -40,6 +41,11 @@ API constexpr bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& 
    rec.SetPoint(ray.At(rec.GetRoot()));
    rec.SetFaceFront(ray, (rec.GetPoint() - m_center) / m_radius);
    return true;
+}
+
+
+API constexpr const Material& Sphere::GetMaterial() const noexcept {
+   return *m_upMaterial;
 }
 
 #endif

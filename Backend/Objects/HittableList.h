@@ -1,11 +1,11 @@
 #ifndef HITTABLE_LIST_H
 #define HITTABLE_LIST_H
 #pragma once
-#include "Objects/Sphere/Sphere.h"
+#include "Objects/Sphere.h"
 
 class HittableList {
  private:
-   std::vector<std::unique_ptr<Sphere>> m_spheres;
+   std::vector<Sphere> m_spheres;
 
  public:
    constexpr void Clear() noexcept;
