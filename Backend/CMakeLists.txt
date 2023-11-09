@@ -18,10 +18,10 @@ set(SOURCES
     "Materials/Lambertian.hpp"
     "Materials/Metal.hpp"
 
-    "Objects/Sphere/BaseSphere.hpp"
     "Objects/Sphere/DielectricSphere.hpp"
     "Objects/Sphere/LambertianSphere.hpp"
     "Objects/Sphere/MetalSphere.hpp"
+    "Objects/Sphere/Sphere.hpp"
 
     "Objects/HitRecord.hpp"
     "Objects/HittableList.hpp"

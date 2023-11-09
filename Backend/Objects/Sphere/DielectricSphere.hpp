@@ -3,14 +3,16 @@
 #pragma once
 #include "DielectricSphere.h"
 
-API constexpr DielectricSphere::DielectricSphere(const Point3& center, const double radius, const double indexOfRefraction) noexcept:
-    BaseSphere(center, radius),
+API constexpr DielectricSphere::DielectricSphere(const Point3& center,
+                                                 const double radius,
+                                                 const double indexOfRefraction) noexcept:
+    Sphere(center, radius),
     m_material(indexOfRefraction) {
 }
 
 
-API constexpr const Dielectric* DielectricSphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
-   return (BaseSphere::HitBase(ray, rayT, rec) ? &m_material : nullptr);
+API inline const Dielectric& DielectricSphere::GetMaterial() const noexcept {
+   return m_material;
 }
 
 #endif

@@ -1,19 +1,19 @@
-#ifndef BASE_SPHERE_HPP
-#define BASE_SPHERE_HPP
+#ifndef SPHERE_HPP
+#define SPHERE_HPP
 #pragma once
-#include "BaseSphere.h"
+#include "Sphere.h"
 #include "Geometry/Ray.h"
 #include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
-API constexpr BaseSphere::BaseSphere(const Point3& center, const double radius) noexcept:
+API constexpr Sphere::Sphere(const Point3& center, const double radius) noexcept:
     m_center(center),
     m_radius(radius),
     m_radiusSquared(radius * radius) {
 }
 
 
-API constexpr bool BaseSphere::HitBase(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
+API constexpr bool Sphere::Hit(const Ray& ray, const Interval& rayT, HitRecord& rec) const noexcept {
    const Vector3& direction = ray.GetDirection();
 
    const Vector3 oc = ray.GetOrigin() - m_center;

@@ -11,14 +11,14 @@ class Material {
  public:
    virtual ~Material() noexcept = default;
 
-   // Rule of 0
+   // Rule of 5
    Material() noexcept = default;
    Material(const Material&) noexcept = default;
    Material(Material&&) noexcept = default;
    Material& operator=(const Material&) noexcept = default;
    Material& operator=(Material&&) noexcept = default;
 
-   [[nodiscard]] virtual bool Scatter(const Ray& ray, const HitRecord& rec, Pixel& attenuation, Ray& scattered) const noexcept = 0;
+   [[nodiscard]] virtual inline bool Scatter(const Ray& ray, const HitRecord& rec, Pixel& attenuation, Ray& scattered) const noexcept = 0;
 };
 
 

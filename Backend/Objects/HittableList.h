@@ -1,15 +1,11 @@
 #ifndef HITTABLE_LIST_H
 #define HITTABLE_LIST_H
 #pragma once
-#include "Objects/Sphere/DielectricSphere.h"
-#include "Objects/Sphere/LambertianSphere.h"
-#include "Objects/Sphere/MetalSphere.h"
+#include "Objects/Sphere/Sphere.h"
 
 class HittableList {
  private:
-   std::vector<DielectricSphere> m_dielectricSpheres;
-   std::vector<LambertianSphere> m_lambertianSpheres;
-   std::vector<MetalSphere> m_metalSpheres;
+   std::vector<std::unique_ptr<Sphere>> m_spheres;
 
  public:
    constexpr void Clear() noexcept;
