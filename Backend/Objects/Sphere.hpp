@@ -6,11 +6,11 @@
 #include "Objects/HitRecord.h"
 #include "Utils/Interval.h"
 
-API constexpr Sphere::Sphere(const Point3& center, const double radius, Material* material) noexcept:
+API constexpr Sphere::Sphere(const Point3& center, const double radius, std::unique_ptr<Material> upMaterial) noexcept:
     m_center(center),
     m_radius(radius),
     m_radiusSquared(radius * radius),
-    m_upMaterial(std::unique_ptr<Material>(material)) {
+    m_upMaterial(std::move(upMaterial)) {
 }
 
 

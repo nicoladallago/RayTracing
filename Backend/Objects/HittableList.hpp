@@ -12,17 +12,17 @@ constexpr void HittableList::Clear() noexcept {
 
 
 constexpr void HittableList::AddDielectricSpehre(const Point3& center, const double radius, const double indexOfRefraction) {
-   m_spheres.emplace_back(Sphere(center, radius, new Dielectric(indexOfRefraction)));
+   m_spheres.emplace_back(Sphere(center, radius, std::make_unique<Dielectric>(indexOfRefraction)));
 }
 
 
 constexpr void HittableList::AddLambertianSpehre(const Point3& center, const double radius, const Pixel& albedo) {
-   m_spheres.emplace_back(Sphere(center, radius, new Lambertian(albedo)));
+   m_spheres.emplace_back(Sphere(center, radius, std::make_unique<Lambertian>(albedo)));
 }
 
 
 constexpr void HittableList::AddMetalSpehre(const Point3& center, const double radius, const Pixel& albedo, const double fuzz) {
-   m_spheres.emplace_back(Sphere(center, radius, new Metal(albedo, fuzz)));
+   m_spheres.emplace_back(Sphere(center, radius, std::make_unique<Metal>(albedo, fuzz)));
 }
 
 
