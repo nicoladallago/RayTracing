@@ -90,7 +90,7 @@ API inline double Utils::Random() noexcept {
    using namespace XoshiroCpp;
    using namespace std::chrono;
 
-   static Xoshiro256PlusPlus rng(static_cast<unsigned long long>(duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count()));
+   static Xoshiro256PlusPlus rng(static_cast<std::uint64_t>(duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count()));
    return DoubleFromBits(rng());
 }
 

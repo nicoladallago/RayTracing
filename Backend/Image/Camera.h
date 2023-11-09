@@ -54,7 +54,9 @@ class Camera {
 
    [[nodiscard]] inline Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
 
-   [[nodiscard]] static inline Pixel RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept;
+   [[nodiscard]] static inline Pixel RayColor(const Ray& ray,
+                                              const unsigned int depth,
+                                              const HittableList& world) noexcept;
    [[nodiscard]] static constexpr double LinearToGamma(const double linear) noexcept;
 
  private:

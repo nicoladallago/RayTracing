@@ -9,10 +9,10 @@ constexpr Lambertian::Lambertian(const Pixel& a) noexcept:
 }
 
 
-API inline bool Lambertian::Scatter([[maybe_unused]] const Ray& ray,
-                                    const HitRecord& rec,
-                                    Pixel& attenuation,
-                                    Ray& scattered) const noexcept {
+inline bool Lambertian::Scatter([[maybe_unused]] const Ray& ray,
+                                const HitRecord& rec,
+                                Pixel& attenuation,
+                                Ray& scattered) const noexcept {
    Vector3 scatterDirection = rec.GetNormal() + RandomUnitVector();
 
    // Catch degenerate scatter direction

@@ -15,10 +15,10 @@ class Dielectric: public Material {
  public:
    constexpr Dielectric(const double indexOfRefraction) noexcept;
 
-   [[nodiscard]] API virtual inline bool Scatter(const Ray& ray,
-                                                 const HitRecord& rec,
-                                                 Pixel& attenuation,
-                                                 Ray& scattered) const noexcept override final;
+   [[nodiscard]] virtual inline bool Scatter(const Ray& ray,
+                                             const HitRecord& rec,
+                                             Pixel& attenuation,
+                                             Ray& scattered) const noexcept override final;
 
  private:
    static constexpr double Reflectance(const double cosine, const double refIdx) noexcept;

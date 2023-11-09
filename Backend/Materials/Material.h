@@ -18,7 +18,10 @@ class Material {
    Material& operator=(const Material&) noexcept = default;
    Material& operator=(Material&&) noexcept = default;
 
-   [[nodiscard]] virtual inline bool Scatter(const Ray& ray, const HitRecord& rec, Pixel& attenuation, Ray& scattered) const noexcept = 0;
+   [[nodiscard]] virtual inline bool Scatter(const Ray& ray,
+                                             const HitRecord& rec,
+                                             Pixel& attenuation,
+                                             Ray& scattered) const noexcept = 0;
 };
 
 

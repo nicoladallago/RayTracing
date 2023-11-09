@@ -12,10 +12,12 @@ API void Image::Save(const std::filesystem::path& path) const {
    std::cout << "P3\n"
              << m_width << ' ' << m_height << "\n255\n";
    for(const Pixel& p : m_data) {
-      std::cout << static_cast<int>(p.GetX()) << ' ' << static_cast<int>(p.GetY()) << ' ' << static_cast<int>(p.GetZ()) << '\n';
+      const int x = static_cast<int>(p.GetX());
+      const int y = static_cast<int>(p.GetY());
+      std::cout << x << ' ' << y << ' ' << static_cast<int>(p.GetZ()) << '\n';
    }
 
    std::cout << std::flush;
    file.close();
-   std::cout.rdbuf(pPrevBuffer); //reset to standard output again
+   std::cout.rdbuf(pPrevBuffer); // reset to standard output again
 }

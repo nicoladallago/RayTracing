@@ -11,10 +11,10 @@ constexpr Dielectric::Dielectric(const double indexOfRefraction) noexcept:
 }
 
 
-API inline bool Dielectric::Scatter(const Ray& ray,
-                                    const HitRecord& rec,
-                                    Pixel& attenuation,
-                                    Ray& scattered) const noexcept {
+inline bool Dielectric::Scatter(const Ray& ray,
+                                const HitRecord& rec,
+                                Pixel& attenuation,
+                                Ray& scattered) const noexcept {
    attenuation = ATTENUATION;
    const double refractionRatio = rec.IsFrontFace() ? m_inverseIr : m_ir;
 
