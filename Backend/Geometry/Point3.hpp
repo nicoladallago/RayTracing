@@ -142,8 +142,9 @@ API constexpr Point3 UnitVector(const Point3& p) noexcept {
 API inline Point3 RandomInUnitDisk() noexcept {
    while(true) {
       const Point3 p = Point3(Utils::Random(-1, 1), Utils::Random(-1, 1), 0);
-      if(p.LenghtSquared() < 1)
+      if(p.LenghtSquared() < 1) {
          return p;
+      }
    }
 }
 

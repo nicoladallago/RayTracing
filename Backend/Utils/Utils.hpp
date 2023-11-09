@@ -41,6 +41,51 @@ API constexpr double Utils::Pow(const double val, const int exp) noexcept {
 }
 
 
+API constexpr double Utils::Sin(const double val) noexcept {
+   double sum = val;
+   double n = 6;
+   int i = 4;
+   int s = 1;
+   double t = val * val * val;
+
+   bool done = Freq(sum, sum + t * s / n);
+   while(!done) {
+      sum += t * s / n;
+      n *= i * (i + 1);
+      i += 2;
+      s = -s;
+      t *= val * val;
+      done = Freq(sum, sum + t * s / n);
+   }
+   return sum;
+}
+
+
+API constexpr double Utils::Cos(const double val) noexcept {
+   double sum = 1;
+   double n = 2;
+   int i = 3;
+   int s = -1;
+   double t = val * val;
+
+   bool done = Freq(sum, sum + t * s / n);
+   while(!done) {
+      sum += t * s / n;
+      n *= i * (i + 1);
+      i += 2;
+      s = -s;
+      t *= val * val;
+      done = Freq(sum, sum + t * s / n);
+   }
+   return sum;
+}
+
+
+API constexpr double Utils::Tan(const double val) noexcept {
+   return Sin(val) / Cos(val);
+}
+
+
 API inline double Utils::Random() noexcept {
    using namespace XoshiroCpp;
    using namespace std::chrono;
@@ -52,6 +97,11 @@ API inline double Utils::Random() noexcept {
 
 API inline double Utils::Random(const double min, const double max) noexcept {
    return min + (max - min) * Random();
+}
+
+
+API constexpr bool Utils::Freq(const double x, const double y) noexcept {
+   return Abs(x - y) <= std::numeric_limits<double>::epsilon();
 }
 
 #endif

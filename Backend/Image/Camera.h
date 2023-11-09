@@ -36,16 +36,16 @@ class Camera {
    Vector3 m_defocusDiskV; // Defocus disk vertical radius
 
  public:
-   API Camera(const double aspectRatio,
-              const unsigned int width,
-              const unsigned int samplesPerPixels,
-              const unsigned int maxDepth,
-              const double vfov,
-              const Point3& lookFrom,
-              const Point3& lookAt,
-              const Vector3& vup,
-              const double defocusAngle,
-              const double focusDist) noexcept;
+   API constexpr Camera(const double aspectRatio,
+                        const unsigned int width,
+                        const unsigned int samplesPerPixels,
+                        const unsigned int maxDepth,
+                        const double vfov,
+                        const Point3& lookFrom,
+                        const Point3& lookAt,
+                        const Vector3& vup,
+                        const double defocusAngle,
+                        const double focusDist) noexcept;
 
    [[nodiscard]] API Image Render(const HittableList& world) noexcept; // TODO make it constexpr
 
@@ -58,7 +58,7 @@ class Camera {
    [[nodiscard]] static constexpr double LinearToGamma(const double linear) noexcept;
 
  private:
-   void Initialize() noexcept;
+   constexpr void Initialize() noexcept;
 
    inline Vector3 PixelSampleSquare() const noexcept; // TODO constexpr
    inline Point3 DefocusDiskSample() const noexcept;

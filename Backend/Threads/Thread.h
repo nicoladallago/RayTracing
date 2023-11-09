@@ -27,18 +27,19 @@ class Thread {
    const size_t m_id;
    const Camera& m_camera;
    const unsigned int m_samplesPerPixel;
+   const unsigned int m_maxDepth;
    const HittableList& m_world;
 
  public:
    API Thread(const size_t id, const Camera& camera, const HittableList& world) noexcept;
    API ~Thread();
 
-   API void Add(Pixel& pixel, const unsigned int i, const unsigned int j);
+   API constexpr void Add(Pixel& pixel, const unsigned int i, const unsigned int j);
    API void StartRender();
 
    [[nodiscard]] API constexpr size_t GetId() const noexcept;
-   [[nodiscard]] API bool RenderDone() const noexcept;
-   [[nodiscard]] API size_t ItemsRemaining() const noexcept;
+   [[nodiscard]] API constexpr bool RenderDone() const noexcept;
+   [[nodiscard]] API constexpr size_t ItemsRemaining() const noexcept;
 
  private:
    void Render() noexcept;

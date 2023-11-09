@@ -12,8 +12,23 @@ API constexpr Thread::Data::Data(Pixel& p, const unsigned int i, const unsigned 
 }
 
 
+API constexpr void Thread::Add(Pixel& pixel, const unsigned int i, const unsigned int j) {
+   m_pixels.emplace_back(pixel, i, j);
+}
+
+
 API constexpr size_t Thread::GetId() const noexcept {
    return m_id;
+}
+
+
+API constexpr bool Thread::RenderDone() const noexcept {
+   return m_pixels.empty();
+}
+
+
+API constexpr size_t Thread::ItemsRemaining() const noexcept {
+   return m_pixels.size();
 }
 
 #endif

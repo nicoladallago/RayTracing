@@ -6,17 +6,13 @@ API Thread::Thread(const size_t id, const Camera& camera, const HittableList& wo
     m_id(id),
     m_camera(camera),
     m_samplesPerPixel(camera.GetSamplesPerPixels()),
+    m_maxDepth(m_camera.GetMaxDepth()),
     m_world(world) {
 }
 
 
 API Thread::~Thread() {
    m_thread.join();
-}
-
-
-API void Thread::Add(Pixel& pixel, const unsigned int i, const unsigned int j) {
-   m_pixels.emplace_back(pixel, i, j);
 }
 
 
@@ -35,16 +31,6 @@ API void Thread::StartRender() {
 }
 
 
-API bool Thread::RenderDone() const noexcept {
-   return m_pixels.empty();
-}
-
-
-API size_t Thread::ItemsRemaining() const noexcept {
-   return m_pixels.size();
-}
-
-
 void Thread::Render() noexcept {
    while(!m_pixels.empty()) {
       Data& data = m_pixels.back();
@@ -57,7 +43,7 @@ void Thread::Render() noexcept {
 
 void Thread::RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept {
    for(unsigned int sample = 0; sample < m_samplesPerPixel; ++sample) {
-      p += Camera::RayColor(m_camera.GetRay(i, j), m_camera.GetMaxDepth(), m_world);
+      p += Camera::RayColor(m_camera.GetRay(i, j), m_maxDepth, m_world);
    }
    p /= m_samplesPerPixel;
 

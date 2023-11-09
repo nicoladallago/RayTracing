@@ -14,11 +14,8 @@ set(SOURCES
     "Image/Image.cpp"
     "Image/Image.hpp"
 
-    "Materials/Dielectric.cpp"
     "Materials/Dielectric.hpp"
-    "Materials/Lambertian.cpp"
     "Materials/Lambertian.hpp"
-    "Materials/Metal.cpp"
     "Materials/Metal.hpp"
 
     "Objects/Sphere/BaseSphere.hpp"

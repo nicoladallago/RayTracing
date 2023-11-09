@@ -12,10 +12,10 @@ class Metal: public Material {
  public:
    constexpr Metal(const Pixel& a, const double f) noexcept;
 
-   [[nodiscard]] API virtual bool Scatter(const Ray& ray,
-                                          const HitRecord& rec,
-                                          Pixel& attenuation,
-                                          Ray& scattered) const noexcept override final;
+   [[nodiscard]] API virtual inline bool Scatter(const Ray& ray,
+                                                 const HitRecord& rec,
+                                                 Pixel& attenuation,
+                                                 Ray& scattered) const noexcept override final;
 };
 
 #include "Metal.hpp"
