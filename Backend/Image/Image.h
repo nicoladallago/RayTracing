@@ -5,15 +5,15 @@
 
 class Image {
  private:
-   const unsigned int m_width;
-   const unsigned int m_height;
+   const size_t m_width;
+   const size_t m_height;
    std::vector<Pixel> m_data;
 
  public:
-   constexpr Image(const unsigned int width, const unsigned int height) noexcept;
+   constexpr Image(const int width, const int height) noexcept;
 
-   [[nodiscard]] constexpr unsigned int GetWidth() const noexcept;
-   [[nodiscard]] constexpr unsigned int GetHeight() const noexcept;
+   [[nodiscard]] constexpr size_t GetWidth() const noexcept;
+   [[nodiscard]] constexpr size_t GetHeight() const noexcept;
    [[nodiscard]] constexpr size_t GetSize() const noexcept;
    [[nodiscard]] constexpr std::span<Pixel> Get() noexcept;
 

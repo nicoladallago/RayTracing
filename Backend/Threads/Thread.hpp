@@ -5,14 +5,14 @@
 #include "Image/Camera.h"
 #include "Objects/HittableList.h"
 
-API constexpr Thread::Data::Data(Pixel& p, const unsigned int i, const unsigned int j) noexcept:
+API constexpr Thread::Data::Data(Pixel& p, const int i, const int j) noexcept:
     m_p(p),
     m_i(i),
     m_j(j) {
 }
 
 
-API constexpr void Thread::Add(Pixel& pixel, const unsigned int i, const unsigned int j) {
+API constexpr void Thread::Add(Pixel& pixel, const int i, const int j) {
    m_pixels.emplace_back(pixel, i, j);
 }
 
@@ -41,8 +41,8 @@ inline void Thread::Render() noexcept {
 }
 
 
-inline void Thread::RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept {
-   for(unsigned int sample = 0; sample < m_samplesPerPixel; ++sample) {
+inline void Thread::RenderPixel(Pixel& p, const int i, const int j) const noexcept {
+   for(int sample = 0; sample < m_samplesPerPixel; ++sample) {
       p += Camera::RayColor(m_camera.GetRay(i, j), m_maxDepth, m_world);
    }
    p /= m_samplesPerPixel;

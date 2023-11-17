@@ -10,16 +10,15 @@ class HittableList;
 class Camera {
  private:
    static constexpr Interval INTERVAL = Interval(0.001, std::numeric_limits<double>::max());
-   static constexpr Pixel ZERO_PIXEL = Pixel(0, 0, 0);
    static constexpr double BKG_ATTENUATION = 0.5;
    static constexpr double BKG_R = 0.5;
    static constexpr double BKG_G = 0.5;
    //static constexpr double BKG_B = 0;
 
    const double m_aspectRatio;
-   const unsigned int m_width;
-   const unsigned int m_samplesPerPixels;
-   const unsigned int m_maxDepth;
+   const int m_width;
+   const int m_samplesPerPixels;
+   const int m_maxDepth;
    const double m_vfov;
    const Point3 m_lookFrom;
    const Point3 m_lookAt;
@@ -27,7 +26,7 @@ class Camera {
    const double m_defocusAngle;
    const double m_focusDist;
 
-   unsigned int m_height;  // Rendered image height
+   int m_height;           // Rendered image height
    Point3 m_pixel00Loc;    // Location of pixel 0, 0
    Vector3 m_pixelDeltaU;  // Offset to pixel to the right
    Vector3 m_pixelDeltaV;  // Offset to pixel below
@@ -37,9 +36,9 @@ class Camera {
 
  public:
    API constexpr Camera(const double aspectRatio,
-                        const unsigned int width,
-                        const unsigned int samplesPerPixels,
-                        const unsigned int maxDepth,
+                        const int width,
+                        const int samplesPerPixels,
+                        const int maxDepth,
                         const double vfov,
                         const Point3& lookFrom,
                         const Point3& lookAt,
@@ -49,13 +48,13 @@ class Camera {
 
    [[nodiscard]] API Image Render(const HittableList& world) noexcept; // TODO make it constexpr
 
-   [[nodiscard]] constexpr unsigned int GetSamplesPerPixels() const noexcept;
-   [[nodiscard]] constexpr unsigned int GetMaxDepth() const noexcept;
+   [[nodiscard]] constexpr int GetSamplesPerPixels() const noexcept;
+   [[nodiscard]] constexpr int GetMaxDepth() const noexcept;
 
-   [[nodiscard]] inline Ray GetRay(const unsigned int i, const unsigned int j) const noexcept;
+   [[nodiscard]] inline Ray GetRay(const int i, const int j) const noexcept;
 
    [[nodiscard]] static inline Pixel RayColor(const Ray& ray,
-                                              const unsigned int depth,
+                                              const int depth,
                                               const HittableList& world) noexcept;
    [[nodiscard]] static constexpr double LinearToGamma(const double linear) noexcept;
 

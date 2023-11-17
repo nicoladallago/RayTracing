@@ -15,10 +15,10 @@ class Thread {
    struct Data
    {
       Pixel& m_p;
-      const unsigned int m_i;
-      const unsigned int m_j;
+      const int m_i;
+      const int m_j;
 
-      API constexpr Data(Pixel& p, const unsigned int i, const unsigned int j) noexcept;
+      API constexpr Data(Pixel& p, const int i, const int j) noexcept;
    };
 
    std::thread m_thread;
@@ -26,15 +26,15 @@ class Thread {
 
    const size_t m_id;
    const Camera& m_camera;
-   const unsigned int m_samplesPerPixel;
-   const unsigned int m_maxDepth;
+   const int m_samplesPerPixel;
+   const int m_maxDepth;
    const HittableList& m_world;
 
  public:
    API Thread(const size_t id, const Camera& camera, const HittableList& world) noexcept;
    API ~Thread();
 
-   API constexpr void Add(Pixel& pixel, const unsigned int i, const unsigned int j);
+   API constexpr void Add(Pixel& pixel, const int i, const int j);
    API void StartRender();
 
    [[nodiscard]] API constexpr size_t GetId() const noexcept;
@@ -43,7 +43,7 @@ class Thread {
 
  private:
    inline void Render() noexcept;
-   inline void RenderPixel(Pixel& p, const unsigned int i, const unsigned int j) const noexcept;
+   inline void RenderPixel(Pixel& p, const int i, const int j) const noexcept;
 };
 
 #include "Thread.hpp"

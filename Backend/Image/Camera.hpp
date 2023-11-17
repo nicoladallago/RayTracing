@@ -7,9 +7,9 @@
 #include "Materials/Material.h"
 
 API constexpr Camera::Camera(const double aspectRatio,
-                             const unsigned int width,
-                             const unsigned int samplesPerPixels,
-                             const unsigned int maxDepth,
+                             const int width,
+                             const int samplesPerPixels,
+                             const int maxDepth,
                              const double vfov,
                              const Point3& lookFrom,
                              const Point3& lookAt,
@@ -30,17 +30,17 @@ API constexpr Camera::Camera(const double aspectRatio,
 }
 
 
-constexpr unsigned int Camera::GetSamplesPerPixels() const noexcept {
+constexpr int Camera::GetSamplesPerPixels() const noexcept {
    return m_samplesPerPixels;
 }
 
 
-constexpr unsigned int Camera::GetMaxDepth() const noexcept {
+constexpr int Camera::GetMaxDepth() const noexcept {
    return m_maxDepth;
 }
 
 
-inline Ray Camera::GetRay(const unsigned int i, const unsigned int j) const noexcept {
+inline Ray Camera::GetRay(const int i, const int j) const noexcept {
    const Point3 pixelCenter = m_pixel00Loc + (i * m_pixelDeltaU) + (j * m_pixelDeltaV);
    const Point3 rayOrigin = (m_defocusAngle <= 0) ? m_lookFrom : DefocusDiskSample();
 
@@ -48,9 +48,9 @@ inline Ray Camera::GetRay(const unsigned int i, const unsigned int j) const noex
 }
 
 
-inline Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const HittableList& world) noexcept {
+inline Pixel Camera::RayColor(const Ray& ray, const int depth, const HittableList& world) noexcept {
    if(depth <= 0) {
-      return ZERO_PIXEL;
+      return Pixel();
    }
 
    HitRecord rec;
@@ -61,7 +61,7 @@ inline Pixel Camera::RayColor(const Ray& ray, const unsigned int depth, const Hi
       if(pMaterial->Scatter(ray, rec, attenuation, scattered)) {
          return attenuation * RayColor(scattered, depth - 1, world);
       }
-      return ZERO_PIXEL;
+      return Pixel();
    }
 
    return RayBackground(ray);
@@ -74,7 +74,7 @@ constexpr double Camera::LinearToGamma(const double linear) noexcept {
 
 
 constexpr void Camera::Initialize() noexcept {
-   m_height = static_cast<unsigned int>(m_width / m_aspectRatio);
+   m_height = static_cast<int>(m_width / m_aspectRatio);
 
    const double theta = Utils::DegreesToRadians(m_vfov);
    const double h = Utils::Tan(theta / 2);
