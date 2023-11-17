@@ -56,7 +56,7 @@ class Camera {
    [[nodiscard]] static inline Pixel RayColor(const Ray& ray,
                                               const int depth,
                                               const HittableList& world) noexcept;
-   [[nodiscard]] static constexpr double LinearToGamma(const double linear) noexcept;
+   static constexpr void LinearToGamma(Pixel& pixel) noexcept;
 
  private:
    constexpr void Initialize() noexcept;
@@ -65,6 +65,7 @@ class Camera {
    inline Point3 DefocusDiskSample() const noexcept;
 
    static constexpr Pixel RayBackground(const Ray& ray) noexcept;
+   static constexpr double LinearToGamma(const double linear) noexcept;
 };
 
 #include "Camera.hpp"

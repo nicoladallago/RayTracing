@@ -15,7 +15,7 @@ class Image {
    [[nodiscard]] constexpr size_t GetWidth() const noexcept;
    [[nodiscard]] constexpr size_t GetHeight() const noexcept;
    [[nodiscard]] constexpr size_t GetSize() const noexcept;
-   [[nodiscard]] constexpr std::span<Pixel> Get() noexcept;
+   [[nodiscard]] constexpr std::vector<Pixel>& Get() noexcept;
 
    API void Save(const std::filesystem::path& path) const;
 };

@@ -18,7 +18,7 @@ API Thread::~Thread() {
 
 API void Thread::StartRender() {
    m_thread = std::thread(&Thread::Render, this);
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__) // Windows only
+#ifdef WINDOWS_BUILD
    HANDLE handle = m_thread.native_handle();
    //if(SetThreadPriority(handle, THREAD_PRIORITY_TIME_CRITICAL) == 0) {
    //   throw std::exception(std::to_string(GetLastError()).c_str());

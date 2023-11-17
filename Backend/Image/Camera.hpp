@@ -68,8 +68,10 @@ inline Pixel Camera::RayColor(const Ray& ray, const int depth, const HittableLis
 }
 
 
-constexpr double Camera::LinearToGamma(const double linear) noexcept {
-   return Utils::Sqrt(linear);
+constexpr void Camera::LinearToGamma(Pixel& pixel) noexcept {
+   pixel.SetX(LinearToGamma(pixel.GetX()));
+   pixel.SetY(LinearToGamma(pixel.GetY()));
+   pixel.SetZ(LinearToGamma(pixel.GetZ()));
 }
 
 
@@ -120,6 +122,11 @@ constexpr Pixel Camera::RayBackground(const Ray& ray) noexcept {
    const Vector3 unitDirection = UnitVector(ray.GetDirection());
    const double a = BKG_ATTENUATION * (unitDirection.GetY() + 1);
    return Pixel(1 - BKG_R * a, 1 - BKG_G * a, 1);
+}
+
+
+constexpr double Camera::LinearToGamma(const double linear) noexcept {
+   return Utils::Sqrt(linear);
 }
 
 

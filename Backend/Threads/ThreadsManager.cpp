@@ -68,7 +68,7 @@ void ThreadsManager::Start(Image& img) {
 
 
 void ThreadsManager::FillThreads(Image& img) noexcept {
-   const std::span<Pixel> pixels = img.Get();
+   std::vector<Pixel>& pixels = img.Get();
    const size_t height = img.GetHeight();
    const size_t width = img.GetWidth();
 
@@ -83,9 +83,7 @@ void ThreadsManager::FillThreads(Image& img) noexcept {
       const size_t offset = j * width;
       for(size_t i = 0; i < width; ++i) {
          m_threads[threadIdx++]->Add(pixels[offset + i], static_cast<int>(i), static_cast<int>(j));
-         if(threadIdx >= threads) {
-            threadIdx = 0;
-         }
+         threadIdx %= threads;
       }
    }
 }

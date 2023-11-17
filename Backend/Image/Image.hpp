@@ -25,7 +25,7 @@ constexpr size_t Image::GetSize() const noexcept {
 }
 
 
-constexpr std::span<Pixel> Image::Get() noexcept {
+constexpr std::vector<Pixel>& Image::Get() noexcept {
    return m_data;
 }
 

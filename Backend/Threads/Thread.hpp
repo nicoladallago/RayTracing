@@ -47,9 +47,7 @@ inline void Thread::RenderPixel(Pixel& p, const int i, const int j) const noexce
    }
    p /= m_samplesPerPixel;
 
-   p.SetX(Camera::LinearToGamma(p.GetX()));
-   p.SetY(Camera::LinearToGamma(p.GetY()));
-   p.SetZ(Camera::LinearToGamma(p.GetZ()));
+   Camera::LinearToGamma(p);
 
    p.SetX(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetX()));
    p.SetY(MAX_PIXEL_VAL * CLAMP.Clamp(p.GetY()));
