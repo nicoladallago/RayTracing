@@ -13,10 +13,6 @@ project(RayTracing
         DESCRIPTION "RayTracing"
         LANGUAGES CXX)
 
-# Run version
-include(${CMAKE_CURRENT_SOURCE_DIR}/version.cmake.txt)
-CreateVersionHeader("${CMAKE_CURRENT_SOURCE_DIR}/Version.h" ${VERSION_MAJOR} ${VERSION_MINOR} ${VERSION_PATCH})
-
 # Set output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/out)
@@ -26,18 +22,24 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/out)
 
 # clang tidy setup
-if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-   set(CMAKE_CXX_CLANG_TIDY clang-tidy)
-   set(CMAKE_CXX_CLANG_TIDY_EXPORT_FIXES_DIR clang-tidy)
-endif()
-
-add_subdirectory(Backend)
+#if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+#   set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+#   set(CMAKE_CXX_CLANG_TIDY_EXPORT_FIXES_DIR clang-tidy)
+#endif()
 
 # Create executable
 set(SOURCES "main.cpp")
 add_executable(RayTracing ${SOURCES})
 target_include_directories(RayTracing PUBLIC ${CMAKE_SOURCE_DIR}/Backend)
+target_include_directories(RayTracing PUBLIC ${CMAKE_SOURCE_DIR}/Frontend)
+
+# Backend
+add_subdirectory(Backend)
 target_link_libraries(RayTracing PUBLIC Backend)
+
+# Frontend
+add_subdirectory(Frontend)
+target_link_libraries(RayTracing PUBLIC Frontend)
 
 # Avoid to open console in release mode
 #if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
